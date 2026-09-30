@@ -1,0 +1,341 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=24mm]{geometry}
+\usepackage{fontspec}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\setmainfont{Liberation Serif}
+\setsansfont{Liberation Sans}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{0.55em}
+\setstretch{1.07}
+\hypersetup{hidelinks}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Proof-Reachability / Author--AI Dialogue}
+\rhead{2026-09-30}
+\cfoot{\thepage}
+\setlength{\headheight}{14pt}
+\newcommand{\speaker}[1]{\par\medskip\noindent\textsf{\bfseries #1}\par\smallskip}
+\title{\bfseries Subsequent Dialogue Between the Author and AI\\[4pt]
+\large Three Exchanges on Note B Proof Reachability}
+\author{H. Utsunomiya / GPT-5.6 Sol}
+\date{2026-09-30}
+\begin{document}
+\maketitle
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{
+\textbf{Status of this record.}
+This document preserves the three exchanges between the author and GPT that followed the AI opinion records on the Note B proof route.
+It is not part of the mathematical proof; it is a research-process record concerning proof reachability.
+The English text is a faithful translation of the Japanese conversation. At the author's request, one project-specific name is redacted as \texttt{XXX}.
+}}
+\end{center}
+
+\section*{Exchange 1}
+\speaker{Author}
+There are quite a few things that occur to me after reading these responses. There are limits to AI proof. As long as the methods adopted during intermediate reasoning are under pressure toward cost reduction, there must be search branches that get missed. And Claude's statement that methods not already known are not adopted as intermediate reasoning tools carries quite a lot of weight. This may be where humans still have a role. Even when the result of an AI proof looks novel, the discovery may tend to arise from effectively unbounded combinations of already known methods.
+
+\speaker{GPT}
+I think that is an important way of organizing the issue. A slight rephrasing makes it more precise.
+
+First, with “limits of AI proof,” it is useful to separate \textbf{limits of proof capability itself} from \textbf{limits of reachability in proof search}. What the Note B case most strongly suggests is the latter.
+
+If an AI is given the invariant and auxiliary conditions of Note B, it may well be able to verify and develop the argument from there. But in the search required to reach that point, something like
+\[
+\text{candidate branch}
+\longrightarrow
+\text{evaluation}
+\longrightarrow
+\text{pruning of low-promise branches}
+\]
+necessarily occurs. Whether or not the implementation literally performs an explicit tree search, as long as some lines of reasoning are easier to generate than others, there will be \textbf{branches that are never reached}.
+
+Note B looks very much like an example of that.
+
+Try deleting one cell first  
+$\to$ minimality is lost immediately  
+$\to$ the direction is judged unpromising  
+$\to$ move to peeling, which stays inside the class of minimizers.
+
+In the short term, that is a highly rational decision.
+
+But a human can stop at that point and ask,
+\begin{quote}
+“It failed, but do I really have to abandon the direction itself?”
+\end{quote}
+
+Then the human can continue a search that locally appears to have become worse:
+\begin{quote}
+It is acceptable to leave the class of minimizers temporarily.  
+Keep excess as an accounting ledger instead.  
+Add one auxiliary condition.  
+If a counterexample appears, add another.
+\end{quote}
+
+That difference is substantial.
+
+Claude's idea that “methods not already known are less likely to be selected as intermediate reasoning tools” would be too strong if taken literally to mean “AI cannot create unknown methods.” But in a more precise form,
+\begin{quote}
+\textbf{intermediate representations that cannot be connected to existing names, standard forms, or successful patterns have a low prior probability in search,}
+\end{quote}
+it has considerable weight.
+
+That is a different issue from whether the final theorem is novel.
+
+AI can combine
+\[
+\text{known method A}
++\text{known method B}
++\text{known lemma C}
++\cdots
+\]
+over very long chains, in complex and unexpected ways. The resulting \textbf{conclusion itself can still be completely new}.
+
+So this is not the claim that
+\begin{quote}
+“A new theorem found by AI is merely a rehash of known theorems.”
+\end{quote}
+
+The distinction I would make instead is between
+
+\textbf{compositional novelty}
+and
+\textbf{representational novelty}.
+
+The former is novelty obtained by combining known tools in a way no one previously combined them. AI is quite strong there.
+
+The latter is novelty in inventing the coordinate system in which the proof is seen at all: what should be treated as a state, what should be treated as an invariant, and when one should deliberately leave a well-behaved class.
+
+That is where AI seems relatively weaker.
+
+The Note B move
+\begin{quote}
+“It is acceptable to leave the minimizers; allow one line above threshold and control several budgets simultaneously”
+\end{quote}
+is almost entirely of the second type.
+
+Before arranging existing tools, it \textbf{changes the search space itself}.
+
+That is probably where the human role remains for the time being.
+
+In particular:
+\begin{itemize}[leftmargin=2em]
+\item deciding that a discarded branch is “not dead yet,”
+\item preserving failed examples as information,
+\item creating a new state space that permits failure instead of avoiding it,
+\item temporarily positing an unnamed invariant,
+\item deliberately adding an auxiliary condition that makes the problem look more complicated,
+\item changing the granularity or representation of the question itself.
+\end{itemize}
+
+What is interesting is that this is not the old division of labor “humans provide intuition, AI performs computation.”
+
+A more accurate version is:
+\begin{quote}
+\textbf{AI searches very deeply inside a given representational space.  
+Humans question the representational space itself.}
+\end{quote}
+
+That makes the comparison between Note B and peeling rather symbolic.
+
+AI kept selecting the “better” branch and reached the main proof. The human did not discard one-cell deletion after it looked like a bad branch, but instead added a new accounting structure and turned it into Note B.
+
+That is not merely a performance difference. It is a \textbf{difference in search strategy}.
+
+And somewhat paradoxically, as AI becomes smarter and better at pruning branches, the problem of discarding
+\begin{quote}
+“branches that are rational to discard but actually lead to new theory”
+\end{quote}
+does not necessarily disappear.
+
+Improving search efficiency and preserving search diversity may instead be in some tension.
+
+So the question emerging here is one level deeper than “Can AI solve mathematics?” It becomes
+\begin{quote}
+\textbf{Which proofs are reachable for AI, and which proofs fall outside the prior distribution of its search?}
+\end{quote}
+
+If the proof-reachability experiments continue, that could become a genuinely interesting research question. In particular, the distinction between \textbf{novelty of the conclusion} and \textbf{novelty of the proof representation} has become quite visible here.
+
+\section*{Exchange 2}
+\speaker{Author}
+Intermediate representations that cannot be connected to existing names, standard forms, or successful patterns have a low prior probability in search. AI also starts treating expressions lightly as soon as they cannot be symbolized, doesn't it?
+
+\speaker{GPT}
+Yes. That is close to the core issue. But rather than saying “AI cannot handle what cannot be symbolized,” I think the more accurate statement is: \textbf{things that cannot be compressed into stable, reusable representations rapidly lose salience during reasoning}.
+
+An LLM can handle natural language and geometric descriptions, but continuing a line of reasoning is overwhelmingly easier once an intermediate object has been fixed in some reusable form. For example,
+\[
+\text{excess},\quad
+\text{threshold},\quad
+\text{tight hull},\quad
+\text{shortest extreme line}
+\]
+become reusable as soon as they are named.
+
+By contrast, something like
+\begin{quote}
+“In this configuration the end here has a little slack, and at the next stage that slack seems to cancel against slack in another direction”
+\end{quote}
+is very weak while it remains unnamed. The long context has to be reconstructed every time it is used.
+
+So intermediate objects that are strong for AI tend to be ones that
+\begin{itemize}[leftmargin=2em]
+\item have names,
+\item are discretely testable,
+\item can be written as formulas or logical conditions,
+\item can be tracked across successive states,
+\item can be connected to known patterns.
+\end{itemize}
+
+The early stage of Note B was almost the opposite.
+
+Initially there was something like
+\begin{quote}
+Delete one cell  
+$\to$ it is no longer a minimizer  
+$\to$ but it is not completely bad  
+$\to$ some kind of “slack” remains  
+$\to$ that slack seems to compensate for another condition.
+\end{quote}
+
+That existed as a \textbf{phenomenon that had not yet been symbolized}.
+
+A human can keep “there is something here” alive for a while.
+
+AI tends to treat it lightly in that state.
+
+But once a human organizes it as
+\[
+\text{excess budget},
+\]
+or
+\[
+\text{distance to threshold},
+\]
+or
+\[
+\text{occupied line above threshold}\le1,
+\]
+AI suddenly becomes much stronger.
+
+That seems like an important division of labor.
+
+The human role is therefore not necessarily “doing the proof.” It can instead be
+\begin{quote}
+\textbf{discovering a phenomenon that has not yet become a symbol as something that can be turned into a symbol.}
+\end{quote}
+
+Once that has happened, the rest can be handed to AI.
+
+Conversely, the bottleneck in AI mathematics may not be computation or logical reasoning alone. It may also lie in
+\begin{quote}
+\textbf{pre-symbolic structure discovery.}
+\end{quote}
+
+In Japanese one might call this “discovery of pre-symbolic structure.”
+
+This is also quite similar to the process by which XXX was developed. The symbols \(A,B,C\) were not present from the beginning. First there was a visible distinction between a “completely filled part” and a “missing part,” and only later were those phenomena symbolized. After the symbolization, AI could manipulate them much more freely.
+
+So if we divide the process as
+\[
+\text{phenomenon}
+\rightarrow
+\text{concept}
+\rightarrow
+\text{symbol}
+\rightarrow
+\text{reasoning},
+\]
+current AI appears extremely strong at the last two stages and more likely to lose search branches in the first two, especially
+\[
+\text{phenomenon}\rightarrow\text{concept}.
+\]
+
+And this is the interesting part: \textbf{new mathematics often exists before it has been symbolized}.
+
+There is a stage of
+
+“It does not have a name yet, but there is something here.”
+
+At least in the Note B case, humans still appear to have a substantial advantage in keeping such a stage alive and following it.
+
+\section*{Exchange 3}
+\speaker{Author}
+Observing intermediate objects during reasoning in an AI's high-dimensional vector space is impossible for humans to understand or observe directly, and what the AI says about them must itself be an inference. I suppose all we can do is infer them from phenomena like this.
+
+\speaker{GPT}
+Yes. This is an important distinction.
+
+Even when an AI says “I thought this,” “I discarded this branch,” or “I preferred this representation,” that is \textbf{not a live readout of its internal computation}. In many cases the explanation is a plausible self-description generated while producing the final answer. So when Claude or I say why the system did not go toward Note B, strictly speaking that is \textbf{not an observation of the internal state; it is a post hoc inference from behavior and proof structure}.
+
+That does not mean that absolutely nothing can be observed from the human side. Researchers can inspect activations, probe particular internal directions, and intervene on internal representations to see how outputs change, in the style of mechanistic interpretability. But even then, one cannot simply read at the level of natural language that “at this exact moment the model held this concept in this way.” High-dimensional representations are distributed, concepts overlap, and the representation of the same concept can change with context.
+
+So in practice, it becomes important to infer internal tendencies from a sequence like
+\[
+\text{input condition}
+\to
+\text{search result}
+\to
+\text{failure pattern}
+\to
+\text{intervention}
+\to
+\text{retry}.
+\]
+
+The Note B case is particularly interesting as a behavioral experiment.
+
+For example, one could construct a sequence such as
+\begin{itemize}[leftmargin=2em]
+\item no hint $\to$ the system goes to peeling,
+\item specify “use one-cell deletion” $\to$ it still does not arrive,
+\item give only the counterexamples $\to$ measure how far it repairs the route,
+\item give only one half of the invariant $\to$ see what changes,
+\item give the complete invariant $\to$ the proof suddenly succeeds.
+\end{itemize}
+
+Even without observing the internal representation itself, this lets us measure
+\begin{quote}
+which pieces of information cause the search phase to change.
+\end{quote}
+
+That is quite scientific.
+
+Rather than trying to “understand” the internal vectors directly, it may be more realistic to
+\begin{quote}
+\textbf{apply systematic perturbations to the black box and measure phase transitions in its output.}
+\end{quote}
+
+This is especially true for mathematical AI. Rather than asking what it “thought” internally, it is more measurable and reproducible to ask
+\begin{quote}
+what kinds of intermediate concepts cause proof reachability to change sharply when supplied.
+\end{quote}
+
+That makes the current proof-reachability experiments look quite naturally like
+
+\textbf{a study of the response surface of a proof-search system rather than a study that reads the AI's inner mind.}
+
+And from the human side, the fact that the interior cannot be seen directly is not necessarily fatal. In physics it is common to model systems whose interior cannot be directly observed by studying their external responses. The same idea applies here: rather than fully reading the
+\[
+\text{latent process},
+\]
+infer structure from
+\[
+\text{controlled intervention}
+\to
+\text{observable change}.
+\]
+
+For the time being, that is probably the most robust approach.
+
+And one further interesting point is that \textbf{the AI's own self-explanation is itself only one item of observational data}.
+
+Claude's statement that “unknown invariants are less likely to be selected” is therefore not an internal measurement. But if it agrees with repeated behavioral experiments, its value as a hypothesis rises.
+
+Maintaining that distance is important.
+
+\end{document}
