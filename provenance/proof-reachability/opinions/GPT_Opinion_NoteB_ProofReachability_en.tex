@@ -1,0 +1,184 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=25mm]{geometry}
+\usepackage{fontspec}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+
+\setmainfont{Liberation Serif}
+\setsansfont{Liberation Sans}
+\setlength{\headheight}{14pt}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{0.55em}
+\setstretch{1.08}
+\hypersetup{hidelinks}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Proof-Reachability / GPT Opinion Record}
+\rhead{2026-09-30}
+\cfoot{\thepage}
+
+\newcommand{\recordlabel}[1]{\par\noindent\textsf{\bfseries #1}\par}
+
+\title{\bfseries GPT Opinion Record on Why AI Search Did Not Follow the Note B Proof Route\\[4pt]
+\large Proof-Reachability Provenance Record}
+\author{GPT-5.6 Sol\\Record maintained by H. Utsunomiya}
+\date{2026-09-30}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{
+\textbf{Status of this record.}
+This document is not part of the mathematical proof. It is a research-process record concerning proof reachability.
+The English text below is a faithful translation of the immediately preceding Japanese GPT response; it is not an independent re-analysis or a later human reconstruction.
+}}
+\end{center}
+
+\recordlabel{Archival question specified by the author}
+Why does AI not go in the direction of the Note B proof? I want to hear GPT's view.
+
+\recordlabel{Actual immediately preceding chat wording}
+Why does AI not go in the direction of the Note B proof? Maybe we should include some discussion of that?
+
+\section*{GPT response (faithful English translation)}
+
+It is worth preserving. However, it is more appropriate to place it \textbf{not in the mathematical body of the paper, but as a provenance / proof-reachability observation}.
+
+What can be said at present is not that ``the reason AI does not go toward Note B has been proved,'' but that this is a \textbf{hypothesis about a search tendency observed across multiple trials}. That distinction should be kept explicit.
+
+There are fairly structural reasons why Note B appears difficult for AI to discover.
+
+The first major point is that \textbf{Note B is not a proof of a static structure; it is a proof that controls intermediate states}. The current main proof has the rather visible structure
+\[
+\text{minimizer}
+\to
+\text{directional convexity}
+\to
+\text{tight hull}
+\to
+\text{shortest extreme line}
+\to
+\text{peeling}.
+\]
+One extracts a geometric object from a minimizer and studies its invariants.
+
+Note B, by contrast, deletes one cell at a time,
+\[
+S_N\supset S_{N-1}\supset S_{N-2}\supset\cdots,
+\]
+and continues the control even though \textbf{the intermediate states need not themselves be minimizers}. The search space therefore expands abruptly.
+
+Moreover, what is needed is not a single monotone quantity. In effect, Note B must manage several quantities simultaneously, such as
+
+\begin{itemize}[leftmargin=2em]
+\item the remaining length of the shortest extreme line,
+\item the distance to the next threshold drop,
+\item the available excess budget,
+\item the possibility of an articulation point appearing,
+\item and preservation of directional convexity.
+\end{itemize}
+
+This is quite unfavorable for AI search.
+
+A particularly important feature is that \textbf{the proof is not visible when any one of these quantities is considered in isolation}. The shortest-line length alone is insufficient, and the distance to the threshold alone is insufficient. A progress condition appears only after the two are combined as competing budgets.
+
+A typical search can easily behave like
+
+\begin{quote}
+propose one candidate invariant\\
+$\to$ it is not monotone\\
+$\to$ discard it.
+\end{quote}
+
+Note B instead requires one to
+
+\begin{quote}
+retain two quantities that fail individually and let them compensate for one another.
+\end{quote}
+
+I think this is a major factor.
+
+There is also \textbf{the treatment of articulation cells}. In an ordinary geometric-optimization search one may think that an endpoint cell can simply be deleted, but Note B has to handle the possibility that connectivity breaks there. This requires excluding a local structure through a statement of the form
+
+\begin{quote}
+if a degree-two articulation cell exists, then the excess is at least four.
+\end{quote}
+
+That lemma is very far from the original problem statement. Moreover, the need for it becomes visible only after the proof has advanced far enough to reach the point where \textbf{``connectivity can fail only here.''}
+
+In AI search, this kind of local lemma whose necessity emerges only late in the argument is difficult to discover.
+
+The peeling route, by contrast, removes
+
+\begin{quote}
+an entire extreme line,
+\end{quote}
+
+and thereby handles connectivity and directional convexity in one stroke. From the AI's point of view, that route is much easier to search.
+
+Another interesting point is that \textbf{although the conclusion of Task A itself is one-cell growth, the AI did not move toward a one-cell proof; instead it discovered the coarser line-peeling structure as an intermediate object}.
+
+This is quite suggestive.
+
+Rather than proving the result at the same granularity as the conclusion, the AI chose a route of the form
+\[
+\text{first discover a coarser structure}
+\to
+\text{then refine its interior later}.
+\]
+
+Note B does the opposite: it enters the problem immediately at the final resolution, namely \textbf{one cell at a time}. From the human side, it was natural to think, ``If the theorem asks for one-cell growth, try deleting cells one at a time in reverse.'' For the AI, however, that resolution appears to create too many states and too many exceptional cases.
+
+This is a genuinely interesting difference from a research perspective.
+
+I would therefore summarize the observation in four points.
+
+\begin{enumerate}[leftmargin=2.4em]
+\item \textbf{state-space expansion}\\
+Note B allows non-minimizing intermediate states, so the search space expands rapidly.
+
+\item \textbf{multi-budget invariant}\\
+The proof requires discovery not of one obvious monotone quantity, but of compensation among several quantities.
+
+\item \textbf{late-emerging local obstruction}\\
+Obstructions such as articulation, and the local lemmas needed to exclude them, do not become visible until partway through the proof.
+
+\item \textbf{granularity preference}\\
+The AI searches showed a tendency to discover a coarser geometric structure such as the extreme-line / hull structure before attempting direct control at one-cell resolution.
+\end{enumerate}
+
+Up to this point, the interpretation is fairly coherent.
+
+However, one absolutely cannot conclude that
+
+\begin{quote}
+``LLMs are intrinsically unable to discover Note-B-type proofs.''
+\end{quote}
+
+What is supported at present is only something like the following:
+
+\begin{quote}
+\textbf{Under the experimental conditions used here, multiple independent searches did not naturally rediscover the Note-B-type one-cell deletion route and were instead drawn toward more global hull / peeling structures.}
+\end{quote}
+
+I think this would fit best as a short observation separate from \path{provenance/proof-reachability/README.md}, for example
+
+\begin{quote}
+\path{provenance/proof-reachability/OBSERVATIONS.md}.
+\end{quote}
+
+One especially interesting sentence is:
+
+\begin{quote}
+\textbf{The target theorem is formulated at one-cell resolution, yet the AI searches repeatedly escaped to a coarser geometric resolution before recovering the one-cell conclusion.}
+\end{quote}
+
+That has more meaning than merely recording that ``the AI failed to prove it.'' It is an observation about \textbf{what granularity of state representation AI tends to select during proof search}.
+
+\end{document}

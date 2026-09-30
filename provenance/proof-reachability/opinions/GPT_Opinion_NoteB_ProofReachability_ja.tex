@@ -1,0 +1,206 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=25mm]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+
+\setmainfont{Liberation Serif}
+\setsansfont{Liberation Sans}
+\setlength{\headheight}{14pt}
+\setCJKmainfont{Noto Serif CJK JP}
+\setCJKsansfont{Noto Sans CJK JP}
+\setCJKmonofont{Noto Sans Mono CJK JP}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{0.55em}
+\setstretch{1.08}
+\hypersetup{hidelinks}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Proof-Reachability / GPT Opinion Record}
+\rhead{2026-09-30}
+\cfoot{\thepage}
+
+\newcommand{\recordlabel}[1]{\par\noindent\textsf{\bfseries #1}\par}
+\newcommand{\gt}{\ensuremath{\ge}}
+\newcommand{\ltwo}{\ensuremath{\le 2}}
+
+\title{\bfseries Note B 証明方向に関する GPT 意見記録\\[4pt]
+\large Proof-Reachability Provenance Record}
+\author{GPT-5.6 Sol\\記録主体: H. Utsunomiya}
+\date{2026-09-30}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\fbox{\parbox{0.92\textwidth}{
+\textbf{記録上の位置づけ。}
+本資料は数学的証明の一部ではなく、proof-reachability に関する研究過程の記録である。
+以下の「GPT回答」は、直前のチャットで生成された日本語回答を内容上編集せず収録する。
+見出し・数式組版・箇条書きの体裁のみ LaTeX に移した。
+}}
+\end{center}
+
+\recordlabel{著者指定のアーカイブ用質問}
+AIはなぜNOTEB証明の方向にはいかないのか？GPT意見を聞きたい
+
+\recordlabel{実際の直前チャット文}
+AIはなぜNOTEB証明の方向にはいかないのか？考察入れておこうかな？
+
+\section*{GPT回答（原文）}
+
+入れておく価値はあります。ただし、\textbf{数学本文ではなく provenance / proof-reachability の考察}として置くのが適切です。
+
+現時点で言えるのは、「AIがNote B方向へ行かない理由が証明された」わけではなく、\textbf{複数試行で観察された探索傾向に対する仮説}です。そこは明確に分けた方がいいです。
+
+Note B がAIに見つかりにくい理由は、かなり構造的に説明できます。
+
+まず大きいのは、\textbf{Note B が静的構造の証明ではなく、途中状態を制御する証明}だという点です。現在の主証明は、
+\[
+\text{minimizer}
+\to
+\text{directional convexity}
+\to
+\text{tight hull}
+\to
+\text{shortest extreme line}
+\to
+\text{peeling}
+\]
+という、かなり「見える」構造を持っています。最小配置から幾何学的対象を抽出し、その不変量を調べればよい。
+
+一方Note Bは、
+\[
+S_N\supset S_{N-1}\supset S_{N-2}\supset\cdots
+\]
+と一セルずつ削りながら、\textbf{各途中状態が必ずしも最小配置ではない}ところで制御を続けます。つまり探索空間が急に広がる。
+
+しかも必要なのが単一の単調量ではありません。Note Bでは実質的に、
+
+\begin{itemize}[leftmargin=2em]
+\item shortest extreme line の残量
+\item 次の threshold drop までの距離
+\item excess の余裕
+\item articulation の発生可能性
+\item directional convexity の維持
+\end{itemize}
+
+のような複数の量を同時に管理します。
+
+ここがAI探索にはかなり不利です。
+
+特に重要なのは、\textbf{個々の量だけを見ると証明が見えない}ことです。たとえば shortest-line length だけでも不十分、threshold までの距離だけでも不十分です。両者を「競合するbudget」として組み合わせて初めて進行条件が出る。
+
+これは典型的な探索では、
+
+\begin{quote}
+候補不変量を一つ出す\\
+$\to$ 単調でない\\
+$\to$ 捨てる
+\end{quote}
+
+となりやすい。Note Bではむしろ、
+
+\begin{quote}
+単独では失敗する二つの量を保持して、相互補償させる
+\end{quote}
+
+必要があります。
+
+ここはかなり大きいと思います。
+
+さらに、\textbf{articulation-cell の扱い}があります。普通の幾何的最適化探索なら「端のセルを消せばよい」と考えますが、Note Bではそこで連結性が壊れる可能性を処理しなければならない。そのために、
+
+\begin{quote}
+degree-two articulation cell が存在すると excess が少なくとも4になる
+\end{quote}
+
+という局所構造の排除が必要になる。
+
+これは最初の問題文から非常に遠い補題です。しかも、その補題が必要だと分かるのは、かなり証明を進めて\textbf{「ここだけ連結性が壊れる」}ところまで来てからです。
+
+AIの探索では、この種の「後になって初めて必要性が見える局所補題」はかなり発見しにくい。
+
+対して peeling route は、
+
+\begin{quote}
+extreme line 全体を消す
+\end{quote}
+
+ことで連結性や方向凸性を一括して処理できます。AIから見ればこちらの方が圧倒的に探索しやすい。
+
+もう一つ面白いのは、\textbf{Task A の結論そのものは一セル成長なのに、AIは一セル証明へ行かず、より粗い line-peeling を中間構造として発見した}ことです。
+
+これはかなり示唆的です。
+
+AIは結論と同じ粒度で証明するより、
+\[
+\text{粗い構造をまず発見}
+\to
+\text{その内部を後で細分化}
+\]
+する方向を選んだわけです。
+
+Note Bは逆に最初から最終粒度、つまり\textbf{一セル単位で問題に正面から入る証明}です。人間側では「一セル成長を証明したいのだから、一セルずつ逆向きに削ってみる」という発想が自然だった。しかしAIにとっては、その粒度では状態数と例外処理が多すぎる。
+
+これは研究上かなり面白い差です。
+
+なので考察としては、私は次の4点にまとめます。
+
+\begin{enumerate}[leftmargin=2.4em]
+\item \textbf{state-space expansion}\\
+Note Bは途中で非最小配置を許すため、探索空間が急増する。
+
+\item \textbf{multi-budget invariant}\\
+一つの明白な単調量ではなく、複数量の相互補償を発見する必要がある。
+
+\item \textbf{late-emerging local obstruction}\\
+articulation のような障害と、それを排除する局所補題が証明途中まで見えない。
+
+\item \textbf{granularity preference}\\
+AIは一セル粒度を直接制御するより、extreme-line / hull という粗い幾何構造を先に発見する傾向を示した。
+\end{enumerate}
+
+ここまではかなり筋の通った考察です。
+
+ただし、
+
+\begin{quote}
+「LLMは本質的にNote B型証明を発見できない」
+\end{quote}
+
+までは全く言えません。
+
+現時点で成立しているのは、
+
+\begin{quote}
+\textbf{今回の実験条件では、複数の独立探索がNote B型の一セル削除ルートを自然には再発見せず、より大域的なhull / peeling型構造へ引き寄せられた。}
+\end{quote}
+
+くらいです。
+
+これは \path{provenance/proof-reachability/README.md} とは別に、
+
+\begin{quote}
+\path{provenance/proof-reachability/OBSERVATIONS.md}
+\end{quote}
+
+みたいな短い考察を置くのが一番よさそうです。
+
+特に面白い一文にすると、
+
+\begin{quote}
+\textbf{The target theorem is formulated at one-cell resolution, yet the AI searches repeatedly escaped to a coarser geometric resolution before recovering the one-cell conclusion.}
+\end{quote}
+
+という現象です。
+
+これ、単なる「AIが証明できなかった」という記録よりずっと意味があります。\textbf{証明探索でAIがどの粒度の状態表現を選びやすいか}という観察になっているからです。
+
+\end{document}

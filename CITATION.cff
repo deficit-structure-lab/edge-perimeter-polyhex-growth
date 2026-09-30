@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use the mathematical results in this repository, please cite the paper below."
+type: software
+authors:
+  - family-names: Utsunomiya
+    given-names: H.
+    alias: deficit-structure-lab
+title: "Shortest-side skeletons of edge-perimeter-minimizing polyhexes — companion repository"
+version: "1.0.0"
+date-released: "2026-09-29"
+url: "https://github.com/deficit-structure-lab/edge-perimeter-polyhex-growth"
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Utsunomiya
+      given-names: H.
+  title: "Shortest-side skeletons of edge-perimeter-minimizing polyhexes"
+  year: 2026

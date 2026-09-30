@@ -1,0 +1,920 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{fact}[theorem]{Fact}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\sm}{\setminus}
+\DeclareMathOperator{\exc}{exc}
+\DeclareMathOperator{\solo}{solo}
+\newcommand{\Adm}{\mathrm{Adm}}
+\newcommand{\dg}{\operatorname{deg}}
+
+\newcommand{\partheadingOLD}[1]{%
+  \par\vspace{1.6\baselineskip}%
+  \noindent\rule{\linewidth}{0.8pt}\par\vspace{0.35\baselineskip}%
+  \begingroup\centering\normalsize\scshape #1\par\endgroup
+  \vspace{0.35\baselineskip}\noindent\rule{\linewidth}{0.8pt}%
+  \par\vspace{1.0\baselineskip}}
+
+\title{Growth chains for near-extremal directionally convex polyhexes}
+\author{H. Utsunomiya}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+This note records a proof, on a class wider than the edge-perimeter minimizers, of the
+one-cell growth theorem of the author's paper \emph{Shortest-side skeletons of
+edge-perimeter-minimizing polyhexes}: every directionally convex polyhex \(S\) with
+\(|S|\ge M(\sigma(S)-1)\), where \(M(t)=\lfloor(t^{2}+3)/12\rfloor\) and \(\sigma\) is the
+edge semiperimeter, admits a one-cell growth sequence with edge-perimeter excess at most two
+at every stage. The main paper needs the statement only for minimizers and proves it there
+by a shorter route; the argument here closes the induction on the wider class by a finite
+case analysis of the tight hull. The common framework of the main paper is reproduced for
+self-containment.
+\end{abstract}
+
+\section{The hexagonal lattice, runs, and directional convexity}\label{sec:prelim}
+
+This part reproduces, for self-containment, the common framework of the main paper
+[Utsunomiya, \emph{Shortest-side skeletons of edge-perimeter-minimizing polyhexes}]:
+the lattice, the perimeter functional, directional convexity, the tight hull and its
+identities, and the extremal capacity function. Numbering follows this note.
+
+\subsection{Lattice and polyhexes}\label{sec:2.1}
+
+Cells of the hexagonal tiling are indexed by axial coordinates
+\((q,r)\in\Z^{2}\). We call \(q\), \(r\) and
+\[
+   s:=q+r
+\]
+the three \emph{keys} of a cell; in words, the third key of a cell is the sum of its two
+axial coordinates. Two cells are \emph{adjacent} when they differ by one of the six
+vectors
+\[
+   d_{0}=(1,0),\quad d_{1}=(0,1),\quad d_{2}=(-1,1),\quad
+   d_{3}=(-1,0),\quad d_{4}=(0,-1),\quad d_{5}=(1,-1).
+\]
+
+A \emph{polyhex} is a finite nonempty set of cells that is connected with respect to
+adjacency. We write \(|S|\) for the number of cells of \(S\).
+
+The following four facts are immediate from the definitions and are used throughout
+without further comment.
+
+\begin{fact}\label{f:1}
+Two distinct cells are adjacent if and only if they agree in exactly one key and differ
+by exactly \(1\) in the other two. In words: an adjacency step keeps one of the three
+keys fixed and changes each of the other two by one unit (the step \(d_{0}=(1,0)\), for
+instance, sends \((q,r,s)\) to \((q+1,r,s+1)\), so the two changing keys need not move
+in opposite senses).
+\end{fact}
+
+\begin{proof}
+Each \(d_{j}\) changes \((q,r,s)\) by \((1,0,1)\), \((0,1,1)\), \((-1,1,0)\),
+\((-1,0,-1)\), \((0,-1,-1)\) or \((1,-1,0)\), and these are exactly the six triples with
+one zero entry and two entries equal to \(\pm1\) that are realized. Conversely a
+difference of that shape is one of the \(d_{j}\).
+\end{proof}
+
+\begin{fact}\label{f:2}
+A \emph{line} is a set of cells on which one key is constant. Two lines belonging to
+different keys meet in exactly one cell; two distinct lines belonging to the same key are
+disjoint.
+\end{fact}
+
+\begin{fact}\label{f:3}
+One adjacency step changes each of \(q\), \(r\) and \(s\) by at most \(1\).
+\end{fact}
+
+\begin{fact}\label{f:4}
+For a polyhex \(S\) and each key, the set of values taken by that key on \(S\) is an
+interval of consecutive integers. In words: no key value inside the range of \(S\) can be
+skipped.
+\end{fact}
+
+\begin{proof}
+Let \(k\) be a key and let \(x,y\in S\) realize two values of \(k\). A path of adjacent
+cells inside \(S\) joins them, and by Fact~\ref{f:3} the value of \(k\) changes by at most
+one per step, so every intermediate integer occurs on the path.
+\end{proof}
+
+\subsection{Edge perimeter, runs and directional convexity}\label{sec:2.2}
+
+Let \(a(S)\) denote the number of unordered pairs of adjacent cells of \(S\). The
+\emph{edge perimeter} of \(S\) is
+\begin{equation}\label{eq:p}
+   p(S)=6|S|-2a(S),
+\end{equation}
+in words: six times the number of cells, minus twice the number of adjacent pairs.
+Equivalently, \(p(S)\) counts the cell edges of \(S\) that are not shared with another
+cell of \(S\); we call these the \emph{boundary edges}. The \emph{edge semiperimeter} is
+\[
+   \sigma(K):=\tfrac{1}{2}p(K)
+\]
+for any finite set of cells \(K\); in words, half the edge perimeter. That this is an
+integer is part of Lemma~\ref{lem:runs} below.
+
+A line \(\Lambda\) is \emph{occupied} by \(S\) when \(S\cap\Lambda\neq\emptyset\); we call
+\(S\cap\Lambda\) the \emph{trace} of \(S\) on \(\Lambda\). Cells of a line are linearly
+ordered (for a line of constant \(q\) by the value of \(r\), for one of constant \(r\) by
+the value of \(q\), for one of constant \(s\) by the value of \(q\)), and consecutive
+cells in that order are adjacent. A \emph{run} of \(S\) on \(\Lambda\) is a maximal block
+of consecutive cells of the trace. Let
+\[
+   R(S)=\text{the total number of runs of \(S\) over all lines},\qquad
+   \lambda(S)=\text{the number of occupied lines}.
+\]
+
+\begin{definition}\label{def:dconv}
+A polyhex \(S\) is \emph{directionally convex} when the trace of \(S\) on every occupied
+line is a single run. In words: along each of the three directions, \(S\) never leaves a
+line and comes back to it.
+\end{definition}
+
+This is a lattice notion and not Euclidean convexity; it is the notion called
+\emph{layer convexity} in parts of the literature on lattice animals.
+
+\begin{lemma}\label{lem:runs}
+For every finite set of cells \(S\),
+\begin{equation}\label{eq:pruns}
+   p(S)=2R(S)\ \ge\ 2\lambda(S),
+\end{equation}
+in words: the edge perimeter equals twice the total number of runs, and the total number
+of runs is at least the number of occupied lines. In particular \(p(S)\) is even and
+\(\sigma(S)=R(S)\). For a polyhex, equality \(R(S)=\lambda(S)\) holds if and only if
+\(S\) is directionally convex.
+\end{lemma}
+
+\begin{proof}
+Let \(e=\{x,y\}\) be a boundary edge, with \(x\in S\) and \(y\notin S\) the two cells it
+separates. By Fact~\ref{f:1} the cells \(x\) and \(y\) agree in exactly one key, hence
+they are consecutive cells of exactly one line \(\Lambda\), and \(x\) is an end of the run
+of \(S\) on \(\Lambda\) containing it. Conversely a run has exactly two ends, and the cell
+immediately beyond each end lies outside \(S\) and determines a boundary edge; for a run
+consisting of a single cell the two ends are the two opposite sides of that cell, so they
+give two distinct boundary edges. This is a bijection between boundary edges and ends of
+runs, whence \(p(S)=2R(S)\).
+
+Every occupied line carries at least one run, so \(R(S)\ge\lambda(S)\), with equality
+exactly when every occupied line carries exactly one run, which is
+Definition~\ref{def:dconv}.
+\end{proof}
+
+\begin{remark}[edge perimeter versus site perimeter]\label{rem:site}
+The \emph{site perimeter} of \(S\) is the number of cells outside \(S\) adjacent to at
+least one cell of \(S\). It is a different functional from \eqref{eq:p}, and the two have
+different minimizers in general; results about one do not transfer to the other. Nothing
+in this paper depends on the site perimeter. We mention it only because part of the
+literature we cite in Section~\ref{sec:2.5} is written in those terms.
+\end{remark}
+
+\subsection{Extreme support lines and traces}\label{sec:2.3}
+
+Let \(S\) be a polyhex. For each key, Fact~\ref{f:4} makes the occupied values an interval,
+so there is a smallest and a largest occupied line in each of the three families. These six
+lines are the \emph{extreme lines} of \(S\); we list them in the cyclic order
+\[
+   \Lambda_{1}:\ q=q_{\min},\quad
+   \Lambda_{2}:\ r=r_{\max},\quad
+   \Lambda_{3}:\ s=s_{\max},\quad
+   \Lambda_{4}:\ q=q_{\max},\quad
+   \Lambda_{5}:\ r=r_{\min},\quad
+   \Lambda_{6}:\ s=s_{\min},
+\]
+so that \(\Lambda_{i}\) and \(\Lambda_{i+3}\) are the two extreme lines of one and the same
+family, indices being read in \(\Z/6\). If a family occupies a single line then the two
+corresponding extreme lines coincide; all statements below are read with that degeneracy
+allowed.
+
+\begin{definition}\label{def:traces}
+Let \(S\) be a \emph{directionally convex} polyhex. Its six \emph{support traces} are the
+traces \(S\cap\Lambda_{i}\), each a single run by Definition~\ref{def:dconv}, and we write
+\[
+   r_{i}:=|S\cap\Lambda_{i}|\ \ge 1 ,\qquad i\in\Z/6,
+   \qquad\text{and}\qquad
+   \rho(S):=\min_{i} r_{i} .
+\]
+In words: \(r_{i}\) is the number of cells of \(S\) on the \(i\)-th extreme line, and
+\(\rho(S)\) is the smallest of those six numbers.
+\end{definition}
+
+\begin{remark}\label{rem:rho}
+Definition~\ref{def:traces} is stated for directionally convex \(S\) only. On that domain \(\rho(S)\) is at once the length of the shortest support trace and the
+length of the shortest extreme-line run. For
+a general polyhex a trace need not be a run, and we do not extend the definition.
+\end{remark}
+
+\section{Tight hulls and exact identities}\label{sec:hulls}
+
+\subsection{Tight lattice hulls}\label{sec:2.4}
+
+\begin{definition}\label{def:hexagon}
+Let \(L\ge1\) and \(u,v,w\ge0\) be integers satisfying the \emph{admissibility} conditions
+\begin{equation}\label{eq:adm}
+   u+v\le L-1,\qquad v+w\le L-1,\qquad u+w\le L-1 ,
+\end{equation}
+and put \(A:=L-u\), \(B:=L-v\), \(C:=L-w\), so that \(A,B,C\ge1\). The corresponding
+\emph{lattice hexagon} is
+\[
+   H(L;u,v,w):=\{\,(q,r):\ 0\le q\le A-1,\ \ 0\le r\le B-1,\ \ w\le q+r\le L-1\,\}.
+\]
+In words: the triangle of side \(L\) with three corner triangles of sides \(u\), \(v\) and
+\(w\) cut off. Degenerate shapes, in which one or more of the cut corners is empty or one
+of the three widths equals \(1\), are allowed.
+\end{definition}
+
+\begin{definition}\label{def:hull}
+The \emph{tight hull} \(H(S)\) of a polyhex \(S\) is the lattice hexagon determined by the
+extreme values of the three keys on \(S\). Concretely, normalize by a translation so that
+\(q_{\min}=r_{\min}=0\) and set
+\[
+   A=1+q_{\max},\quad B=1+r_{\max},\quad L=1+s_{\max},\quad w=s_{\min},\quad
+   u=L-A,\quad v=L-B .
+\]
+\end{definition}
+
+\begin{lemma}[the tight hull is admissible]\label{lem:tightadm}
+For every polyhex \(S\), the parameters \(L,u,v,w\) of Definition~\ref{def:hull} satisfy
+\(L\ge1\), \(u,v,w\ge0\) and the three inequalities \eqref{eq:adm}, so
+\(H(S)=H(L;u,v,w)\) is a lattice hexagon.
+\end{lemma}
+
+\begin{proof}
+After the normalization every cell has \(q,r\ge0\), hence \(s\ge0\), so \(w\ge0\) and
+\(L\ge1\); and \(u=s_{\max}-q_{\max}\), \(v=s_{\max}-r_{\max}\). A cell with
+\(q=q_{\max}\) has \(s\ge q_{\max}\), so \(u\ge0\); likewise \(v\ge0\). A cell with
+\(s=s_{\max}\) has \(s_{\max}=q+r\le q_{\max}+r_{\max}\), which is \(u+v\le L-1\). A cell
+with \(q=0\) has \(s=r\le r_{\max}\), so \(s_{\min}\le r_{\max}\), which is \(v+w\le L-1\);
+a cell with \(r=0\) gives \(s_{\min}\le q_{\max}\), which is \(u+w\le L-1\).
+\end{proof}
+
+For a lattice hexagon \(H\) we write \(\Lambda_{1},\dots,\Lambda_{6}\) for its six extreme
+lines in the cyclic order of Section~\ref{sec:2.3}, namely
+\[
+   q=0,\quad r=B-1,\quad s=L-1,\quad q=A-1,\quad r=0,\quad s=w ,
+\]
+and call them the \emph{side lines}; we write
+\[
+   \ell_{i}:=|H\cap\Lambda_{i}|
+\]
+for the six \emph{side lengths}, \(h:=\min_{i}\ell_{i}\) for the shortest side length, and
+\(\kappa_{i}:=H\cap\Lambda_{i}\cap\Lambda_{i+1}\) for the \emph{corner} cells. Finally we
+set
+\[
+   \delta(H):=\ell_{1}-\ell_{4},
+   \qquad
+   Q(H):=(\ell_{1}-\ell_{3})^{2}+(\ell_{3}-\ell_{5})^{2}+(\ell_{5}-\ell_{1})^{2} .
+\]
+
+\begin{lemma}\label{lem:hull}
+Let \(S\) be a polyhex and \(H=H(S)\). Then
+\begin{enumerate}
+\item[(i)] \(S\subseteq H\);
+\item[(ii)] \(S\) and \(H\) occupy exactly the same lines, so \(\lambda(S)=\lambda(H)\);
+\item[(iii)] each of the six side lines of \(H\) meets \(S\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) is immediate from Definition~\ref{def:hull}, since every cell of \(S\) satisfies the
+six inequalities defining \(H\). For (ii), the lines occupied by \(S\) in the \(q\)-family
+are, by Fact~\ref{f:4}, exactly \(q=0,\dots,A-1\), and likewise \(r=0,\dots,B-1\) and
+\(s=w,\dots,L-1\); these are precisely the lines occupied by \(H\), as read off from
+Definition~\ref{def:hexagon}. Assertion (iii) is the case of (ii) for the six extreme
+values: each of them is attained by some cell of \(S\).
+\end{proof}
+
+Lemma~\ref{lem:hull} is the only place where connectedness of \(S\) is used in this
+section, and it is used through Fact~\ref{f:4}: for a disconnected set the occupied key
+values need not form an interval, and (ii) fails.
+
+\subsection{Hull identities}\label{sec:2.5}
+
+\begin{lemma}\label{lem:hex}
+Let \(H=H(L;u,v,w)\) be a lattice hexagon. Then:
+\begin{enumerate}
+\item[(i)] the six side lengths are
+\[
+   \ell_{1}=L-v-w,\quad \ell_{2}=v+1,\quad \ell_{3}=L-u-v,\quad
+   \ell_{4}=u+1,\quad \ell_{5}=L-u-w,\quad \ell_{6}=w+1 ,
+\]
+and each side line meets \(H\) in a single run whose two end cells are the corners
+\(\kappa_{i-1}\) and \(\kappa_{i}\);
+\item[(ii)] \(H\) is a directionally convex polyhex with
+\[
+   \lambda(H)=\sigma(H)=A+B+C=3L-(u+v+w);
+\]
+\item[(iii)] the six side lengths satisfy
+\begin{equation}\label{eq:sidesum}
+   \sum_{i=1}^{6}\ell_{i}=\lambda(H)+3 ,
+\end{equation}
+in words: the six side lengths of the hull add up to three more than the number of lines
+the hull occupies; and the three differences across opposite sides agree,
+\begin{equation}\label{eq:delta}
+   \ell_{1}-\ell_{4}=\ell_{3}-\ell_{6}=\ell_{5}-\ell_{2}=\delta(H)=L-u-v-w-1 ;
+\end{equation}
+\item[(iv)] with \(T(k):=k(k+1)/2\),
+\[
+   |H|=T(L)-T(u)-T(v)-T(w) ;
+\]
+\item[(v)] \textup{(hull defect identity)}
+\begin{equation}\label{eq:defectid}
+   \lambda(H)^{2}+3-12|H| \;=\; 3\,\delta(H)^{2}+2\,Q(H)\;\ge\;0 ,
+\end{equation}
+in words: the square of the number of occupied lines, plus three, minus twelve times the
+number of cells, equals three times the square of the common opposite-side difference plus
+twice the imbalance \(Q(H)\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) On the line \(q=0\) the defining inequalities reduce to \(w\le r\le\min(B-1,L-1)=B-1\),
+which is a nonempty interval because \(w\le B-1\) is the condition \(v+w\le L-1\) of
+\eqref{eq:adm}; its length is \(B-w=L-v-w\). On the line \(r=B-1\) they reduce to
+\(\max(0,w-B+1)\le q\le\min(A-1,v)\), and \eqref{eq:adm} gives \(w-B+1\le0\) and
+\(v\le A-1\), so the interval is \(0\le q\le v\), of length \(v+1\). The remaining four
+sides are obtained in the same way, each time using exactly one of the three inequalities
+of \eqref{eq:adm} at each end. Each side is an interval of consecutive cells of its line,
+hence a run; its two end cells are the two cells where a second defining inequality becomes
+an equality, that is, the two corners.
+
+(ii) The occupied lines are \(q=0,\dots,A-1\), \(r=0,\dots,B-1\) and \(s=w,\dots,L-1\),
+which number \(A+B+C\); on each of them the trace is an interval of consecutive cells by
+the same computation as in (i), so \(H\) is directionally convex and
+Lemma~\ref{lem:runs} gives \(\sigma(H)=R(H)=\lambda(H)\). Connectedness follows since each
+trace is a run and consecutive traces meet a common line.
+
+(iii) Summing the six expressions of (i),
+\[
+   \sum_{i}\ell_{i}=3L-(u+v+w)+3=\lambda(H)+3 .
+\]
+Using the side-length formulas of (i), the three opposite-side differences
+\(\ell_{1}-\ell_{4}\), \(\ell_{3}-\ell_{6}\), \(\ell_{5}-\ell_{2}\) of \eqref{eq:delta}
+are \((L-v-w)-(u+1)\), \((L-u-v)-(w+1)\) and \((L-u-w)-(v+1)\), all equal to
+\(L-u-v-w-1\).
+
+(iv) The triangle \(\{q,r\ge0,\ q+r\le L-1\}\) has \(T(L)\) cells. The three sets removed
+in Definition~\ref{def:hexagon} are the corner triangles \(q\ge A\), \(r\ge B\) and
+\(q+r\le w-1\), of \(T(u)\), \(T(v)\) and \(T(w)\) cells respectively, and \eqref{eq:adm}
+makes them pairwise disjoint: a cell with \(q\ge A\) and \(r\ge B\) would have
+\(q+r\ge A+B=2L-u-v\ge L+1\), which is impossible, and a cell with \(q\ge A\) and
+\(q+r\le w-1\) would give \(r\le w-1-A<0\), and symmetrically.
+
+(v) Put \(U:=u+v+w\) and \(P:=u^{2}+v^{2}+w^{2}\). By (ii) and (iv),
+\[
+   \lambda(H)^{2}+3-12|H|=(3L-U)^{2}+3-6L(L+1)+6P+6U
+   =3L^{2}-6LU-6L+U^{2}+6P+6U+3 .
+\]
+On the other side, \(\delta(H)=L-U-1\) and, by (i),
+\(Q(H)=(u-w)^{2}+(w-v)^{2}+(v-u)^{2}=3P-U^{2}\), so
+\[
+   3\delta(H)^{2}+2Q(H)=3(L-U-1)^{2}+2(3P-U^{2})
+\]
+expands to the same expression. In words: both sides equal three times \(L^{2}\), minus six
+times \(LU\), minus six times \(L\), plus \(U^{2}\), plus six times \(P\), plus six times
+\(U\), plus three. Nonnegativity is clear from the right-hand side.
+\end{proof}
+
+
+
+\begin{remark}[attribution]\label{rem:fs}
+An equivalent defect identity is obtained from F\"ulep and Sieben's polyiamond identity
+\cite[Lemma~3.3]{FulepSieben2010} through the triangular--hexagonal duality developed in their Section~5.
+In the same site-perimeter variables, \cite[Proposition~5.10]{FulepSieben2010} yields exactly the capacity
+function \(M(t)\) of Section~\ref{sec:2.6} after the substitution \(p=t+3\); the value
+\(p=7\) excluded there corresponds to the value \(t=4\) excluded in
+Remark~\ref{rem:attain} below. We nevertheless give the derivation here in edge-perimeter
+variables to keep the argument self-contained, and we do not identify the two settings:
+\cite{FulepSieben2010} is about the site perimeter (Remark~\ref{rem:site}).
+\end{remark}
+
+\section{Capacity and minimum edge perimeter}\label{sec:capacity}
+
+\subsection{Extremal capacity}\label{sec:2.6}
+
+We first record the two operations on directionally convex polyhexes that the capacity
+computation needs: removing a whole support trace, and putting it back one cell at a time.
+
+\begin{lemma}[peeling]\label{lem:peel}
+Let \(K\) be a directionally convex polyhex, let \(\Lambda\) be one of its six extreme
+lines, and let \(K':=K\sm\Lambda\). If \(K'\neq\emptyset\), then
+\begin{enumerate}
+\item[(i)] \(K'\) is a directionally convex polyhex with \(\sigma(K')\le\sigma(K)-1\);
+\item[(ii)] the cells of \(K\cap\Lambda\) can be ordered \(c_{1},\dots,c_{k}\) so that for
+every \(j\) the set \(K'\cup\{c_{1},\dots,c_{j}\}\) is a directionally convex polyhex of
+edge semiperimeter at most \(\sigma(K)\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Say \(\Lambda\) is the line \(q=q_{\min}\); the other five cases are the same after
+permuting the roles of the keys and of the two senses.
+
+(i) For each occupied value \(k\) of \(q\) let \(K_{k}\) be the trace of \(K\) on
+\(q=k\); it is a run. If \(K\) is connected, then for consecutive values \(k,k+1\) a path
+inside \(K\) joining a cell of \(K_{k}\) to a cell of \(K_{k+1}\) must, by
+Fact~\ref{f:3}, contain a step from a cell with \(q=k\) to a cell with \(q=k+1\), so
+\(K_{k}\) and \(K_{k+1}\) are adjacent. Hence \(K'\), the union of the \(K_{k}\) with
+\(k\ge q_{\min}+1\), is connected. Its traces in the \(q\)-family are traces of \(K\),
+hence runs. Now fix a line of the \(r\)-family, \(r=k\); its cells are \((q,k)\), so the
+trace of \(K\) on it is a run if and only if its \(q\)-values form an interval, and by
+Fact~\ref{f:2} it meets \(\Lambda\) in at most the one cell \((q_{\min},k)\). The trace of
+\(K'\) on this line is the trace of \(K\) with that cell, if present, removed. Since
+\(q_{\min}\) is the least \(q\)-value occurring anywhere in \(K\), it is the least
+\(q\)-value of the interval, so removing it leaves an interval, possibly empty. A line of
+the \(s\)-family, \(s=k\), has cells \((q,k-q)\), again parametrized by \(q\), and the
+same sentence applies verbatim. So all traces of \(K'\) are runs and \(K'\) is
+directionally convex. Finally \(\Lambda\) is occupied by
+\(K\) and not by \(K'\), so \(\lambda(K')\le\lambda(K)-1\), and by Lemma~\ref{lem:runs}
+\(\sigma(K')=\lambda(K')\le\lambda(K)-1=\sigma(K)-1\).
+
+(ii) Since \(K\) is connected there is a cell \(c_{1}\in K\cap\Lambda\) adjacent to
+\(K'\). Order the remaining cells of the run \(K\cap\Lambda\) so that every initial
+segment \(\{c_{1},\dots,c_{j}\}\) is a block of consecutive cells of that run containing
+\(c_{1}\). Write \(K_{j}:=K'\cup\{c_{1},\dots,c_{j}\}\). Then \(K_{j}\) is connected,
+because \(c_{1}\) is adjacent to \(K'\) and each later \(c_{j}\) is adjacent to a cell
+already inserted. Its trace on \(\Lambda\) is a block, hence a run; its trace on any other
+line of the \(q\)-family is a trace of \(K'\), hence a run. On a line of the \(r\)- or
+\(s\)-family, parametrized by \(q\) as in (i), the trace of \(K_{j}\) is the trace of
+\(K'\) there together with at most one inserted cell, which lies on \(\Lambda\) and so
+has \(q=q_{\min}\). The trace of \(K\) on that line is a run containing this cell and, by
+(i), the trace of \(K'\) is that run with its least element \(q_{\min}\) removed; putting
+the cell back restores the run of \(K\). Hence every trace of \(K_{j}\) is a run, so
+\(K_{j}\) is directionally convex, and every line it occupies is occupied by \(K\), whence
+\(\sigma(K_{j})=\lambda(K_{j})\le\lambda(K)=\sigma(K)\).
+\end{proof}
+
+\begin{corollary}\label{cor:subsets}
+Let \(K\) be a directionally convex polyhex. For every \(j\) with \(1\le j\le|K|\) there is
+a directionally convex polyhex \(K_{j}\subseteq K\) with \(|K_{j}|=j\) and
+\(\sigma(K_{j})\le\sigma(K)\).
+\end{corollary}
+
+\begin{proof}
+Strong induction on \(|K|\). For \(|K|=1\) there is nothing to prove. Let \(|K|\ge2\). Some
+extreme line \(\Lambda\) does not contain all of \(K\): otherwise \(K\) would be contained
+in two extreme lines belonging to different families, which by Fact~\ref{f:2} meet in a
+single cell, contradicting \(|K|\ge2\). Apply Lemma~\ref{lem:peel} to that \(\Lambda\). The
+sets \(K_{j}\) of part (ii) supply all sizes between \(|K'|\) and \(|K|\); the sizes below
+\(|K'|\) are supplied by the inductive hypothesis applied to \(K'\), whose edge
+semiperimeter is at most \(\sigma(K)\).
+\end{proof}
+
+\begin{definition}\label{def:M}
+For an integer \(t\ge0\) put
+\[
+   M(t):=\left\lfloor\frac{t^{2}+3}{12}\right\rfloor ,
+\]
+in words: the integer part of one twelfth of the square of \(t\) plus three. Thus
+\(M(0)=M(1)=M(2)=0\) and \(M(3)=1\). The function \(M\) is nondecreasing.
+\end{definition}
+
+\begin{theorem}\label{thm:capacity}
+Let \(N\ge1\).
+\begin{enumerate}
+\item[(a)] Every polyhex \(S\) satisfies \(|S|\le M(\sigma(S))\); in words, a configuration
+of edge semiperimeter \(t\) cannot have more than \(M(t)\) cells.
+\item[(b)] For every \(t\ge3\) there is a directionally convex polyhex \(K\) with
+\(|K|=M(t)\) and \(\sigma(K)\le t\).
+\item[(c)] The minimum edge perimeter of an \(N\)-cell polyhex is
+\[
+   p_{\min}(N)=2g(N),\qquad g(N)=\left\lceil\sqrt{12N-3}\,\right\rceil ,
+\]
+in words: the smallest edge semiperimeter that can hold \(N\) cells is the least integer at
+least as large as the square root of twelve times \(N\) minus three, and the minimum edge
+perimeter is twice that number.
+\item[(d)] Every \(N\)-cell minimizer \(S\) is directionally convex and satisfies
+\(\sigma(S)=\lambda(S)=g(N)\).
+\item[(e)] Writing \(\exc(S):=p(S)-p_{\min}(|S|)\), a polyhex \(S\) satisfies
+\(\exc(S)\le2\) if and only if \(|S|>M(\sigma(S)-2)\).
+\end{enumerate}
+\end{theorem}
+
+The directional convexity in (d) is a known result: Davoli, Piovano and Stefanelli
+\cite[Proposition~3.3]{DavoliPiovanoStefanelli2017} prove that every minimizer of the
+edge-isoperimetric problem on the triangular lattice is \(3\)-convex, which is
+directional convexity in the present terminology; the proof below is the self-contained
+one of the main paper, via the hull identities.
+
+\begin{proof}
+(a) Let \(H=H(S)\). By Lemma~\ref{lem:hull} and Lemma~\ref{lem:hex}(v),
+\[
+   12|S|\le12|H|=\lambda(H)^{2}+3-\bigl(3\delta(H)^{2}+2Q(H)\bigr)\le\lambda(S)^{2}+3
+   \le\sigma(S)^{2}+3 ,
+\]
+the last step by Lemma~\ref{lem:runs}. Since \(|S|\) is an integer, \(|S|\le M(\sigma(S))\).
+
+(b) For \(t\equiv3\pmod 6\), say \(t=6m+3\), take \(K=H(3m+1;m,m,m)\); for \(t=6m\) take
+\(H(3m-1;m-1,m-1,m-1)\); for \(t=6m+1\) take \(H(3m;m,m,m-1)\); for \(t=6m+2\) take
+\(H(3m+1;m,m,m+1)\); for \(t=6m+4\) take \(H(3m+1;m,m,m-1)\); for \(t=6m+5\) take
+\(H(3m+2;m,m,m+1)\). In each case \eqref{eq:adm} holds for the indicated range of \(m\),
+Lemma~\ref{lem:hex}(ii) gives \(\sigma(K)=t\), and Lemma~\ref{lem:hex}(iv),(v) give
+\(12|K|=t^{2}+3-D\) with \(D\in\{0,3,4,7\}\) according to the residue of \(t\), so
+\(|K|=M(t)\). The single case not covered by an admissible triple is \(t=4\); there
+\(M(4)=1\) and a single cell has edge semiperimeter \(3\le4\).
+
+(c) Put \(t_{N}:=\min\{t\ge3:\ M(t)\ge N\}\). By (a) every \(N\)-cell polyhex has
+\(M(\sigma(S))\ge N\), hence \(\sigma(S)\ge t_{N}\). Conversely (b) produces a
+directionally convex \(K\) with \(|K|=M(t_{N})\ge N\) and \(\sigma(K)\le t_{N}\), and
+Corollary~\ref{cor:subsets} extracts from it an \(N\)-cell polyhex of edge semiperimeter at
+most \(t_{N}\). Therefore \(p_{\min}(N)=2t_{N}\). Finally, for integers \(t\),
+\[
+   M(t)\ge N\iff \frac{t^{2}+3}{12}\ge N\iff t\ge\sqrt{12N-3},
+\]
+and \(\sqrt{12N-3}\ge3\) for \(N\ge1\), so \(t_{N}=g(N)\).
+
+(d) By (c), \(\sigma(S)=g(N)\). Let \(H=H(S)\). Applying (a) to \(H\), which is
+directionally convex with \(\sigma(H)=\lambda(H)\), gives \(M(\lambda(H))\ge|H|\ge N\) and
+therefore \(\lambda(H)\ge t_{N}=g(N)\). Combining with Lemmas~\ref{lem:runs}
+and~\ref{lem:hull},
+\[
+   g(N)=\sigma(S)=R(S)\ \ge\ \lambda(S)=\lambda(H)\ \ge\ g(N),
+\]
+so \(R(S)=\lambda(S)\) and \(S\) is directionally convex.
+
+(e) Write \(t=\sigma(S)\) and \(k=|S|\); by (c), \(\exc(S)=2\bigl(t-g(k)\bigr)\). Since
+both sides are integers, \(\exc(S)>2\) is equivalent to \(g(k)\le t-2\). If \(t-2\ge3\),
+then by the definition of \(g\) as \(t_{k}\) and the monotonicity of \(M\) this is
+equivalent to \(M(t-2)\ge k\). If \(t-2<3\), then \(t\in\{3,4\}\) because a polyhex has
+\(t\ge3\); here \(M(t-2)=0<k\) and \(g(k)\ge3>t-2\), so both statements are false.
+In both cases \(\exc(S)>2\) is equivalent to \(M(t-2)\ge k\), which is the assertion.
+\end{proof}
+
+\begin{remark}\label{rem:attain}
+Parts (a) and (b) together say exactly that
+\[
+   M(t)=\max\{\,|K|:\ K\text{ a polyhex with }\sigma(K)\le t\,\},
+\]
+in words: \(M(t)\) is the largest number of cells that fit within an edge-semiperimeter
+budget of \(t\). The budget form is the one the rest of the paper uses, and the
+inequality in (b) is not a weakening: for every \(t\ge3\) other than \(t=4\) the
+hexagons listed in the proof do satisfy \(\sigma(K)=t\), and the value \(t=4\) is not the
+edge semiperimeter of any polyhex at all. Indeed a polyhex \(K\) with \(\sigma(K)=4\)
+would have \(|K|\le M(4)=1\) by (a), while the one-cell polyhex has edge semiperimeter
+\(3\).
+\end{remark}
+
+\subsection{The plateau bridge}\label{sec:2.7}
+
+The function \(N\mapsto g(N)\) is nondecreasing and takes each of its values on a block of
+consecutive integers. For \(\gamma\) in the range of \(g\) let
+\[
+   N_{b}(\gamma):=\min\{\,N\ge1:\ g(N)=\gamma\,\}
+\]
+be the first cell count at which the minimum edge semiperimeter equals \(\gamma\).
+
+\begin{lemma}\label{lem:bridge}
+For every \(\gamma\) in the range of \(g\),
+\begin{equation}\label{eq:bridge}
+   N_{b}(\gamma)=M(\gamma-1)+1 ,
+\end{equation}
+in words: the plateau on which the minimum edge semiperimeter equals \(\gamma\) begins one
+cell after the capacity of edge semiperimeter \(\gamma-1\) has been exhausted.
+\end{lemma}
+
+\begin{proof}
+For integers \(N\ge1\) and \(t\ge3\) we have, as in the proof of
+Theorem~\ref{thm:capacity}(c), \(g(N)\le t\) if and only if \(N\le M(t)\). Hence
+\(\{N:\ g(N)\le\gamma-1\}=\{1,\dots,M(\gamma-1)\}\), so the least \(N\) with
+\(g(N)\ge\gamma\) is \(M(\gamma-1)+1\); as \(\gamma\) lies in the range of \(g\), that
+least \(N\) satisfies \(g(N)=\gamma\).
+\end{proof}
+
+
+
+
+\section{Near-extremal configurations and missing cells}\label{sec:near}
+
+\begin{definition}\label{def:near}
+A directionally convex polyhex \(S\) is \emph{near-extremal} when
+\[
+   |S|\ \ge\ M\bigl(\sigma(S)-1\bigr),
+\]
+in words: \(S\) has at least as many cells as the largest configuration whose edge
+semiperimeter budget is one unit smaller. We call the family of these configurations the
+\emph{near-extremal class}.
+\end{definition}
+
+\begin{lemma}\label{lem:minnear}
+Every edge-perimeter minimizer is near-extremal.
+\end{lemma}
+
+\begin{proof}
+Let \(|S|=N\). By Theorem~\ref{thm:capacity}(d), \(S\) is directionally convex with
+\(\sigma(S)=g(N)\). By the definition of \(g\) as the least \(t\) with \(M(t)\ge N\) we
+have \(M(g(N)-1)<N\), so \(|S|=N>M(\sigma(S)-1)\).
+\end{proof}
+
+The class is strictly larger than the class of minimizers: it contains configurations of
+excess \(2\) as well as of excess \(0\). The main paper shows that peeling a shortest
+extreme line from a minimizer always produces a minimizer, so the induction there can be
+run inside the minimizers; this note shows that the same induction closes on the wider
+class, at the price of a stronger peeling estimate (Lemma~\ref{lem:key}).
+
+\subsection*{Notation for Sections \ref{sec:near}--\ref{sec:primary}}
+
+Throughout, \(S\) is a directionally convex polyhex with
+\[
+   n=|S|,\qquad \sigma=\sigma(S)=\lambda(S),\qquad H=H(S),
+\]
+so that \(\sigma(H)=\sigma\) by Lemma~\ref{lem:hull}(ii). We use the \emph{defect}
+\begin{equation}\label{eq:defectS}
+   D(S)=\sigma^{2}+3-12n ,
+\end{equation}
+in words: the square of the edge semiperimeter, plus three, minus twelve times the number
+of cells. The cells of \(H\sm S\) are called \emph{missing}, their number is
+\(\mu=|H|-n\), and \eqref{eq:defectid} gives
+\begin{equation}\label{eq:defectsplit}
+   D(S)=D(H)+12\mu ,
+\end{equation}
+in words: the defect of \(S\) is the defect of its hull plus twelve for each missing cell.
+For \(i\in\Z/6\) we write, as in Definition~\ref{def:traces} and Section~\ref{sec:2.4},
+\[
+   r_{i}=|S\cap\Lambda_{i}|\ \ge1,\qquad
+   m_{i}=\ell_{i}-r_{i}\ \ge0,\qquad
+   \beta=\sum_{i}m_{i},\qquad
+   \rho=\rho(S)=\min_{i}r_{i} ,
+\]
+so \(m_{i}\) counts the missing cells on the \(i\)-th side line and \(\beta\) counts,
+with multiplicity, the missing cells lying on side lines.
+
+\begin{lemma}[missing cells]\label{lem:missing}
+Let \(S\) be a directionally convex polyhex and \(H=H(S)\).
+\begin{enumerate}
+\item[(a)] If \(m_{i}\ge1\) then \(\kappa_{i-1}\) or \(\kappa_{i}\) is missing; consequently
+\(m_{i-1}\ge1\) or \(m_{i+1}\ge1\).
+\item[(b)] For every missing cell \(z\) and every line \(\Lambda\) through \(z\), one of the
+two end cells of \(H\cap\Lambda\) is missing, and every end cell of a trace of \(H\) lies
+on a side line.
+\item[(c)] If \(\beta=0\) then \(S=H\).
+\item[(d)] If some missing cell lies on no side line, then at least three distinct missing
+cells lie on side lines.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) By Lemma~\ref{lem:hex}(i) the trace \(H\cap\Lambda_{i}\) is a run with end cells
+\(\kappa_{i-1}\) and \(\kappa_{i}\), and \(S\cap\Lambda_{i}\) is a nonempty run inside it.
+The complement of one run inside another is the union of an initial and a final segment, so
+if it is nonempty it contains an end cell of \(H\cap\Lambda_{i}\). Since
+\(\kappa_{i-1}\in\Lambda_{i-1}\) and \(\kappa_{i}\in\Lambda_{i+1}\), the second assertion
+follows.
+
+(b) Let \(z\) be missing and \(\Lambda\) a line through \(z\). Then \(\Lambda\) is occupied
+by \(H\), hence by \(S\) as well by Lemma~\ref{lem:hull}(ii). Now \(H\cap\Lambda\) is a run
+containing \(z\), and \(S\cap\Lambda\) is a run not containing \(z\); therefore \(z\) lies
+in one of the two segments of \((H\cap\Lambda)\sm(S\cap\Lambda)\), and every cell of that
+segment, in particular the end cell of \(H\cap\Lambda\) on that side, is missing. For the
+second assertion, let \(e\) be an end cell of a trace \(H\cap\Lambda\). The next cell of
+\(\Lambda\) beyond \(e\) is not in \(H\), so it violates one of the six inequalities of
+Definition~\ref{def:hexagon}; since one adjacency step changes each key by at most \(1\)
+(Fact~\ref{f:3}), \(e\) satisfies that same inequality with equality, which says exactly
+that \(e\) lies on the corresponding side line.
+
+(c) If no missing cell lies on a side line then by (b) there is no missing cell at all.
+
+(d) Let \(z\) be missing and on no side line, and apply (b) to the three lines through
+\(z\), obtaining missing end cells \(e_{1},e_{2},e_{3}\) on side lines. Each \(e_{j}\neq z\)
+because \(z\) is on no side line. If \(e_{j}=e_{k}\) for \(j\neq k\), then \(z\) and this
+common cell would both lie on a line of the \(j\)-th family and on a line of the \(k\)-th
+family, and two lines of different families meet in exactly one cell (Fact~\ref{f:2}),
+forcing \(z=e_{j}\). So \(e_{1},e_{2},e_{3}\) are distinct.
+\end{proof}
+
+\section{The key peeling lemma}\label{sec:key}
+
+\begin{lemma}[key lemma]\label{lem:key}
+Let \(S\) be near-extremal with \(n=|S|\ge2\). Then
+\begin{equation}\label{eq:key}
+   n-\rho\ \ge\ M(\sigma-2) ,
+\end{equation}
+in words: deleting the shortest support trace still leaves at least as many cells as fit
+within an edge semiperimeter budget two units smaller. Moreover there is an index \(i\)
+with \(r_{i}=\rho\) and \(S\sm\Lambda_{i}\neq\emptyset\).
+\end{lemma}
+
+\begin{proof}
+We prove the last assertion first. Suppose that \(S\subseteq\Lambda_{i}\) for every \(i\)
+with \(r_{i}=\rho\). For such an \(i\) we get \(n=|S\cap\Lambda_{i}|=r_{i}=\rho\), hence
+\(n=\rho\le r_{j}\le n\) and therefore \(r_{j}=n\), that is \(S\subseteq\Lambda_{j}\), for
+every \(j\). Taking two side lines of different families and applying Fact~\ref{f:2} gives
+\(n\le1\), contradicting \(n\ge2\).
+
+For \eqref{eq:key} we argue by contradiction, in six steps. Assume
+\(n-\rho<M(\sigma-2)\); as all quantities are integers,
+\begin{equation}\label{eq:contra}
+   n-\rho+1\ \le\ M(\sigma-2).
+\end{equation}
+
+\medskip\noindent\textbf{Step 1.} \emph{For every \(i\),}
+\begin{equation}\label{eq:step1}
+   12\,r_{i}\ \ge\ 4\sigma+8-D(S).
+\end{equation}
+Indeed \(r_{i}\ge\rho\), so by \eqref{eq:contra} and Definition~\ref{def:M},
+\[
+   n-r_{i}+1\ \le\ n-\rho+1\ \le\ M(\sigma-2)\ \le\ \frac{(\sigma-2)^{2}+3}{12} .
+\]
+Multiplying by \(12\) and using \eqref{eq:defectS} gives
+\(12n-12r_{i}+12\le\sigma^{2}-4\sigma+7\), which rearranges to \eqref{eq:step1}. In words:
+twelve times any support-trace length is at least four times the edge semiperimeter, plus
+eight, minus the defect.
+
+\medskip\noindent\textbf{Step 2.} \emph{\(D(S)\le2\sigma+10\).}
+Near-extremality gives \(n\ge M(\sigma-1)>\frac{(\sigma-1)^{2}+3}{12}-1\), so
+\(12n>\sigma^{2}-2\sigma-8\) and hence \(D(S)<2\sigma+11\). Both sides being integers,
+\(D(S)\le2\sigma+10\).
+
+\medskip\noindent\textbf{Step 3.} \emph{Put \(z_{i}:=\ell_{i}-\rho\) and
+\(W:=\sum_{i}z_{i}\). Then \(z_{i}\ge m_{i}\ge0\), \(W\le4\), and \(D(S)\ge4W+8\).}
+For the first assertion,
+\[
+   z_{i}=\ell_{i}-\rho=(r_{i}-\rho)+(\ell_{i}-r_{i})=(r_{i}-\rho)+m_{i}\ \ge\ m_{i}\ \ge\ 0,
+\]
+since \(r_{i}\ge\rho\); in words, the slack of a hull side over the shortest support trace
+is at least the number of missing cells on that side. By \eqref{eq:sidesum},
+\(\sum_{i}\ell_{i}=\sigma+3\), so
+\begin{equation}\label{eq:rhoW}
+   6\rho+W=\sigma+3,\qquad\text{equivalently}\qquad 12\rho=2\sigma+6-2W .
+\end{equation}
+Applying \eqref{eq:step1} to an index with \(r_{i}=\rho\) and substituting
+\eqref{eq:rhoW},
+\[
+   2\sigma+6-2W\ \ge\ 4\sigma+8-D(S),\qquad\text{that is}\qquad D(S)\ \ge\ 2\sigma+2+2W .
+\]
+Together with Step 2 this forces \(W\le4\). Support traces are nonempty by
+Lemma~\ref{lem:hull}(iii), so \(\rho\ge1\), and \eqref{eq:rhoW} gives
+\(\sigma=6\rho+W-3\ge W+3\); substituting \(2\sigma\ge2W+6\) into
+\(D(S)\ge2\sigma+2+2W\) yields \(D(S)\ge4W+8\).
+
+\medskip\noindent\textbf{Step 4.} \emph{Up to a cyclic rotation of the indices, the vector
+\((z_{1},\dots,z_{6})\) is one of}
+\[
+   \mathrm{(i)}\ (0,0,0,0,0,0),\qquad
+   \mathrm{(ii)}\ (1,0,0,1,0,0),\qquad
+   \mathrm{(iii)}\ (1,0,1,0,1,0),
+\]
+\[
+   \mathrm{(iv)}\ (2,0,0,2,0,0),\qquad
+   \mathrm{(v)}\ (1,1,0,1,1,0).
+\]
+Since \(z_{i}=\ell_{i}-\rho\), the differences of the \(z_{i}\) are those of the
+\(\ell_{i}\), so \eqref{eq:delta} gives
+\[
+   z_{1}-z_{4}=z_{3}-z_{6}=z_{5}-z_{2}=\delta,\qquad \delta:=\delta(H).
+\]
+If \(\delta\ge0\) then \(W=3\delta+2(z_{2}+z_{4}+z_{6})\ge3\delta\), and symmetrically for
+\(\delta\le0\); with \(W\le4\) this gives \(|\delta|\le1\). If \(|\delta|=1\) then
+\(3+2(\cdot)\le4\) forces the bracket to vanish, leaving \(W=3\) and the vector
+\((1,0,1,0,1,0)\) or its rotation \((0,1,0,1,0,1)\), which is (iii). If \(\delta=0\) then
+\(z_{i+3}=z_{i}\) and \(W=2(z_{1}+z_{2}+z_{3})\), so \(z_{1}+z_{2}+z_{3}\in\{0,1,2\}\); the
+three possible partitions give (i), (ii) and, for the value \(2\), either (iv) or (v).
+
+The rotation is harmless in Steps 5 and 6, which read the vector only through quantities
+that do not depend on where the pattern sits. This is because \(i\) and \(i+3\) always have
+opposite parities, so each pair of opposite indices contains exactly one odd index; the
+counts of positive entries among \(z_{1},z_{3},z_{5}\) used below are therefore the same
+for every rotation. (When \(\delta=0\) one also has \(\ell_{i+3}=\ell_{i}\), so the two
+alternating triples of side lengths agree as multisets and \(Q(H)\) may be read off from
+either.)
+
+\medskip\noindent\textbf{Step 5.} \emph{Patterns \textup{(i)}--\textup{(iv)} are
+impossible.} In each of them no two cyclically consecutive \(z_{i}\) are positive, hence by
+Step 3 no two cyclically consecutive \(m_{i}\) are positive either. But
+Lemma~\ref{lem:missing}(a) says that \(m_{i}\ge1\) forces \(m_{i-1}\ge1\) or
+\(m_{i+1}\ge1\). So every \(m_{i}=0\), that is \(\beta=0\), and
+Lemma~\ref{lem:missing}(c) gives \(S=H\) and \(\mu=0\). By \eqref{eq:defectsplit} and
+\eqref{eq:defectid}, \(D(S)=3\delta^{2}+2Q(H)\), and \(Q(H)\) is computed from the
+differences of \(z_{1},z_{3},z_{5}\). The four cases give:
+
+\begin{center}
+\begin{tabular}{llccccc}
+\hline
+pattern & & \(W\) & \(\delta\) & \(Q(H)\) & \(D(S)\) & Step 3 requires \\
+\hline
+(i)   & \((0,0,0,0,0,0)\) & \(0\) & \(0\)   & \(0\) & \(0\)  & \(\ge8\) \\
+(ii)  & \((1,0,0,1,0,0)\) & \(2\) & \(0\)   & \(2\) & \(4\)  & \(\ge16\) \\
+(iii) & \((1,0,1,0,1,0)\) & \(3\) & \(\pm1\)& \(0\) & \(3\)  & \(\ge20\) \\
+(iv)  & \((2,0,0,2,0,0)\) & \(4\) & \(0\)   & \(8\) & \(16\) & \(\ge24\) \\
+\hline
+\end{tabular}
+\end{center}
+
+The values of \(Q(H)\) are obtained as follows. In (ii) the two positive entries occupy one
+pair of opposite indices, which contains exactly one odd index, so
+\((z_{1},z_{3},z_{5})\) is a permutation of \((1,0,0)\) and \(Q(H)=1+0+1=2\); in (iv) the
+same argument with the value \(2\) gives \(Q(H)=4+0+4=8\); in (iii) the triple
+\((z_{1},z_{3},z_{5})\) is \((1,1,1)\) or \((0,0,0)\) and \(Q(H)=0\). Each row contradicts
+the bound of Step 3.
+
+\medskip\noindent\textbf{Step 6.} \emph{Pattern \textup{(v)} is impossible.} Here
+\(\delta=0\) and the positive entries are \(z_{j}=z_{j+1}=z_{j+3}=z_{j+4}=1\) for some
+\(j\), with \(z_{j+2}=z_{j+5}=0\). Among \(z_{1},z_{3},z_{5}\) exactly two equal \(1\):
+the indices \(j\) and \(j+3\) have opposite parities and contribute exactly one, and so do
+\(j+1\) and \(j+4\). Hence \((z_{1},z_{3},z_{5})\) is a permutation of \((1,1,0)\),
+\(Q(H)=0+1+1=2\), and \(D(H)=3\cdot0+2\cdot2=4\).
+
+By Step 3, \(m_{j+2}=m_{j+5}=0\) and every other \(m_{i}\) is at most \(1\). Consider
+\(\Lambda_{j}\): if \(m_{j}\ge1\) then by Lemma~\ref{lem:missing}(a) one of
+\(\kappa_{j-1},\kappa_{j}\) is missing, and \(\kappa_{j-1}\in\Lambda_{j-1}=\Lambda_{j+5}\),
+whose \(m\) vanishes; so the missing cell is \(\kappa_{j}\). On \(\Lambda_{j+1}\) the two
+candidates are \(\kappa_{j}\) and \(\kappa_{j+1}\in\Lambda_{j+2}\), and the latter is
+excluded, so again only \(\kappa_{j}\). On \(\Lambda_{j+3}\) the candidates are
+\(\kappa_{j+2}\in\Lambda_{j+2}\), excluded, and \(\kappa_{j+3}\); on \(\Lambda_{j+4}\) they
+are \(\kappa_{j+3}\) and \(\kappa_{j+4}\in\Lambda_{j+5}\), excluded. So the only cells on
+side lines that can be missing are \(\kappa_{j}\) and \(\kappa_{j+3}\): at most two of
+them. By Lemma~\ref{lem:missing}(d) a missing cell lying on no side line would force three
+distinct missing cells on side lines, so there is none, and
+\[
+   \mu\le2,\qquad D(S)=D(H)+12\mu=4+12\mu\in\{4,16,28\} .
+\]
+On the other hand \(W=4\), so Step 3 gives \(D(S)\ge2\sigma+10\) while Step 2 gives
+\(D(S)\le2\sigma+10\); hence \(D(S)=2\sigma+10\). Since also \(D(S)\ge4W+8=24\), the only
+possibility is \(D(S)=28\), whence \(\sigma=9\) and \(\mu=2\). But \eqref{eq:rhoW} with
+\(W=4\) gives \(\sigma=6\rho+1\), so \(\sigma\equiv1\pmod 6\), while \(9\equiv3\pmod 6\).
+This contradiction completes the proof.
+\end{proof}
+
+\section{The primary proof}\label{sec:primary}
+
+\begin{theorem}\label{thm:near}
+Let \(S\) be a near-extremal polyhex with \(n=|S|\). Then there are polyhexes
+\[
+   S_{1}\subset S_{2}\subset\cdots\subset S_{n}=S,\qquad |S_{k}|=k,
+\]
+each directionally convex, with \(\exc(S_{k})\le2\) for every \(k\).
+\end{theorem}
+
+\begin{proof}
+Strong induction on \(n\). For \(n=1\) the single cell has \(p=6=p_{\min}(1)\) and
+\(\exc=0\).
+
+Let \(n\ge2\). By Lemma~\ref{lem:key} there is an index \(i\) with \(r_{i}=\rho\) and
+\(S':=S\sm\Lambda_{i}\neq\emptyset\). By Lemma~\ref{lem:peel}(i), \(S'\) is a directionally
+convex polyhex with \(\sigma(S')\le\sigma-1\), and \(|S'|=n-\rho\). Using
+\eqref{eq:key} and the monotonicity of \(M\),
+\[
+   |S'|=n-\rho\ \ge\ M(\sigma-2)\ \ge\ M\bigl(\sigma(S')-1\bigr),
+\]
+so \(S'\) is again near-extremal. In words: peeling the shortest support trace lowers the
+budget by at least one and removes at most what that budget can hold, so the configuration
+stays in the class. By the inductive hypothesis there is a chain
+\(S_{1}\subset\cdots\subset S_{n-\rho}=S'\) of directionally convex polyhexes with
+\(|S_{k}|=k\) and \(\exc(S_{k})\le2\).
+
+By Lemma~\ref{lem:peel}(ii) the cells of \(S\cap\Lambda_{i}\) can be ordered
+\(c_{1},\dots,c_{\rho}\) so that each
+\[
+   T_{j}:=S'\cup\{c_{1},\dots,c_{j}\}\qquad(1\le j\le\rho)
+\]
+is a directionally convex polyhex with \(\sigma(T_{j})\le\sigma\). Put
+\(S_{n-\rho+j}:=T_{j}\); then \(T_{\rho}=S\) and the sizes increase by one at each step.
+Finally, \(|T_{j}|\ge n-\rho+1>M(\sigma-2)\ge M\bigl(\sigma(T_{j})-2\bigr)\) by
+\eqref{eq:key} and the monotonicity of \(M\), so Theorem~\ref{thm:capacity}(e) gives
+\(\exc(T_{j})\le2\).
+\end{proof}
+
+\begin{corollary}
+Every edge-perimeter minimizer admits a one-cell growth sequence by adjacent cells with
+excess at most two at every stage.
+\end{corollary}
+\begin{proof}
+By Lemma~\ref{lem:minnear} the minimizer is near-extremal; apply Theorem~\ref{thm:near}.
+Adjacency of each added cell follows from connectedness of each stage.
+\end{proof}
+
+\begin{remark}[the procedure]\label{rem:algorithm}
+The proof is constructive and the construction is short to state: repeatedly delete the
+whole shortest support trace, and read the resulting sequence backwards, restoring each
+deleted trace one cell at a time from a cell adjacent to what remains. Each configuration
+along the way is directionally convex and has excess \(0\) or \(2\).
+\end{remark}
+
+\begin{remark}[relation to the main paper]\label{rem:whyclass}
+For minimizers the main paper obtains the strict inequality \(n-\rho\ge M(\sigma-2)+1\),
+hence a minimizer after peeling, from a residue computation and a rigidity statement at
+two exceptional plateau starts. Lemma~\ref{lem:key} above obtains the weaker
+\(n-\rho\ge M(\sigma-2)\) on the wider near-extremal class by a finite case analysis of
+the hull; that is exactly what is needed for the wider class to be closed under the
+peeling step, and Theorem~\ref{thm:near} is correspondingly stronger in scope than the
+growth theorem of the main paper, though not needed for it.
+\end{remark}
+
+\bibliographystyle{plain}
+\bibliography{refs}
+\end{document}

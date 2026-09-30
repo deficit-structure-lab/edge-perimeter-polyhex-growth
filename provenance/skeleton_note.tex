@@ -1,0 +1,264 @@
+% ============================================================
+%  STANDALONE NOTE — Shortest-side skeleton theorem
+%  ASTRA Lemma 6, rewritten in the notation of the current paper
+%  (NOTATION LOCK v1.0). References "Lemma 3.4" etc. are to the
+%  current integrated draft (CONTENT FROZEN 2026-09-27, now under
+%  review). Nothing in this note is used by the paper yet.
+% ============================================================
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\sm}{\setminus}
+\DeclareMathOperator{\exc}{exc}
+\title{Shortest-side skeleton theorem\\[4pt]
+\large ASTRA Lemma 6 in the notation of the current paper --- audit copy}
+\author{}
+\date{2026-09-27 (rev 2: three editorial patches after independent audit)}
+\begin{document}
+\maketitle
+
+\section*{0. Purpose and scope}
+
+This note states and proves, in the notation of the current paper, the lemma that the
+GPT-ASTRA run produced as its ``Lemma 6'': removing any shortest extreme line from an
+edge-perimeter minimizer leaves an edge-perimeter minimizer whose threshold has dropped by
+exactly one. It records precisely which statements of the current paper are used, which
+step is new, and how the two exceptional residues coincide with the existing
+Plateau-Start Bound. It is written to be audited on its own.
+
+Every quantity is that of the current paper: \(p\), \(\sigma=p/2\), \(\lambda\), \(R\),
+\(g(N)=\lceil\sqrt{12N-3}\rceil\), \(M(t)=\lfloor(t^{2}+3)/12\rfloor\),
+\(N_{b}(\gamma)=\min\{N:g(N)=\gamma\}\), the tight hull \(H(S)=H(L;u,v,w)\), its side lines
+\(\Lambda_{1},\dots,\Lambda_{6}\) and side lengths \(\ell_{i}\), the support traces
+\(r_{i}=|S\cap\Lambda_{i}|\) of a directionally convex \(S\), and \(\rho(S)=\min_{i}r_{i}\).
+
+\section*{1. Statements of the current paper that are used}
+
+\begin{center}
+\begin{tabular}{@{}llp{8.6cm}@{}}
+\toprule
+label & where & content used \\
+\midrule
+(P1) & Lemma 2.6 & \(p(S)=2R(S)\ge2\lambda(S)\); equality iff directionally convex \\
+(P2) & Lemma 3.3 & \(S\subseteq H(S)\), \(\lambda(S)=\lambda(H)\), all six side lines meet \(S\) \\
+(P3) & Lemma 3.4(ii),(iii) & \(H\) directionally convex with \(\sigma(H)=\lambda(H)\); \(\sum_{i}\ell_{i}=\lambda(H)+3\) \\
+(P4) & Lemma 4.1(i),(ii) & peeling: \(S\sm\Lambda\) directionally convex polyhex with \(\sigma\) down by \(\ge1\); the removed cells can be restored one at a time through directionally convex polyhexes of \(\sigma\le\sigma(S)\) \\
+(P5) & Thm 4.4(c),(d) & \(p_{\min}(N)=2g(N)\); a minimizer is directionally convex with \(\sigma=\lambda=g(N)\) \\
+(P6) & definition of \(g\) & \(g(N)\le t\iff N\le M(t)\); \(g\) nondecreasing \\
+(P7) & Lemma 4.6 & \(N_{b}(\gamma)=M(\gamma-1)+1\) \\
+(P8) & Prop 11.1 & Plateau-Start Bound: for \(\gamma\ge7\) in the range of \(g\) and a minimizer \(S\) with \(|S|=N_{b}(\gamma)\), \(\rho(S)\le N_{b}(\gamma)-N_{b}(\gamma-1)\) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+(P8) is the only statement taken from Part~IV. Its own proof uses, besides (P2)--(P7): the
+hull cell count of Lemma 3.4(iv) (to compute \(|H|\) for the regular hexagon and for the
+hexagon with one opposite pair lengthened); the fact that the threshold jump
+\(j(N)=g(N)-g(N-1)\) lies in \(\{0,1\}\) for \(N\ge3\) (to see that \(\gamma-1\) is in the
+range of \(g\); in the present note this is replaced by the positivity of
+\(M(\sigma-1)-M(\sigma-2)\) in Step 4); the Opposite-Pair Excess Lemma 11.2; and the
+complete-boundary Lemma 11.3. It treats the residues \(\gamma\equiv3\) and
+\(\gamma\equiv5\pmod 6\) as its Cases~2 and~3. In a one-proof reorganization these items
+would move to the hull section of Part~I.
+
+\section*{2. The theorem}
+
+\begin{theorem}[shortest-side skeleton]\label{thm:skel}
+Let \(S\) be an edge-perimeter minimizer with \(n=|S|\ge3\), let \(\sigma=\sigma(S)=g(n)\),
+and let \(\Lambda\) be \emph{any} extreme line of \(S\) with \(|S\cap\Lambda|=\rho(S)\). Put
+\(S':=S\sm\Lambda\). Then
+\begin{enumerate}
+\item[(i)] \(S'\) is nonempty and is an edge-perimeter minimizer with \(g(|S'|)=\sigma-1\);
+\item[(ii)] the cells of \(S\cap\Lambda\) can be ordered \(c_{1},\dots,c_{\rho}\) so that each
+\(T_{j}:=S'\cup\{c_{1},\dots,c_{j}\}\) is a directionally convex polyhex with
+\(\exc(T_{j})\le2\).
+\end{enumerate}
+In words: peeling a shortest extreme line from a minimizer lands on a minimizer one
+threshold step down, and putting the line back one cell at a time never costs more than
+two units of edge perimeter.
+\end{theorem}
+
+\section*{3. Proof}
+
+By (P5), \(S\) is directionally convex with \(\lambda(S)=\sigma=g(n)\), so
+\(r_{1},\dots,r_{6}\) and \(\rho=\rho(S)\) are defined, and \(\rho\ge1\) by (P2). Let
+\(H=H(S)\) with side lengths \(\ell_{i}\).
+
+\medskip\noindent\textbf{Step 1 (upper bound on \(\rho\)).}
+By (P2),(P3), \(\sum_{i}\ell_{i}=\lambda(H)+3=\sigma+3\). Since \(S\subseteq H\) we have
+\(r_{i}\le\ell_{i}\), hence \(\sum_{i}r_{i}\le\sigma+3\). The minimum of six integers is at
+most their mean, so
+\begin{equation}\label{eq:rhobound}
+   \rho\ \le\ \Bigl\lfloor\frac{\sigma+3}{6}\Bigr\rfloor .
+\end{equation}
+In words: the shortest support trace has at most one sixth of \(\sigma+3\) cells.
+
+\medskip\noindent\textbf{Step 2 (lower bound on \(n\)).}
+By (P6), \(g(n)=\sigma\) means \(n>M(\sigma-1)\), i.e.
+\begin{equation}\label{eq:nbound}
+   n\ \ge\ M(\sigma-1)+1 .
+\end{equation}
+
+\medskip\noindent\textbf{Step 3 (the residue table).}
+Write \(\sigma=6m+s\) with \(0\le s\le5\). For \(t=6m+j\), \(0\le j\le5\), one has
+\(M(t)=3m^{2}+mj+\lfloor(j^{2}+3)/12\rfloor\) with
+\(\lfloor(j^{2}+3)/12\rfloor=0,0,0,1,1,2\) for \(j=0,\dots,5\). Taking differences (for
+\(s\le1\) the arguments \(\sigma-1,\sigma-2\) fall into the block \(6(m-1)+j\)), and
+computing \(\lfloor(\sigma+3)/6\rfloor=m+\lfloor(s+3)/6\rfloor\):
+
+\begin{center}
+\begin{tabular}{crr r}
+\toprule
+\(s=\sigma\bmod 6\) & \(M(\sigma-1)-M(\sigma-2)\) & \(\lfloor(\sigma+3)/6\rfloor\) & difference \\
+\midrule
+0 & \(m\)   & \(m\)   & \(0\) \\
+1 & \(m\)   & \(m\)   & \(0\) \\
+2 & \(m\)   & \(m\)   & \(0\) \\
+3 & \(m\)   & \(m+1\) & \(\mathbf{-1}\) \\
+4 & \(m+1\) & \(m+1\) & \(0\) \\
+5 & \(m\)   & \(m+1\) & \(\mathbf{-1}\) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Combining \eqref{eq:rhobound} and \eqref{eq:nbound},
+\[
+   n-\rho\ \ge\ M(\sigma-1)+1-\Bigl\lfloor\frac{\sigma+3}{6}\Bigr\rfloor .
+\]
+If \(s\notin\{3,5\}\) the table gives \(M(\sigma-1)-\lfloor(\sigma+3)/6\rfloor\ge M(\sigma-2)\),
+hence
+\begin{equation}\label{eq:strict}
+   n-\rho\ \ge\ M(\sigma-2)+1 .
+\end{equation}
+If \(s\in\{3,5\}\) the table gives only \(n-\rho\ge M(\sigma-2)\), with equality if and only
+if both \eqref{eq:nbound} and \eqref{eq:rhobound} are equalities:
+\[
+   n=M(\sigma-1)+1,\qquad \rho=m+1 .
+\]
+In words: the strict inequality \eqref{eq:strict} already holds except possibly when all
+three of the following occur at once --- the threshold is \(3\) or \(5\) modulo \(6\), the
+configuration is at the very start of its plateau, and the shortest trace is as long as
+the counting allows.
+
+\medskip\noindent\textbf{Step 4 (the two exceptional residues are the Plateau-Start Bound).}
+Suppose \(s\in\{3,5\}\), \(n=M(\sigma-1)+1\), \(\rho=m+1\). By (P7),
+\(n=N_{b}(\sigma)\), so \(S\) is a minimizer at the start of the plateau of \(\gamma:=\sigma\).
+Since \(g(3)=\lceil\sqrt{33}\rceil=6\) and \(g\) is nondecreasing, \(n\ge3\) gives
+\(\sigma\ge6\); hence \(m\ge1\), and as \(s\in\{3,5\}\), \(\gamma=\sigma\ge9\ge7\).
+Moreover \(\gamma=g(n)\) lies in the range of \(g\), and in these residues the table gives
+\(M(\sigma-1)-M(\sigma-2)=m\ge1\), so \(M(\sigma-2)<M(\sigma-1)\) and some \(N\) has
+\(g(N)=\sigma-1\); thus \(\sigma-1\) lies in the range of \(g\) as well and
+\(N_{b}(\sigma-1)\) is defined by (P7). Thus (P8) applies and gives
+\[
+   \rho(S)\ \le\ N_{b}(\sigma)-N_{b}(\sigma-1)
+   \ =\ M(\sigma-1)-M(\sigma-2)\ =\ m
+\]
+by (P7) and the table. This contradicts \(\rho=m+1\). Hence the equality case does not occur,
+and \eqref{eq:strict} holds for every residue.
+
+\begin{remark}
+(P8) is exactly ASTRA's ``Lemma 5'' in disguise. Its Cases~2 and~3 show that a minimizer at a
+plateau start with \(\gamma\equiv3\) (resp.\ \(5\)) mod \(6\) and \(\rho=m+1\) would have all
+six support traces of length \(\ge m+1\), which forces the hull to be the regular hexagon of
+side \(m+1\) (resp.\ that hexagon with one opposite pair lengthened by one), and by
+Lemma 11.3 forces \(S=H\); but \(|H|-N_{b}(\gamma)=m\ge1\). ASTRA arrives at the same two
+hull shapes and the same count deficit \(m\).
+\end{remark}
+
+\medskip\noindent\textbf{Step 5 (conclusion (i)).}
+From \eqref{eq:strict} and (P6), \(g(n-\rho)\ge\sigma-1\). Since \(\rho\ge1\) and
+\(n-\rho\ge M(\sigma-2)+1\ge1\), the set \(S'=S\sm\Lambda\) is nonempty, so (P4)(i) applies:
+\(S'\) is a directionally convex polyhex with \(\sigma(S')\le\sigma-1\). Then by (P1),(P5)
+\[
+   2(\sigma-1)\ \le\ 2g(|S'|)\ =\ p_{\min}(|S'|)\ \le\ p(S')\ =\ 2\sigma(S')\ \le\ 2(\sigma-1),
+\]
+so all are equalities: \(S'\) is a minimizer and \(g(|S'|)=\sigma-1\). Nothing in Steps 1--5
+depends on which shortest line \(\Lambda\) was chosen, so (i) holds for every shortest
+extreme line.
+
+\medskip\noindent\textbf{Step 6 (conclusion (ii)).}
+By (P4)(ii) there is an ordering \(c_{1},\dots,c_{\rho}\) of \(S\cap\Lambda\) such that every
+\(T_{j}\) is a directionally convex polyhex with \(\sigma(T_{j})\le\sigma\). As
+\(|T_{j}|\ge|S'|\) and \(g\) is nondecreasing, \(g(|T_{j}|)\ge g(|S'|)=\sigma-1\). Therefore,
+using (P1),(P5),
+\[
+   \exc(T_{j})=p(T_{j})-2g(|T_{j}|)=2\bigl(\sigma(T_{j})-g(|T_{j}|)\bigr)
+   \le2\bigl(\sigma-(\sigma-1)\bigr)=2 .
+\]
+In words: during the restoration the perimeter never exceeds the starting value while the
+threshold is already one step lower, so the excess is at most two. \qed
+
+\section*{4. Consequences}
+
+\begin{corollary}[skeleton]\label{cor:skel}
+Every minimizer \(S\) with \(|S|\ge1\) admits a chain
+\(S=T_{0}\supset T_{1}\supset\cdots\supset T_{k}\) of minimizers, each obtained from the
+previous by deleting a shortest extreme line, ending at \(|T_{k}|\le2\); and
+\(g(|T_{i+1}|)=g(|T_{i}|)-1\) for each step.
+\end{corollary}
+
+\begin{proof}
+Apply Theorem~\ref{thm:skel}(i) repeatedly while \(|T_{i}|\ge3\). Sizes strictly decrease.
+\end{proof}
+
+\begin{corollary}[one-cell growth with excess at most two]\label{cor:growth}
+The main theorem of the current paper follows: interpolate each step of
+Corollary~\ref{cor:skel} by Theorem~\ref{thm:skel}(ii), handle \(|T_{k}|\le2\) directly
+(a single cell has \(\exc=0\); a domino has \(\exc=0\) and one of its cells is a single cell),
+and read the whole chain backwards. Adjacency of each added cell follows from connectedness
+of each stage, as in the current proof of Theorem 1.1.
+\end{corollary}
+
+\section*{5. What is new relative to the current paper}
+
+\begin{itemize}
+\item \textbf{New:} the inequality \(n-\rho\ge M(\sigma-2)+1\) for minimizers (Steps 1--4),
+obtained from \eqref{eq:rhobound}, \eqref{eq:nbound}, the residue table and (P8). The current
+Key Lemma 6.1 gives the weaker \(n-\rho\ge M(\sigma-2)\) on the larger near-extremal class and
+does not use (P8).
+\item \textbf{New:} Step 6 bounds the excess during restoration by comparing \(\sigma\) with
+\(g(|S'|)=\sigma-1\) directly, without Theorem 4.4(e) and without the near-extremal class.
+\item \textbf{Not new:} everything else is (P1)--(P8) verbatim.
+\item \textbf{Consequence for the current text:} the sentences ``peeling a minimizer need
+not produce a minimizer'' (\S5), Remark 7.3, and the description of \(X_{31}\) as ``a dead
+end for the primary proof's induction'' (\S1.3) are false or misleading for shortest-line
+peeling, which is what the primary proof performs.
+\end{itemize}
+
+\section*{6. Hypotheses, and where each is used}
+
+\begin{center}
+\begin{tabular}{@{}lp{9.5cm}@{}}
+\toprule
+\(S\) a minimizer & Step 2 (\(n>M(\sigma-1)\)); Step 4 via (P8); Step 5 (directional convexity from (P5)) \\
+\(n\ge3\) & Step 4 (\(m\ge1\), \(\gamma\ge7\)); Step 5 (\(S'\neq\emptyset\)) \\
+\(\Lambda\) shortest & Step 3 (\eqref{eq:rhobound} bounds \(|S\cap\Lambda|\)); Step 4 (\(\rho\) is what (P8) bounds) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The word ``shortest'' cannot be dropped: for a non-shortest line \(|S\cap\Lambda|\) may exceed
+\(\lfloor(\sigma+3)/6\rfloor\), and the computation reported below shows that roughly half of
+the non-shortest peelings of minimizers with \(N\le34\) do not land on a minimizer.
+
+\section*{7. Machine check (re-check only, not part of the proof)}
+
+Independent implementation (cube coordinates, no shared code with the paper's ancillary
+files), see \texttt{skeleton\_check.py}:
+\begin{itemize}
+\item all minimizers with \(3\le N\le34\), all shortest extreme lines (ties included):
+\(2{,}382\) peelings, every one a minimizer with \(g\) down by exactly \(1\), and every
+restoration order of Lemma 4.1(ii) keeps \(\exc\le2\);
+\item non-shortest peelings: \(6{,}498\), of which \(3{,}192\) land on a minimizer;
+\item residue table verified for \(\sigma\le2999\); \(N_{b}(\sigma)=M(\sigma-1)+1\) and the
+two boundary counts \(3m^{2}+2m+1\), \(3m^{2}+4m+2\) verified for \(m\le59\).
+\end{itemize}
+
+\end{document}

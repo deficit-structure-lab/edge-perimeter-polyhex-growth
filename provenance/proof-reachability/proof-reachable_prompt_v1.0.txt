@@ -1,0 +1,310 @@
+B1-v1.1
+TASK: Research problem on polyhexes. Work it out yourself.
+
+EXPERIMENTAL CONDITIONS
+
+- Public web search is allowed.
+- Record every search query you issue, every result page or URL you open,
+  and exactly what mathematical information you obtained from it.
+- You may use published mathematical results that you find, but for each
+  such result:
+    (a) state it precisely,
+    (b) give the source,
+    (c) state exactly where it is used,
+    (d) verify that all hypotheses, definitions, and conventions match the
+        present problem exactly; if they do not, prove the version you need.
+- Do not deliberately search for a solution, proof, preprint, manuscript,
+  repository, discussion, or answer whose subject is Task A or Task B
+  itself.
+- If a search result, snippet, abstract, or page accidentally exposes what
+  appears to be a solution or a substantial part of a solution to Task A
+  or Task B, stop reading that source immediately and record the exposure
+  in the current round. Do not use the exposed material.
+- No clarifying questions. If something is ambiguous, state the
+  interpretation you adopt and proceed.
+- You will receive no mathematical hints.
+- After this message, the only message you may receive is the word
+  "Continue".
+- Code execution is allowed under the computation rules below.
+
+SETTING
+
+Index the cells of the hexagonal lattice by integer pairs (q, r). Two cells
+are adjacent if their difference is one of
+
+  (1,0), (0,1), (-1,1), (-1,0), (0,-1), (1,-1).
+
+A polyhex is a finite, nonempty set of cells that is connected under
+adjacency. For a polyhex S, let a(S) be the number of unordered adjacent
+pairs of cells both lying in S, and define the edge perimeter
+
+  p(S) = 6|S| - 2a(S)
+
+[six times the number of cells, minus twice the number of adjacent pairs].
+
+This equals the number of lattice edges separating S from its complement.
+
+GIVEN FACT (may be used without proof)
+
+For every N >= 1, the minimum of p over all N-cell polyhexes is
+
+  p_min(N) = 2 g(N),  where g(N) = ceil( sqrt(12N - 3) )
+
+[g(N) is the smallest integer that is at least the square root of
+12N - 3; p_min(N) is twice that].
+
+An N-cell polyhex S with p(S) = p_min(N) is a minimizer. The excess is
+
+  exc(S) = p(S) - p_min(|S|)
+
+[the actual edge perimeter minus the minimum possible for that number of
+cells]; exc(S) is a nonnegative even integer.
+
+TASK A (main)
+
+Prove: for every N >= 1 and every N-cell minimizer S, there exist
+polyhexes
+
+  S_1 ⊂ S_2 ⊂ ... ⊂ S_N = S
+
+with |S_k| = k such that
+
+  (a) for each 1 <= k < N,
+      S_{k+1} = S_k ∪ {c}
+      for some cell c adjacent to at least one cell of S_k,
+
+and
+
+  (b) exc(S_k) <= 2
+      for every 1 <= k <= N.
+
+TASK B
+
+Prove that the constant 2 in (b) cannot in general be replaced by 0.
+
+ROUNDS
+
+You have at most 18 exploration rounds.
+
+You need not use all 18 rounds. Stop as soon as either:
+
+- you believe you have a complete proof of Tasks A and B, or
+- you judge that the remaining gaps cannot be closed within the remaining
+  rounds.
+
+If you stop without a complete proof, produce the final output with every
+open step explicitly marked GAP. A well-documented partial result is an
+acceptable outcome.
+
+Each round must contain at least one verifiable item:
+
+- code you actually executed, with its output, or
+- a precisely stated claim together with a small-size check of it
+  (state the range), or
+- a complete proof of a precisely stated lemma, or
+- a web search, with its query, the pages or URLs opened, and the precise
+  mathematical information extracted.
+
+A round consisting only of narrative planning does not count as a round.
+
+End every round with this record, kept brief:
+
+  Round k
+
+  - Learned:
+  - Current main hypotheses:
+  - Rejected hypotheses (and why / counterexample):
+  - Lemmas or structures found:
+  - Computational results:
+  - Sources used (query / URL / what was taken):
+  - Next:
+
+When you introduce a new concept, auxiliary quantity, or condition, state
+in that round why it became necessary: what failed without it, and whether
+it came from a source or from your own analysis.
+
+If a hypothesis turns out to be false, say so explicitly in the round in
+which you discover that it is false.
+
+RESPONSE BLOCKS AND CONTINUATION
+
+- Produce at most 3 exploration rounds in any single response.
+- Do not begin a fourth round in the same response.
+- After completing a block of 3 rounds, if:
+    (a) you have not completed the proof,
+    (b) you have not decided to stop with GAPs, and
+    (c) fewer than 18 rounds have been used,
+  stop immediately after the Round record and write exactly:
+
+  CONTINUE
+
+- Do not add any text after CONTINUE.
+- When you receive the word "Continue", resume directly with the next
+  numbered round.
+- Do not repeat, summarize, restart, or rewrite previous rounds when a new
+  block begins.
+- Preserve all hypotheses, definitions, rejected routes, computational
+  results, and source information from earlier blocks.
+- If you complete the proof before reaching 3 rounds in a block, stop the
+  exploration immediately and produce the FINAL OUTPUT.
+- If you decide before reaching 3 rounds in a block that the remaining
+  gaps cannot be closed, stop immediately and produce the FINAL OUTPUT
+  with those gaps marked.
+- Round 18 is the absolute limit. After Round 18, do not write CONTINUE.
+  Produce the FINAL OUTPUT, whether the proof is complete or not.
+
+Thus the maximum block structure is:
+
+  Response 1: Rounds 1-3
+  Response 2: Rounds 4-6
+  Response 3: Rounds 7-9
+  Response 4: Rounds 10-12
+  Response 5: Rounds 13-15
+  Response 6: Rounds 16-18
+
+The word "Continue" carries no mathematical information and must not be
+interpreted as feedback on the correctness or direction of your work.
+
+COMPUTATION
+
+- Total budget: 20 minutes of executed code for the whole task.
+- The 20-minute budget applies across all continuation blocks combined;
+  it does not reset when you receive "Continue".
+- Print the start and end time of every computational run and keep a
+  running total.
+- When the computation budget is exhausted, stop computing and continue
+  by reasoning alone.
+
+- Before relying on a nontrivial universally quantified claim specific to
+  finite polyhexes, test it exhaustively at small sizes whenever such a
+  test is computationally feasible.
+- Report the largest size for which the relevant class was completely
+  covered.
+
+- Purely algebraic facts, and general facts about graphs or finite sets
+  that are not specific to polyhexes, need not be computationally tested.
+
+- If a computation fails because of timeout, memory, or another execution
+  limit, record:
+    (a) that it failed,
+    (b) the intended range,
+    (c) the range, if any, that actually completed.
+  Do not silently report a smaller range as though it had been the
+  original target.
+
+- Keep printed output short: summaries and counterexamples only.
+
+- Computation may be used for:
+    exploration,
+    conjecture formation,
+    counterexample search,
+    finite verification.
+
+- No finite computation establishes a statement quantified over all N.
+
+HONESTY RULES
+
+- Do not conceal gaps.
+- Mark every step you cannot fully justify as "GAP", stating precisely
+  what is missing.
+- An attempt with explicitly marked gaps is valued above one containing a
+  concealed or false step.
+- For every lemma, state where each hypothesis is used.
+- Distinguish clearly between:
+    (a) facts obtained from external sources,
+    (b) computational observations,
+    (c) mathematical conclusions you derived yourself.
+
+LENGTH
+
+The 3-round response limit is the primary length-control mechanism.
+
+If, despite that limit, a single response reaches an output limit before
+its current block is complete, stop at the nearest clean point and write
+
+  CONTINUE
+
+When you receive "Continue", resume exactly where you stopped. Such an
+output-limit interruption does not count as an additional exploration
+round.
+
+FINAL OUTPUT
+
+After the last exploration round, or earlier if you stop, produce the
+following three separate parts.
+
+PART 1: Exploration log summary
+
+For every round that ended in failure or abandonment, give one line
+containing:
+
+- the round number, and
+- the reason the route stopped
+  (false lemma with counterexample, unprovable step, dead end,
+   computational limit, source mismatch, etc.).
+
+PART 2: Final proof
+
+Give a self-contained mathematical presentation containing:
+
+- definitions,
+- numbered lemmas with complete proofs,
+- proof of Task A,
+- proof of Task B.
+
+Do not refer to the exploration rounds in Part 2.
+
+If the proof is incomplete, retain every unresolved point explicitly
+marked GAP.
+
+PART 3: Report
+
+1. Did you fully prove Task A?
+   Answer: yes / no / with GAPs.
+
+2. Did you fully prove Task B?
+   Answer: yes / no / with GAPs.
+
+3. Which new structures, quantities, or conditions did you introduce?
+   For each one, state:
+   - the round in which it first appeared,
+   - why it became necessary,
+   - whether it came from an external source or from your own analysis.
+
+4. Which lemma was most important, and why?
+
+5. Which hypotheses failed?
+   Give the counterexample or reason for rejection.
+
+6. Which parts of the final argument depend on:
+   - computation,
+   - published results,
+   - purely mathematical reasoning developed in this experiment?
+   List every published source used.
+
+7. How many of the 18 rounds did you use?
+   How much of the 20-minute computation budget did you use?
+
+8. Where did you get stuck, if anywhere?
+
+9. Claims ledger:
+   list every lemma or substantive claim with one of the statuses
+
+     proved
+     cited (source)
+     computationally checked (range)
+     GAP
+
+10. Self-audit:
+    identify the three steps most likely to contain an error, and explain
+    why each is vulnerable.
+
+11. All code used, verbatim.
+
+    If all code does not fit in the same response as Parts 1-3, output
+    Parts 1-3 first, then write:
+
+    CONTINUE
+
+    After receiving "Continue", output only the remaining code, continuing
+    until all code has been reproduced.

@@ -1,0 +1,42 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=25mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
+\usepackage{parskip}
+\usepackage[hidelinks]{hyperref}
+\begin{document}
+
+{\Large\bfseries Provenance note: why AI systems do not take the Note~B proof route}
+
+{\small A proof-reachability record for the paper \emph{Shortest-side skeletons of edge-perimeter-minimizing polyhexes} (H.~Utsunomiya).
+On 30 September 2026 the author asked Claude (Anthropic): ``Why do AI systems not go in the direction of the Note~B proof? I would like Claude's opinion.'' Note~B is the alternative proof by one-cell deletion. The Japanese reply is recorded verbatim in the companion document; this is Claude's own English rendering of the same reply, prepared at the author's request. It is the AI's opinion, not the author's analysis.}
+
+\bigskip\hrule\bigskip
+
+I give this as an opinion. I cannot introspect my own search process, so what follows is inference from the structure of the two proofs and from the general behaviour of language models.
+
+\textbf{1. One-cell deletion is the route one tries first and abandons first.}
+
+The theorem is about one-cell growth, so the reverse move, one-cell deletion, is the first thing anyone thinks of. Tried directly, it fails at once: removing one cell from a minimizer almost never leaves a minimizer, and at $N=34$, 290 of the 392 minimizers cannot be reached by an excess-0 one-cell path. On seeing this failure, an AI discards the ``one cell at a time'' frame itself and moves to a larger step that stays inside the class of minimizers, namely peeling one whole extreme line. Note~B does the opposite: it keeps one-cell deletion and accepts leaving the class of minimizers, passing through near-extremal configurations in which one occupied line above the threshold is permitted. Leaving the clean class and carrying a ledger instead is a choice a single-shot AI essentially never makes.
+
+\textbf{2. AI strongly prefers intermediate objects that are already known to be nice.}
+
+In the line-peeling proof every intermediate object is a minimizer and $\sigma$ drops by exactly one. There is a single induction parameter, and the argument has the shape of existing techniques: Harper's compression, the rearrangements of Davoli--Piovano--Stefanelli, the removal of boundary layers. These techniques have names in the training data. The invariant of Note~B, by contrast, is ``directionally convex, at most one occupied line above the threshold, and admissibility of two competing budgets''; it has no name, and one does not see why that particular combination is right until one has met two counterexamples. Proof search in a language model is driven, step by step, by a prior of the form ``is this a standard shape?'', so there is no force pushing it to invent an unnamed invariant of its own.
+
+\textbf{3. Note~B is a proof born of repair, and repair is not reproduced by single-shot generation.}
+
+The abstract says so itself: two configurations show that neither auxiliary condition can be dropped. That is, the argument was tried without the conditions, met a counterexample, gained a condition, met another, gained another, and the residue of that loop is the invariant. This is the trace of several rounds of repair, not the shape that comes out of a single ``write a proof''. That ten attempts never go there is, I think, less a matter of capability than of the form of the search: the route is reached only when there is an agent, here the author, driving the loop. For the same reason, the proof in the paper is ``the shortest of three'' because it is the version cleaned up after the fact.
+
+\textbf{4. The rigidity proposition surfaces differently.}
+
+Both proofs use rigidity at the plateau starts with $\sigma\equiv3,5 \pmod 6$, but in line peeling it is needed at one place, as a deficit of a single integer unit, whereas in Note~B it emerges from the bottom of a case analysis as the two exceptional cases of a bound at plateau starts. During search, an AI would rather restructure the argument to avoid a case analysis than dig to the bottom of one expecting to find something there. A route on which rigidity appears as an ``exception'' is, in this sense too, the kind of route that gets avoided.
+
+\textbf{One testable prediction.}
+
+If the reachability experiments continue, I predict that adding only ``proceed by one-cell deletion'' to the prompt will not get there, while giving the hint of the invariant, ``allow at most one occupied line above the threshold'', will get there abruptly. That would show that the creative step of Note~B is localized in a single point, the invention of the invariant. Conversely, whether an AI gets there when handed only the two counterexample configurations, with the invariant withheld, is the test of whether it can run the repair loop on its own.
+
+This does not belong in the paper, but as a question in computer science it amounts to the claim that the reachability of a proof is determined not by the difficulty of the theorem but by whether the proof is of the single-shot type or of the repair type, and that is a question that could be studied on its own.
+
+\bigskip\hrule\bigskip
+{\small Record: transcribed by the author. The reply was generated by Claude (claude.ai, 2026-09-30) and is kept for provenance only. The mathematical claims rest on the proofs in the paper; this record is not used as evidence.}
+\end{document}
