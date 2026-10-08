@@ -1,35 +1,11 @@
-\begin{thebibliography}{10}
-
-\bibitem{BarberErde2018}
-Ben Barber and Joshua Erde.
-\newblock Isoperimetry in integer lattices.
-\newblock {\em Discrete Analysis}, 2018:Paper No. 7, 16 pp., 2018.
-
-\bibitem{BarequetBenShachar2022}
-Gill Barequet and Gil Ben-Shachar.
-\newblock Minimum-perimeter lattice animals and the constant-isomer conjecture.
-\newblock {\em The Electronic Journal of Combinatorics}, 29(3):\#P3.45, 2022.
-
-\bibitem{BarequetBenShachar2023}
-Gill Barequet and Gil Ben-Shachar.
-\newblock Algorithms for counting minimum-perimeter lattice animals.
-\newblock {\em Algorithmica}, 85(1):75--99, 2023.
-
-\bibitem{BollobasLeader1991}
-B\'ela Bollob\'as and Imre Leader.
-\newblock Edge-isoperimetric inequalities in the grid.
-\newblock {\em Combinatorica}, 11(4):299--314, 1991.
-
-\bibitem{BriggsWells2024}
-Joseph Briggs and Chris Wells.
-\newblock Phase transitions in isoperimetric problems on the integers, 2024.
-\newblock arXiv:2402.14087.
+\begin{thebibliography}{1}
 
 \bibitem{DavoliPiovanoStefanelli2017}
 Elisa Davoli, Paolo Piovano, and Ulisse Stefanelli.
 \newblock Sharp {$N^{3/4}$} law for the minimizers of the edge-isoperimetric
   problem on the triangular lattice.
 \newblock {\em Journal of Nonlinear Science}, 27(2):627--660, 2017.
+\newblock Author preprint: \url{https://cvgmt.sns.it/paper/2862/}.
 
 \bibitem{FulepSieben2010}
 G\'abor F\"ulep and N\'andor Sieben.
@@ -48,11 +24,6 @@ Heiko Harborth.
 \newblock Solution to problem {664A}.
 \newblock {\em Elemente der Mathematik}, 29:14--15, 1974.
 
-\bibitem{Harper2001}
-L.~H. Harper.
-\newblock The edge-isoperimetric problem for regular planar tessellations.
-\newblock {\em Ars Combinatoria}, 61:47--63, 2001.
-
 \bibitem{Harper2004}
 L.~H. Harper.
 \newblock {\em Global Methods for Combinatorial Isoperimetric Problems},
@@ -63,12 +34,6 @@ L.~H. Harper.
 Greg Malen, \'Erika Rold\'an, and Rosemberg Toal\'a-Enr\'iquez.
 \newblock Extremal \{p,q\}-animals.
 \newblock {\em Annals of Combinatorics}, 27:169--209, 2023.
-
-\bibitem{StrachanSwanepoel2026}
-Cameron Strachan and Konrad Swanepoel.
-\newblock Edge isoperimetry of lattices.
-\newblock {\em Annals of Combinatorics}, 2026.
-\newblock Published online 5 January 2026.
 
 \bibitem{VainsencherBruckstein2008}
 Daniel Vainsencher and Alfred~M. Bruckstein.

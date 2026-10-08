@@ -185,100 +185,43 @@ support trace を定める．
 
 \subsection{先行研究との関係}\label{sec:0.5}
 
-公式 \(p_{\min}(N)=2\lceil\sqrt{12N-3}\rceil\) は Harary と Harborth
-\cite{HararyHarborth1976} によるもので，三つのユークリッド的タイリングにおける extremal
-animal を決定したものである．これは \(b\) をセル間の隣接対の個数として
-\(p=6N-2b\) と置けば，平面上の互いに内部が重ならない \(N\) 個の合同円板について接触対の
-最大数を \(\lfloor3N-\sqrt{12N-3}\rfloor\) とする Harborth の先行公式
-\cite{Harborth1974} に対応する．本稿は第~\ref{sec:capacity}~節で自足的な導出を与える．証明が
-必要とするのは値そのものではなく，値を生み出す hull の機構だからである．
+六角タイリングのセル隣接グラフは単位距離の辺を持つ三角格子であり，そのグラフにおける
+セル集合の辺境界はちょうど辺周長である．したがって，本稿で扱う問題は三角格子上の辺等周
+問題である．その最小値 $p_{\min}(N)=2\lceil\sqrt{12N-3}\,\rceil$ は Harary と Harborth
+\cite{HararyHarborth1976} による．隣接するセル対を $b$ 組持つ $N$ セル polyhex の辺周長は
+$6N-2b$ であるため，この値は，平面上の重なり合わない $N$ 個の単位円板の接触対数の最大値
+に関する Harborth の先行する公式 $\lfloor 3N-\sqrt{12N-3}\rfloor$ \cite{Harborth1974} に対応する．
+容量関数 $M(t)$ は，彼らの周長変数を $t+3$ に設定すると，Fülep と Sieben の polyhex の
+site 周長に関する最大サイズ関数 \cite[Proposition~5.10]{FulepSieben2010} と，$t=4$ を除く
+すべての $t\ge 3$ について一致する（注意~\ref{rem:fs}）．また，本稿の hull defect 恒等式は，
+同論文第 5 節の双対性の下で彼らの polyiamond の恒等式 \cite[Lemma~3.3]{FulepSieben2010}
+に対応する．二つの周長は異なる汎関数であり（注意~\ref{rem:site}），対応するのは結果として
+得られる公式だけである．第~\ref{sec:capacity}~節ではこれらの事実を辺周長変数で再導出する．
+証明が必要とするのは値だけでなく，hull の仕組みだからである．
 
-その機構自体は既知の領域に近く，どこが既知であるかは明示しておく．容量関数 \(M(t)\) は，
-代入 \(p=t+3\) の下で，Fülep と Sieben が \emph{site} 周長について決定した最大サイズ関数
-\cite[Proposition~5.10]{FulepSieben2010} と一致する．また本稿の hull defect 恒等式は，彼らの
-polyiamond の恒等式 \cite[Lemma~3.3]{FulepSieben2010} を，同論文第 5 節の三角格子と六角格子の
-双対を通して移したものである．唯一の例外値までが両側で一致する．第~\ref{sec:hulls}~節が
-加えているのはこれらの恒等式ではなく，辺周長変数による定式化であり，本稿の残りが消費するのは
-その形である．
+Davoli，Piovano，Stefanelli \cite{DavoliPiovanoStefanelli2017} は同じ辺等周問題を扱い，
+すべての最小配置を特徴づけている．特に，最小配置が方向凸であることを証明する
+（定理~\ref{thm:capacity} の後の注を参照）．彼らの結果は，最短 extreme line の削除が最小性を
+保存することも，本稿で証明する超過を抑えた一セル成長の主張も述べていない．
 
-Barequet と Ben-Shachar \cite{BarequetBenShachar2022} は最小 \emph{site} 周長 animal を
-研究し，inflation——animal にその周長層全体を加える操作——があるサイズの最小配置とより大きい
-サイズの最小配置との間に全単射を誘導することを示して，ベンゼノイド炭化水素の化学で観察されて
-いた constant-isomer 現象を証明した．続く論文 \cite{BarequetBenShachar2023} は最小 site 周長
-animal を数え上げるアルゴリズムを与える．この系譜は本稿と三点で異なる．汎関数が辺周長では
-なく site 周長であること，inflation が配置全体に作用してサイズを一セルではなく周長の分だけ
-進めること，そして最適性の要求が関係づける二つのサイズにのみ課され，途中の各サイズには課さ
-れないことである．本稿は二つの周長の概念をどこでも同一視せず，一方に関する結果を他方へ移さ
-ない．
-
-\emph{すべての}最小配置を扱う先行研究として最も近いのは Davoli, Piovano, Stefanelli
-\cite{DavoliPiovanoStefanelli2017} である．彼らは三角格子上の辺等周問題——下で述べる同一視に
-より本稿と同じ問題——を扱い，すべての最小配置の特徴づけを目的としている．同論文の式 (12) は
-最小辺周長 \(\theta_n=2\lceil\sqrt{12n-3}\rceil\) を記録し，Theorem 1.1 は連結な最小配置を
-格子面積と格子周長の等周不等式で等号を達成する連結配置として特徴づける．Proposition 3.3 は
-すべての最小配置が \(3\)-convex であることを示し，これは本稿の方向凸性に一致する．この対応は
-定理~\ref{thm:capacity} でも述べるが，本稿ではその後に必要な \(\lambda(S)=g(N)\) まで同時に
-得るため，rearrangement ではなく hull 恒等式を通る自足的証明を残す．さらに Theorem 1.2 は各
-最小配置 \(M_n\) に内接する最大正則格子六角形 \(H_r\) を対応させて
-\(|M_n\sm H_r|\le K_t n^{3/4}+o(n^{3/4})\) を示し，Theorem 1.4 は定数 \(K_t\) の最適性を
-示す．その過程の不等式 (62) では，\(H_r\) の六辺外側にある占有格子層の総数を周長汎関数で
-評価している．これは最小配置が六角形からどれだけ外れうるかを彼らの距離で記述する結果である
-のに対し，本稿は一本の extreme line を削除したとき何が起こるかを記述する．また彼らの補助
-六角形は配置の\emph{内部}にある最大正則六角形であり，本稿第~\ref{sec:hulls}~節の六角形は
-配置を\emph{外側から}包む tight hull で，正則である必要もない．より重要なのは，上で引用した
-\cite{DavoliPiovanoStefanelli2017} の結果のいずれも，最短 extreme line の削除が最小性を保存
-することも，そのために必要な残存セル数の厳密な下界も述べていないことである．本稿の記号で
-その下界は \(|S|-\rho\ge M(\sigma-2)+1\) であり，\(\sigma\bmod6\) の二つの剰余類では
-容量計数だけより整数一つ分強い．その一単位を命題~\ref{pro:rigidity} の剛性で補うことが本稿の
-追加議論である．ただし，本稿の定理~\ref{thm:intro-skel}--\ref{thm:intro-sharp} が
-\cite{DavoliPiovanoStefanelli2017} の構造理論から追加の作業によって導出不能である，と主張する
-ものではない．主張するのは，上で引用した結果にはこれらの定理は明記されておらず，本稿の証明も
-それらを帰結として用いていない，ということである．
-
-Vainsencher と Bruckstein \cite{VainsencherBruckstein2008} は正則タイリング上の
-isoperimetrically optimal polyforms（六角タイリングを含む）を研究し，spiral 構成が各サイズで
-最適周長を達成する一方，最適形状の全体を尽くすわけではないことを述べている．これは固定サイズ
-での形状に関する結果であり，本稿は連続する閾値の最小配置どうしがどのように結ばれるかを扱う．
-
-最小配置の入れ子列そのものは新しくない．六角タイリングのセル隣接グラフは単位距離辺を持つ
-三角格子であり，そのグラフにおけるセル集合の辺境界はちょうどその辺周長である．したがって
-定理~\ref{thm:intro-main} は，\(\Z^{2}\) 上のある 6-正則 Cayley グラフの辺等周問題に関する
-主張である．その問題は解かれており \cite{HararyHarborth1976}
-（\cite{Harborth1974,Harper2001} も参照），しかも\emph{入れ子解}，すなわち任意の前半部分が
-最適であるような格子の順序づけを伴って解かれている
-\cite[Theorem~7.2]{Harper2004}．Harary と Harborth はそのような順序をスパイラルとして与えた．
-Malen，Roldán，Toalá-Enríquez \cite{MalenRoldanToala2023} は後にスパイラル構成を
-ユークリッド的および双曲的な \(\{p,q\}\)-animal へ拡張し，三つのユークリッド的最小周長
-公式を系として回収している．
-
-入れ子解が与えるのは\emph{一本}の列であり，各サイズで一つの最小配置を通る．本稿の結果は
-量化子を逆にする．しかも二つの粒度で逆にする．定理~\ref{thm:intro-skel} は，鎖が extreme line
-一本ずつ進むことを許せば，\emph{すべての}最小配置が最小配置の入れ子鎖の上にあることを述べる．
-定理~\ref{thm:intro-sharp} は，鎖が一セルずつ進まなければならないときにはこれが破れることを
-述べる．その粒度では，すべての最小配置が最小配置の入れ子列の上にあるわけではない．そして
-定理~\ref{thm:intro-main} は，最適性を辺周長一段分だけ緩めることが，すべての最小配置への
-到達可能性を回復するのにちょうど足りることを述べる．
-
-入れ子解が存在するか否かはそれ自体独立に興味のある問いである．Bollobás と Leader
-\cite{BollobasLeader1991} は入れ子解を持たないグラフの最初の例を与え，Barber と Erde
-\cite{BarberErde2018} は \(\Z^{d}\) 上の任意の Cayley グラフがそれを持つかを問うた．現在では
-\(d=1\) \cite{BriggsWells2024} と，強い形で任意の \(d\ge2\) \cite{StrachanSwanepoel2026} に
-おいて反例が知られている．本稿が扱う格子はその境界の肯定側にあり，したがって以下の結果は，
-問題を入れ子解の存在から入れ子最適列の中での指定された最小配置の到達可能性へと移し，その
-答えが段の粒度に依存することを示す．
-
-著者の知る限り，\emph{任意の}辺周長最小配置に対して，隣接セルによる一セル成長列であって全
-中間段階の辺周長超過が高々 2 であるものを与える先行結果は存在せず，extreme line 全体の削除
-によってすべての最小配置を単一セルに結ぶ最小配置の鎖を与える先行結果も存在しない．
-
-新規性の主張を明確にすると，本稿には六つの層がある．(1) 最小周長と容量関数，(2) tight-hull
-恒等式，(3) 最小配置の方向凸性，(4) 最短辺 skeleton 定理
-（定理~\ref{thm:intro-skel}），(5) すべての最小配置への超過 2 以下の一セル到達可能性
-（定理~\ref{thm:intro-main}），(6) 定数 \(2\) の最適性（定理~\ref{thm:intro-sharp}）である．
-(1)--(3) は上で明示した意味で古典的または既知結果に近く，本稿が必要とする変数で議論を
-自足的にするため証明を含めている．本稿の貢献は (4)--(6) である．
+三角格子の辺等周問題には入れ子解が存在する \cite[Theorem~7.2, p.~135]{Harper2004}．
+すなわち，任意の有限な前半部分が最適であるような格子の順序が存在する．Vainsencher と
+Bruckstein \cite{VainsencherBruckstein2008} は，スパイラル構成が各サイズで最適周長を達成
+する一方，最適形状を尽くさないことを指摘する．Malen，Roldán，Toalá-Enríquez
+\cite{MalenRoldanToala2023} はスパイラル構成をユークリッド的および双曲的な
+$\{p,q\}$-animal に拡張する．入れ子解が与えるのは各サイズに一つの最小配置であるが，
+本稿の結果は指定された任意の最小配置を対象とする．定理~\ref{thm:intro-skel} は，extreme line
+全体を削除するステップなら，各最小配置を通る最小配置の鎖が存在することを示す．一方，
+定理~\ref{thm:intro-main} と定理~\ref{thm:intro-sharp} は，一セル成長ですべての最小配置に
+到達するには超過 2 が十分かつ必要であることを示す．
 
 \subsection{構成}\label{sec:0.6}
+
+以下の結果のうち，最小辺周長と容量関数（第~\ref{sec:capacity}~節），tight hull の恒等式
+（第~\ref{sec:hulls}~節），および最小配置の方向凸性（定理~\ref{thm:capacity}(d)）は，
+第~\ref{sec:0.5}~節で説明したとおり，古典的な結果または既知結果に近いものである．本稿では，
+議論を必要な変数のまま自足的に保つためにのみ，これらを証明する．本稿の貢献は
+定理~\ref{thm:intro-skel}--\ref{thm:intro-sharp} である．
 
 第~\ref{sec:prelim}--\ref{sec:capacity}~節は格子，辺周長，方向凸性，tight hull とその恒等式，
 および容量関数を固定する．第~\ref{sec:rigidity}~節は最短 extreme line を上から評価し，例外的
@@ -404,10 +347,11 @@ run であることをいう．言葉では，三方向のそれぞれに沿っ�
 \end{proof}
 
 \begin{remark}[辺周長と site 周長]\label{rem:site}
-\(S\) の \emph{site 周長}とは，\(S\) の外にあって \(S\) のセルの少なくとも一つに隣接するセルの
-個数である．これは \eqref{eq:p} とは別の汎関数であり，一般に最小配置も異なる．一方に関する結果
-は他方へ移らない．本稿は site 周長に一切依存しない．第~\ref{sec:2.5}~節で引用する文献の一部が
-その言葉で書かれているため，ここで言及するに留める．
+$S$ の \emph{site 周長}とは，$S$ の外にあって $S$ の少なくとも一つのセルに隣接するセルの
+個数である．これは \eqref{eq:p} とは異なる汎関数であり，一般に最小配置も異なる．一方に
+関する結果は他方へ移らない．Fülep と Sieben \cite{FulepSieben2010} は site 周長を用いる．
+第~\ref{sec:0.5}~節と注意~\ref{rem:fs} で説明する彼らの公式との対応は代数的なものであり，
+本稿の証明は一貫して辺周長を用いる．
 \end{remark}
 
 \subsection{extreme support line とトレース}\label{sec:2.3}
@@ -670,14 +614,12 @@ run であって，連続するトレースが共通の線と交わることか�
 \end{figure}
 
 \begin{remark}[帰属]\label{rem:fs}
-同値な defect 恒等式は，Fülep と Sieben による polyiamond の恒等式
-\cite[Lemma~3.3]{FulepSieben2010} を，同論文の第 5 節で展開されている三角格子と六角格子の
-双対を通して移すことで得られる．同じ site 周長の変数の下で，彼らの
-\cite[Proposition~5.10]{FulepSieben2010} は，代入 \(p=t+3\) の後にちょうど
-第~\ref{sec:capacity}~節の容量関数 \(M(t)\) を与える．そこで除外されている値 \(p=7\) は，下の
-注意~\ref{rem:attain} で除外される値 \(t=4\) に対応する．それでも本稿では議論を自足的に保つ
-ため辺周長変数で導出を与え，二つの設定を同一視しない．\cite{FulepSieben2010} は site 周長に
-関するものである（注意~\ref{rem:site}）．
+同等の defect 恒等式は，Fülep と Sieben の polyiamond の恒等式
+\linebreak\cite[Lemma~3.3]{FulepSieben2010} から，同論文第 5 節で展開された三角格子と六角格子の
+双対性を通じて得られる．同じ site 周長変数で， \cite[Proposition~5.10]{FulepSieben2010} は，
+彼らの周長変数を $t+3$ に設定すると，第~\ref{sec:capacity}~節の容量関数 $M(t)$ をちょうど
+与える．そこで除外されるその変数の値 $7$ は，注意~\ref{rem:attain} で除外される $t=4$ に
+対応する．
 \end{remark}
 
 
@@ -776,13 +718,13 @@ run である．\(K\) は連結だから，連続する値 \(k,k+1\) につい�
 \end{enumerate}
 \end{theorem}
 
-(d) の最小配置の方向凸性は既知結果でもある．Davoli, Piovano, Stefanelli
-\cite[Definition~3.2 and Proposition~3.3]{DavoliPiovanoStefanelli2017} は三角格子上の辺等周問題
-のすべての最小配置が \emph{3-convex}，すなわち同じ格子線上の二点の間にある全格子点を含むこと
-を示している．第~\ref{sec:0.5}~節の同一視の下で，これは本稿の方向凸性そのものである．彼らは
-平行線上の点数を並べ替える rearrangement により証明するが，以下では hull 恒等式と容量上界から
-(d) を導き，同時に以後必要な \(\lambda(S)=g(N)\) まで得る．方向凸性自体の新しい証明を主張する
-ためではなく，本稿を自足的にするため全文を残す．
+(d) の最小配置の方向凸性は既知結果である．Davoli，Piovano，Stefanelli
+\cite[Definition~3.2 and Proposition~3.3]{DavoliPiovanoStefanelli2017} は，三角格子上の辺等周問題
+のすべての最小配置についてこの性質を示している．著者の元のプレプリントでは，この性質を
+\emph{$3$-connected} と呼ぶ．すなわち，同じ格子線上の二点の間にある全格子点が集合に含まれる
+という性質であり，第~\ref{sec:0.5}~節の同一視の下で，本稿で用いる方向凸性そのものである．
+彼らの証明は rearrangement を用いる．以下の証明では，第~\ref{sec:hulls}~節の hull 恒等式と
+容量上界 (a) から (d) を導き，同時に $\lambda(S)=g(N)$ を得ることで議論を自足的に保つ．
 
 \begin{proof}
 (a) \(H=H(S)\) とする．補題~\ref{lem:hull} と補題~\ref{lem:hex}(v) より

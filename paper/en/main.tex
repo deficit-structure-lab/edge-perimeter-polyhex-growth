@@ -180,121 +180,54 @@ implementations independent of their proofs.
 
 \subsection{Relation to previous work}\label{sec:0.5}
 
-The formula \(p_{\min}(N)=2\lceil\sqrt{12N-3}\rceil\) is due to Harary and Harborth
-\cite{HararyHarborth1976}, who determined the extremal animals of the three Euclidean
-tilings; it corresponds, through \(p=6N-2b\) with \(b\) the number of adjacent pairs of
-cells, to Harborth's earlier formula \(\lfloor3N-\sqrt{12N-3}\rfloor\)
-\cite{Harborth1974} for the maximum number of touching pairs among \(N\)
-non-overlapping unit discs in the plane. We give a self-contained derivation in
-Section~\ref{sec:capacity}, because the proof needs the hull machinery that produces it
-and not merely the value.
+The cell-adjacency graph of the hexagonal tiling is the triangular lattice
+with its unit-distance edges, and the edge boundary of a set of cells in that
+graph is exactly its edge perimeter; the problem studied here is therefore the
+edge-isoperimetric problem on the triangular lattice. Its minimum value
+$p_{\min}(N)=2\lceil\sqrt{12N-3}\,\rceil$ is due to Harary and Harborth
+\cite{HararyHarborth1976}.
+Since an $N$-cell polyhex with $b$ adjacent pairs has edge perimeter $6N-2b$,
+this value corresponds to Harborth's earlier formula
+$\lfloor 3N-\sqrt{12N-3}\rfloor$ for the maximum number of touching pairs among
+$N$ non-overlapping unit discs in the plane \cite{Harborth1974}. The capacity function $M(t)$
+coincides, when their perimeter variable is set equal to $t+3$, with the
+maximum-size function of F\"ulep and Sieben for the site perimeter of polyhexes
+\cite[Proposition~5.10]{FulepSieben2010}, for every $t\ge 3$ other than $t=4$
+(Remark~\ref{rem:fs}); and
+our hull defect identity corresponds to their polyiamond identity
+\cite[Lemma~3.3]{FulepSieben2010} under the duality of their Section~5. The two perimeters are
+different functionals (Remark~\ref{rem:site}); only the resulting formulas correspond.
+Section~\ref{sec:capacity} rederives these facts in edge-perimeter variables because the proof
+needs the hull machinery, not merely the values.
 
-That machinery is itself close to known ground, and we are explicit about where. The
-capacity function \(M(t)\) coincides, after the substitution \(p=t+3\), with the
-maximum-size function for the \emph{site} perimeter determined by Fülep and Sieben
-\cite[Proposition~5.10]{FulepSieben2010}, and our hull defect identity is the image of their
-polyiamond identity \cite[Lemma~3.3]{FulepSieben2010} under the triangular--hexagonal
-duality of their Section~5. Even the one exceptional value is the same on both sides. What
-Section~\ref{sec:hulls} adds is not these identities but their formulation in
-edge-perimeter variables, which is what the rest of the paper consumes.
+Davoli, Piovano and Stefanelli \cite{DavoliPiovanoStefanelli2017} study the same
+edge-isoperimetric problem and characterize all minimizers. They prove, in particular,
+that minimizers are directionally convex (see the remark after
+Theorem~\ref{thm:capacity}). Their results do not state that deleting a shortest
+extreme line preserves minimality, nor the bounded-excess one-cell growth statement
+proved here.
 
-Barequet and Ben-Shachar \cite{BarequetBenShachar2022} study minimum \emph{site}-perimeter
-animals and show that inflation --- adding to an animal its entire perimeter layer ---
-induces a bijection between the minimizers of one size and those of a larger size, thereby
-proving the constant-isomer phenomenon observed in the chemistry of benzenoid hydrocarbons.
-A companion paper \cite{BarequetBenShachar2023} gives algorithms for counting
-minimum-site-perimeter animals. That line of work differs from the present one in three
-respects: the functional is the site perimeter rather than the edge perimeter; inflation
-acts on a configuration as a whole and advances the size by the size of its perimeter,
-rather than by one cell; and the optimality requirement is imposed at the two sizes it
-relates, not at every intermediate size. We do not identify the two notions of perimeter
-anywhere, and no result about one is transferred to the other.
-
-The closest previous work on \emph{all} minimizers is that of Davoli, Piovano and
-Stefanelli \cite{DavoliPiovanoStefanelli2017}, who study the edge-isoperimetric problem on
-the triangular lattice --- the same problem as ours, see the identification below --- with the
-declared aim of characterizing every minimizer. Four items of that paper bear on this one.
-Their equation~(12) records the value \(\theta_{n}=2\lceil\sqrt{12n-3}\rceil\) of the
-minimum edge perimeter. Their Theorem~1.1 characterizes the connected minimizers as the
-connected configurations attaining equality in an isoperimetric inequality between a
-lattice area and a lattice perimeter. Their Proposition~3.3 proves that every minimizer is \(3\)-convex, which
-is our directional convexity; we state this correspondence at Theorem~\ref{thm:capacity}
-and keep our own proof, which runs through the hull identities rather than through the
-rearrangement argument used there. Their Theorem~1.2 attaches to each minimizer \(M_{n}\)
-the largest regular lattice hexagon \(H_{r}\) contained in it and shows that
-\(|M_{n}\sm H_{r}|\le K_{t}n^{3/4}+o(n^{3/4})\), and their Theorem~1.4 shows that the
-constant \(K_{t}\) is optimal; along the way
-(their inequality~(62)) the numbers of occupied lattice layers outside \(H_{r}\) on the six
-sides are bounded in total by their perimeter functional. That result describes how far a
-minimizer can deviate from a hexagon, in their metric; the present paper describes what
-happens when one extreme line is deleted. The two auxiliary hexagons point in opposite
-directions --- theirs is the largest regular hexagon \emph{inside} the configuration, ours
-(Section~\ref{sec:hulls}) is the tight lattice hexagon \emph{around} it, not necessarily
-regular --- and, more to the point, none of the results of
-\cite{DavoliPiovanoStefanelli2017} cited above states that the removal of a shortest
-extreme line preserves minimality, nor the exact lower bound on the number of remaining
-cells that this requires. That bound, \(|S|-\rho\ge M(\sigma-2)+1\) in the notation of
-Section~\ref{sec:skeleton}, is one integer stronger than what the capacity count gives in
-two residue classes of \(\sigma\) modulo \(6\), and closing that gap by the rigidity
-statement of Proposition~\ref{pro:rigidity} is the additional argument this paper
-supplies. We do not claim that Theorems~\ref{thm:intro-skel}--\ref{thm:intro-sharp} could
-not be extracted from the structure theory of \cite{DavoliPiovanoStefanelli2017} by
-further work; we claim that they are not stated there and that the present proof does not
-use it.
-
-Vainsencher and Bruckstein \cite{VainsencherBruckstein2008} study isoperimetrically
-optimal polyforms on the regular tilings, the hexagonal one included, and observe that a
-spiral construction attains the optimal perimeter at every size without exhausting the
-optimal shapes. That concerns the shapes at a fixed size; the present paper concerns how
-the minimizers at consecutive thresholds are related to one another.
-
-A nested sequence of minimizers is not in itself new. The cell-adjacency graph of the
-hexagonal tiling is the triangular lattice with its unit-distance edges, and in that graph
-the edge boundary of a set of cells is exactly its edge perimeter, so
-Theorem~\ref{thm:intro-main} concerns the edge-isoperimetric problem of a specific
-\(6\)-regular Cayley graph on \(\mathbb{Z}^{2}\). That problem is solved
-\cite{HararyHarborth1976} (see also \cite{Harborth1974,Harper2001}), and it is solved
-together with a \emph{nested solution}: an ordering of the lattice all of whose prefixes are
-optimal \cite[Theorem~7.2]{Harper2004}.
-Harary and Harborth exhibited such an ordering as a spiral, and Malen, Rold\'an and
-Toal\'a-Enr\'iquez \cite{MalenRoldanToala2023} later extended the spiral construction to
-Euclidean and hyperbolic \(\{p,q\}\)-animals, recovering the three Euclidean
-minimum-perimeter formulas as a corollary.
-
-What a nested solution provides is \emph{one} sequence, passing through one minimizer at
-each size. The present results reverse the quantifier, at two granularities.
-Theorem~\ref{thm:intro-skel} says that \emph{every} minimizer lies on a nested chain of
-minimizers when the chain is allowed to advance by one extreme line at a time.
-Theorem~\ref{thm:intro-sharp} says that this fails when the chain must advance by one cell
-at a time: not every minimizer lies on a nested sequence of minimizers at that granularity,
-and Theorem~\ref{thm:intro-main} says that relaxing optimality by a single step of the edge
-perimeter is exactly what restores reachability for all of them.
-
-Whether nested solutions exist at all is a question of independent interest. Bollob\'as and
-Leader \cite{BollobasLeader1991} gave the first example of a graph without them, and Barber
-and Erde \cite{BarberErde2018} asked whether every Cayley graph on \(\mathbb{Z}^{d}\) has
-one; counterexamples are now known for \(d=1\) \cite{BriggsWells2024} and, in a strong
-form, for every \(d\ge2\) \cite{StrachanSwanepoel2026}. The lattice considered here is on
-the positive side of that divide, so the results below move the issue from the existence of
-a nested solution to the reachability of prescribed minimizers within nested optimal
-sequences, and show that the answer depends on the granularity of the steps.
-
-To our knowledge, no previous result provides, for \emph{every} edge-perimeter minimizer, a
-one-cell growth sequence by adjacent cells all of whose intermediate stages have
-edge-perimeter excess at most two, nor a chain of minimizers linking every minimizer to a
-single cell by deletions of whole extreme lines.
-
-To state plainly what is claimed as new. The paper has six layers: (1) the minimum
-perimeter and the capacity function; (2) the tight-hull identities; (3) directional
-convexity of minimizers; (4) the shortest-side skeleton theorem
-(Theorem~\ref{thm:intro-skel}); (5) bounded-excess one-cell reachability of every
-minimizer (Theorem~\ref{thm:intro-main}); (6) optimality of the constant \(2\)
-(Theorem~\ref{thm:intro-sharp}). Layers (1)--(3) are classical or close to known results
-in the senses made explicit above, and are included, with proofs, only so that the argument
-is self-contained in the variables it needs. The contribution of the paper is layers
-(4)--(6).
+The triangular-lattice edge-isoperimetric problem admits a nested solution
+\cite[Theorem~7.2, p.~135]{Harper2004}: an ordering of the lattice whose every finite
+prefix is optimal. Vainsencher and Bruckstein \cite{VainsencherBruckstein2008}
+observe that a spiral construction attains the optimal perimeter at every size
+without exhausting the optimal shapes. Malen, Rold\'an and Toal\'a-Enr\'iquez
+\cite{MalenRoldanToala2023} extend the spiral construction to Euclidean and
+hyperbolic $\{p,q\}$-animals. A nested solution supplies one minimizer at each
+size; the present results concern every prescribed minimizer.
+Theorem~\ref{thm:intro-skel} gives a chain of minimizers through each of them when
+steps delete whole extreme lines, whereas Theorems~\ref{thm:intro-main}
+and~\ref{thm:intro-sharp} show that an excess of two is sufficient and necessary
+for one-cell growth to reach all minimizers.
 
 \subsection{Organization}\label{sec:0.6}
+
+Of the results below, the minimum edge perimeter and the capacity function
+(Section~\ref{sec:capacity}), the tight-hull identities (Section~\ref{sec:hulls}) and the directional
+convexity of minimizers (Theorem~\ref{thm:capacity}(d)) are classical or close to known
+results, as explained in Section~\ref{sec:0.5}, and are proved here only to keep the
+argument self-contained in the variables it needs. The contribution of the
+paper is Theorems~\ref{thm:intro-skel}--\ref{thm:intro-sharp}.
 
 Sections~\ref{sec:prelim}--\ref{sec:capacity} fix the lattice, the edge perimeter,
 directional convexity, the tight hull and its identities, and the capacity function.
@@ -434,11 +367,12 @@ Definition~\ref{def:dconv}.
 \end{proof}
 
 \begin{remark}[edge perimeter versus site perimeter]\label{rem:site}
-The \emph{site perimeter} of \(S\) is the number of cells outside \(S\) adjacent to at
-least one cell of \(S\). It is a different functional from \eqref{eq:p}, and the two have
-different minimizers in general; results about one do not transfer to the other. Nothing
-in this paper depends on the site perimeter. We mention it only because part of the
-literature we cite in Section~\ref{sec:2.5} is written in those terms.
+The \emph{site perimeter} of $S$ is the number of cells outside $S$ adjacent to at
+least one cell of $S$. It is a different functional from \eqref{eq:p}, and the two have
+different minimizers in general; results about one do not transfer to the other.
+F\"ulep and Sieben \cite{FulepSieben2010} use the site perimeter. The correspondence
+with their formulas described in Section~\ref{sec:0.5} and Remark~\ref{rem:fs} is
+algebraic; the proofs here use the edge perimeter throughout.
 \end{remark}
 
 \subsection{Extreme support lines and traces}\label{sec:2.3}
@@ -779,11 +713,9 @@ cells \(\kappa_{1},\dots,\kappa_{6}\) darker. The side lengths are
 An equivalent defect identity is obtained from F\"ulep and Sieben's polyiamond identity
 \cite[Lemma~3.3]{FulepSieben2010} through the triangular--hexagonal duality developed in their Section~5.
 In the same site-perimeter variables, \cite[Proposition~5.10]{FulepSieben2010} yields exactly the capacity
-function \(M(t)\) of Section~\ref{sec:capacity} after the substitution \(p=t+3\); the
-value \(p=7\) excluded there corresponds to the value \(t=4\) excluded in
-Remark~\ref{rem:attain} below. We nevertheless give the derivation here in edge-perimeter
-variables to keep the argument self-contained, and we do not identify the two settings:
-\cite{FulepSieben2010} is about the site perimeter (Remark~\ref{rem:site}).
+function $M(t)$ of Section~\ref{sec:capacity} when their perimeter variable is set equal to $t+3$; the value $7$
+of that variable excluded there corresponds to the value $t=4$ excluded in
+Remark~\ref{rem:attain}.
 \end{remark}
 
 
@@ -884,16 +816,14 @@ semiperimeter \(t\) cannot have more than \(M(t)\) cells.
 \end{theorem}
 
 The directional convexity of minimizers in (d) is a known result. Davoli, Piovano and
-Stefanelli \cite[Definition~3.2 and Proposition~3.3]{DavoliPiovanoStefanelli2017} prove
-that every minimizer of the edge-isoperimetric problem on the triangular lattice is
-\emph{\(3\)-convex}: for any two of its points on a common lattice line, all lattice points
-between them belong to it. Under the identification of Section~\ref{sec:0.5} this is
-exactly directional convexity. Their proof is a rearrangement argument, reordering the
-numbers of points on the parallel lines of one family; the proof below instead obtains (d)
-from the hull identities of Section~\ref{sec:hulls} and the capacity bound (a), together
-with the additional information \(\lambda(S)=g(N)\) that the rest of the paper consumes.
-We give it in full so that the paper is self-contained, not because a new proof of the
-convexity itself is needed.
+Stefanelli \cite[Definition~3.2 and Proposition~3.3]{DavoliPiovanoStefanelli2017}
+establish this property for every minimizer of the edge-isoperimetric problem on the
+triangular lattice. Their original preprint calls the property \emph{$3$-connected}:
+for any two points on a common lattice line, all lattice points between them belong
+to the set. Under the identification of Section~\ref{sec:0.5} this is exactly the
+directional convexity used here. Their proof uses rearrangement; the proof below
+obtains (d) from the hull identities of Section~\ref{sec:hulls} and the capacity
+bound (a), together with $\lambda(S)=g(N)$, to keep the argument self-contained.
 
 \begin{proof}
 (a) Let \(H=H(S)\). By Lemma~\ref{lem:hull} and Lemma~\ref{lem:hex}(v),
