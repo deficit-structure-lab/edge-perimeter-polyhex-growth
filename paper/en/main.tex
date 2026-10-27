@@ -442,22 +442,16 @@ For every polyhex \(S\), the parameters \(L,u,v,w\) of Definition~\ref{def:hull}
 \end{lemma}
 
 \begin{proof}
-After the normalization \(q_{\min}=r_{\min}=0\), every cell of \(S\) has \(q,r\ge0\),
-hence \(s=q+r\ge0\); so \(w=s_{\min}\ge0\) and \(L=1+s_{\max}\ge1\). In the notation
-of the definition, \(u=s_{\max}-q_{\max}\) and \(v=s_{\max}-r_{\max}\), and the four
-remaining conditions are the following four inequalities between extreme values, each
-read off from one well-chosen cell of \(S\).
-\begin{itemize}
-\item \(u\ge0\) and \(v\ge0\): a cell with \(q=q_{\max}\) has \(s=q_{\max}+r\ge q_{\max}\),
-so \(s_{\max}\ge q_{\max}\); likewise \(s_{\max}\ge r_{\max}\).
-\item \(u+v\le L-1\), that is \(s_{\max}\le q_{\max}+r_{\max}\): a cell with
-\(s=s_{\max}\) has \(s_{\max}=q+r\le q_{\max}+r_{\max}\).
-\item \(v+w\le L-1\), that is \(s_{\min}\le r_{\max}\): a cell with \(q=q_{\min}=0\) has
-\(s=r\le r_{\max}\), so \(s_{\min}\le r_{\max}\).
-\item \(u+w\le L-1\), that is \(s_{\min}\le q_{\max}\): a cell with \(r=r_{\min}=0\) has
-\(s=q\le q_{\max}\).
-\end{itemize}
-Note that only the six extreme values are used, not connectedness.
+Normalize \(q_{\min}=r_{\min}=0\). Then \(q,r,s=q+r\ge0\),
+so \(w=s_{\min}\ge0\) and \(L=s_{\max}+1\ge1\).
+A cell attaining \(q_{\max}\) or \(r_{\max}\) shows
+\(s_{\max}\ge q_{\max},r_{\max}\), hence \(u,v\ge0\).
+A cell attaining \(s_{\max}\) gives
+\(s_{\max}\le q_{\max}+r_{\max}\), or \(u+v\le L-1\).
+Finally cells attaining \(q_{\min}=0\) and \(r_{\min}=0\)
+give respectively \(s_{\min}\le r_{\max}\) and
+\(s_{\min}\le q_{\max}\), or \(v+w,u+w\le L-1\).
+No connectedness assumption is needed.
 \end{proof}
 
 For a lattice hexagon \(H\) we write \(\Lambda_{1},\dots,\Lambda_{6}\) for its six extreme
