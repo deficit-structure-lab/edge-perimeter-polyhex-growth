@@ -150,9 +150,10 @@ Three ingredients carry the argument. First, every minimizer is \emph{directiona
 convex}: along each of the three lattice directions its trace on every line is a single
 run. This follows from a comparison with the \emph{tight hull} of the configuration, the
 lattice hexagon spanned by its extreme lines, whose cell count satisfies an exact
-\emph{defect identity} in terms of its six side lengths. The same identity yields the
-capacity function \(M(t)=\lfloor(t^{2}+3)/12\rfloor\), the largest number of cells that fit
-within an edge-semiperimeter budget of \(t\), and with it the formula for \(p_{\min}\).
+\emph{defect identity} in terms of its six side lengths. The same identity yields the capacity bound
+\(|S|\le M(\sigma(S))\), where \(M(t)=\lfloor(t^{2}+3)/12\rfloor\). Together
+with the classical formula for \(p_{\min}\), this implies directional convexity
+of minimizers.
 
 Second, the six side lengths of the hull add up to exactly three more than the number of
 occupied lines, so a shortest extreme line of a minimizer with threshold \(\sigma\) carries at
@@ -201,10 +202,22 @@ Section~\ref{sec:capacity} cites the minimum edge-perimeter formula while retain
 self-contained hull proof of the capacity bound and minimizer convexity.
 
 Davoli, Piovano and Stefanelli \cite{DavoliPiovanoStefanelli2017} study the same
-edge-isoperimetric problem and characterize all minimizers. They prove, in particular,
-that minimizers are directionally convex (see the discussion following Corollary~\ref{cor:capacity-directional}). Their results do not state that deleting a shortest
-extreme line preserves minimality, nor the bounded-excess one-cell growth statement
-proved here.
+edge-isoperimetric problem on the triangular lattice and characterize its minimizers
+through an isoperimetric equality. In particular, they establish directional convexity
+of every minimizer.
+
+The present work addresses a different question: whether a prescribed minimizer
+admits a specific deletion operation that preserves minimality. If a shortest
+extreme line containing \(k\) cells is removed from an \(N\)-cell minimizer, it is
+not enough to know that the remaining configuration is directionally convex.
+One must also establish the threshold relation \(g(N-k)=g(N)-1\). The classical
+perimeter formula and directional convexity alone do not directly guarantee
+this relation. Our proof supplies the required quantitative control through
+a bound on the shortest support trace and a rigidity argument at exceptional
+plateau starts.
+
+Thus, the contribution is not a new characterization of minimizers, but a
+deletion and growth structure valid for every prescribed minimizer.
 
 The triangular-lattice edge-isoperimetric problem admits a nested solution
 \cite[Theorem~7.2, p.~135]{Harper2004}: an ordering of the lattice whose every finite
@@ -221,11 +234,11 @@ for one-cell growth to reach all minimizers.
 
 \subsection{Organization}\label{sec:0.6}
 
-Of the results below, the minimum edge perimeter and the capacity function
-(Section~\ref{sec:capacity}), the tight-hull identities (Section~\ref{sec:hulls}) and the directional
-convexity of minimizers (Corollary~\ref{cor:capacity-directional}) are classical or close to known
-results, as explained in Section~\ref{sec:0.5}, and are proved here only to keep the
-argument self-contained in the variables it needs. The contribution of the
+The minimum edge-perimeter formula is cited as a classical result in
+Section~\ref{sec:capacity}. The tight-hull identities (Section~\ref{sec:hulls}),
+the capacity upper bound and the directional convexity of minimizers
+(Corollary~\ref{cor:capacity-directional}) are proved here in the variables needed
+for the subsequent geometric argument. The contribution of the
 paper is Theorem~\ref{thm:intro-skel}, Theorem~\ref{thm:intro-main}, and Proposition~\ref{thm:intro-sharp}.
 
 Sections~\ref{sec:prelim}--\ref{sec:capacity} fix the lattice, the edge perimeter,
@@ -523,7 +536,7 @@ and the three opposite-side differences agree,
 \]
 \item[(v)] \textup{(hull defect identity)}
 \begin{equation}\label{eq:defectid}
-   \lambda(H)^{2}+3-12|H| \;=\; 3\,\delta(H)^{2}+2\,Q(H)\;\ge\;0 ,
+   \lambda(H)^{2}+3-12|H| \;=\; 3\,\delta(H)^{2}+2\,Q(H)\;\ge\;0 .
 \end{equation}
 
 \end{enumerate}
@@ -698,10 +711,10 @@ of that variable excluded there corresponds to the exceptional budget $t=4$, for
 
 \section{Capacity and minimum edge perimeter}\label{sec:capacity}
 
-\subsection{Peeling and extremal capacity}\label{sec:2.6}
+\subsection{Peeling}\label{sec:2.6}
 
-We first record the two operations on directionally convex polyhexes that the capacity
-computation needs: removing a whole support trace, and putting it back one cell at a time.
+The following lemma supplies the extreme-line deletion and restoration steps
+used in Section~\ref{sec:skeleton}.
 
 \begin{lemma}[peeling]\label{lem:peel}
 Let \(K\) be a directionally convex polyhex, let \(\Lambda\) be one of its six extreme
@@ -773,13 +786,24 @@ and \ref{lem:runs},
 Taking integer parts gives the claim.
 \end{proof}
 
+\begin{remark}[attainment of the capacity bound]
+For \(t\ge3\), set \(N=M(t)\ge1\). By Lemma~\ref{lem:cap-equiv},
+\(g(N)\le t\); hence Theorem~\ref{thm:knownperimeter} provides an
+\(N\)-cell minimizer of semiperimeter at most \(t\).
+Together with Proposition~\ref{pro:capacity-bound}, this gives
+\[
+M(t)=\max\{\,|K|:\ K\text{ is a polyhex and }\sigma(K)\le t\,\}.
+\]
+\end{remark}
+
 \begin{corollary}[directional convexity of minimizers]\label{cor:capacity-directional}
 Every \(N\)-cell minimizer \(S\) is directionally convex and has
 \(\sigma(S)=\lambda(S)=g(N)\).
 \end{corollary}
 \begin{proof}
 Theorem~\ref{thm:knownperimeter} gives \(\sigma(S)=g(N)\).
-The tight hull \(H=H(S)\) is directionally convex, so by
+By Lemma~\ref{lem:hex}(ii), the tight hull \(H=H(S)\) is directionally
+convex with \(\sigma(H)=\lambda(H)\), so by
 Proposition~\ref{pro:capacity-bound} and Lemma~\ref{lem:cap-equiv},
 \(N\le|H|\le M(\lambda(H))\) implies \(g(N)\le\lambda(H)\).
 Consequently
@@ -1414,9 +1438,10 @@ symbolically in \(L,u,v,w\); all \(5{,}220\) admissible hexagons with \(L\le16\)
 \textsc{analytic} \\
 3 & \(|S|\le M(\sigma(S))\); minimizers are directionally convex with \(\lambda=g\) &
 all polyhexes with \(N\le11\) & \textsc{analytic} \\
-4 & \(p_{\min}(N)=2\lceil\sqrt{12N-3}\rceil\) &
-brute force for \(N\le9\); against the capacity function for \(N\le3000\) &
-\textsc{analytic} \\
+4 & the cited minimum edge-perimeter formula
+\(p_{\min}(N)=2\lceil\sqrt{12N-3}\rceil\) &
+brute force for \(N\le9\); arithmetic threshold check for \(N\le3000\) &
+\textsc{cited/rechecked} \\
 5 & peeling: connectedness, directional convexity and the drop in \(\sigma\) &
 all \(145{,}374\) side peelings of directionally convex polyhexes with \(N\le10\) &
 \textsc{analytic} \\
