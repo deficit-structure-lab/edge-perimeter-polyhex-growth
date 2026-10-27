@@ -197,13 +197,12 @@ maximum-size function of F\"ulep and Sieben for the site perimeter of polyhexes
 our hull defect identity corresponds to their polyiamond identity
 \cite[Lemma~3.3]{FulepSieben2010} under the duality of their Section~5. The two perimeters are
 different functionals (Remark~\ref{rem:site}); only the resulting formulas correspond.
-Section~\ref{sec:capacity} rederives these facts in edge-perimeter variables because the proof
-needs the hull machinery, not merely the values.
+Section~\ref{sec:capacity} cites the minimum edge-perimeter formula while retaining a
+self-contained hull proof of the capacity bound and minimizer convexity.
 
 Davoli, Piovano and Stefanelli \cite{DavoliPiovanoStefanelli2017} study the same
 edge-isoperimetric problem and characterize all minimizers. They prove, in particular,
-that minimizers are directionally convex (see the remark after
-Theorem~\ref{thm:knownperimeter}). Their results do not state that deleting a shortest
+that minimizers are directionally convex (see the discussion following Corollary~\ref{cor:capacity-directional}). Their results do not state that deleting a shortest
 extreme line preserves minimality, nor the bounded-excess one-cell growth statement
 proved here.
 
@@ -817,7 +816,7 @@ cell after the capacity of edge semiperimeter \(\gamma-1\) has been exhausted.
 \end{lemma}
 
 \begin{proof}
-For integers \(N\ge1\) and \(t\ge3\) we have, by Lemma~\ref{lem:cap-equiv}, \(g(N)\le t\) if and only if \(N\le M(t)\). Hence
+By Lemma~\ref{lem:cap-equiv}, for \(N\ge1\) and \(t\ge0\), \(g(N)\le t\) if and only if \(N\le M(t)\). Hence
 \(\{N:\ g(N)\le\gamma-1\}=\{1,\dots,M(\gamma-1)\}\), so the least \(N\) with
 \(g(N)\ge\gamma\) is \(M(\gamma-1)+1\); as \(\gamma\) lies in the range of \(g\), that
 least \(N\) satisfies \(g(N)=\gamma\).
