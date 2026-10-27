@@ -138,11 +138,6 @@ candidate generation to such growth excludes no minimizer.
 The constant two in Theorem~\ref{thm:intro-main} cannot be lowered.
 \end{proposition}
 
-\begin{corollary}[necessary excess in universal growth chains]\label{cor:positive-excess}
-There is no one-cell growth chain consisting entirely of minimizers that reaches every minimizer.
-\end{corollary}
-This follows from Proposition~\ref{thm:intro-sharp}, since an all-minimizer chain has zero excess at every step.
-
 Since \(p\) and \(p_{\min}\) are both even, the excess is always an even non-negative
 integer, so the only smaller uniform bound would be zero; the \(13\)-cell configuration
 mentioned above rules that out. Theorem~\ref{thm:intro-skel} and Proposition~\ref{thm:intro-sharp}
@@ -245,9 +240,6 @@ give, and Section~\ref{sec:computation} the computational checks.
 
 \section{The hexagonal lattice, runs, and directional convexity}\label{sec:prelim}
 
-Sections~\ref{sec:prelim}--\ref{sec:capacity} fix the lattice, the perimeter functional,
-the convexity notion, the tight hull and its identities, and the extremal capacity function.
-
 \subsection{Lattice and polyhexes}\label{sec:2.1}
 
 Cells of the hexagonal tiling are indexed by axial coordinates
@@ -265,15 +257,9 @@ vectors
 A \emph{polyhex} is a finite nonempty set of cells that is connected with respect to
 adjacency. We write \(|S|\) for the number of cells of \(S\).
 
-The following four facts are immediate from the definitions and are used throughout
-without further comment.
-
 \begin{fact}\label{f:1}
 Two distinct cells are adjacent if and only if they agree in exactly one key and differ
-by exactly \(1\) in the other two. In words: an adjacency step keeps one of the three
-keys fixed and changes each of the other two by one unit (the step \(d_{0}=(1,0)\), for
-instance, sends \((q,r,s)\) to \((q+1,r,s+1)\), so the two changing keys need not move
-in opposite senses).
+by exactly \(1\) in the other two. The changes need not have opposite signs.
 \end{fact}
 
 \begin{proof}
@@ -534,8 +520,7 @@ and each side line meets \(H\) in a single run whose two end cells are the corne
 \begin{equation}\label{eq:sidesum}
    \sum_{i=1}^{6}\ell_{i}=\lambda(H)+3 ,
 \end{equation}
-in words: the six side lengths of the hull add up to three more than the number of lines
-the hull occupies; and the three differences across opposite sides agree,
+and the three opposite-side differences agree,
 \begin{equation}\label{eq:delta}
    \ell_{1}-\ell_{4}=\ell_{3}-\ell_{6}=\ell_{5}-\ell_{2}=\delta(H)=L-u-v-w-1 ;
 \end{equation}
@@ -547,9 +532,7 @@ the hull occupies; and the three differences across opposite sides agree,
 \begin{equation}\label{eq:defectid}
    \lambda(H)^{2}+3-12|H| \;=\; 3\,\delta(H)^{2}+2\,Q(H)\;\ge\;0 ,
 \end{equation}
-in words: the square of the number of occupied lines, plus three, minus twelve times the
-number of cells, equals three times the square of the common opposite-side difference plus
-twice the imbalance \(Q(H)\).
+
 \end{enumerate}
 \end{lemma}
 
