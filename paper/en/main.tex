@@ -201,10 +201,13 @@ different functionals (Remark~\ref{rem:site}); only the resulting formulas corre
 Section~\ref{sec:capacity} cites the minimum edge-perimeter formula while retaining a
 self-contained hull proof of the capacity bound and minimizer convexity.
 
-Davoli, Piovano and Stefanelli \cite{DavoliPiovanoStefanelli2017} study the same
-edge-isoperimetric problem on the triangular lattice and characterize its minimizers
-through an isoperimetric equality. In particular, they establish directional convexity
-of every minimizer.
+Davoli, Piovano and Stefanelli \cite[Theorem~1.1]{DavoliPiovanoStefanelli2017}
+study the same edge-isoperimetric problem on the triangular lattice. They characterize
+minimizers by equality in an isoperimetric inequality involving the area and
+geometric perimeter of the associated configuration; in particular, they establish
+directional convexity of every minimizer. This equality characterizes an individual
+configuration, but does not itself give a hereditary equality condition for the
+configuration obtained by deleting a prescribed extreme line.
 
 The present work addresses a different question: whether a prescribed minimizer
 admits a specific deletion operation that preserves minimality. If a shortest
@@ -218,6 +221,21 @@ plateau starts.
 
 Thus, the contribution is not a new characterization of minimizers, but a
 deletion and growth structure valid for every prescribed minimizer.
+The shortest-line restriction matters: deleting the non-shortest extreme line
+\(q=0\) from the \(13\)-cell minimizer \(S^{\ast}\) in Example~\ref{ex:13}
+leaves a \(9\)-cell configuration with \(\lambda=12>g(9)=11\), hence not a minimizer.
+This illustrates why a deletion statement requires control of the chosen line.
+
+Barequet and Ben-Shachar \cite{BarequetBenShachar2022} investigate inflation and
+deflation of minimum-\emph{site}-perimeter lattice animals: inflation adds all
+neighboring empty cells at once, whereas deflation removes all boundary cells.
+Their hexagonal-lattice bijections concern this different perimeter functional
+and these whole-boundary operations, rather than the edge-perimeter-preserving
+deletion of a shortest extreme line. Their counting algorithms for minimum-perimeter
+animals are developed further in \cite{BarequetBenShachar2023}.
+The classical minimum-perimeter sequence was also noted by Kurz
+\cite{OEIS_A135711_Kurz}; this concerns perimeter values rather than a
+delete-and-restore operation on arbitrary minimizers.
 
 The triangular-lattice edge-isoperimetric problem admits a nested solution
 \cite[Theorem~7.2, p.~135]{Harper2004}: an ordering of the lattice whose every finite
@@ -1291,51 +1309,12 @@ correspondingly longer. Since the
 main theorem does not need the wider class, a proof appears in the companion Note A (\url{https://github.com/Hideyuki-Utsunomiya/edge-perimeter-polyhex-growth/blob/main/notes/note_A.pdf}).
 \end{remark}
 
-\begin{lemma}[arithmetic separation]\label{lem:bridge-arith}
-For positive integers \(a,b\) other than \(a=b=1\),
-\(g(a)+g(b)\ge g(a+b+1)+1\).
-\end{lemma}
-\begin{proof}
-Put \(A=g(a)\), \(B=g(b)\). By the definition of \(g\),
-\(12a\le A^2+3\) and \(12b\le B^2+3\), so
-\(12(a+b+1)-3\le A^2+B^2+15\).
-As \(g(1)=3\) and \(g(n)\ge5\) for \(n\ge2\),
-\((A-1)(B-1)\ge8\) unless \(a=b=1\). Thus
-\(A^2+B^2+15\le(A+B-1)^2\). Taking square roots and
-ceilings proves \(g(a+b+1)\le A+B-1\).
-\end{proof}
-
-\begin{lemma}[Bridge-Excess Lemma]\label{lem:bridge-excess}
-If a polyhex \(X\) with \(|X|=N\ge4\) has a degree-two
-articulation cell, then \(\exc(X)\ge4\).
-\end{lemma}
-\begin{proof}
-Deleting such a cell gives exactly two connected components
-\(X_1,X_2\) of sizes \(a,b\ge1\), with \(a+b+1=N\):
-each contains a neighbour of the deleted cell, which has only two
-neighbours. Counting adjacent pairs yields
-\(p(X)=p(X_1)+p(X_2)+2\). As \(N\ge4\), \((a,b)\ne(1,1)\).
-By Lemma~\ref{lem:bridge-arith},
-\[
-p(X)\ge2g(a)+2g(b)+2\ge2g(N)+4=p_{\min}(N)+4,
-\]
-and hence \(\exc(X)\ge4\).
-\end{proof}
-
-\begin{corollary}[absence of degree-two articulation cells in the band]\label{cor:no-bridge}
-Every polyhex with at least four cells and excess at most two has no
-degree-two articulation cell.
-\end{corollary}
-\begin{proof}
-Otherwise Lemma~\ref{lem:bridge-excess} gives excess at least four.
-\end{proof}
-
 \begin{remark}[a one-cell-at-a-time proof]\label{rem:onecell}
 An alternative proof of Theorem~\ref{thm:intro-main} descends one cell
 at a time within a restricted class of directionally convex polyhexes.
 An admissibility invariant balances shortest extreme-line length against
 the remaining plateau budget; the connectivity obstruction is controlled
-by the Bridge-Excess Lemma above. This proof shares the exceptional
+by a bridge-excess estimate proved in that note. This proof shares the exceptional
 plateau-start rigidity of Proposition~\ref{pro:rigidity} and is not
 independent of that input. The full argument appears in the companion Note B (\url{https://github.com/Hideyuki-Utsunomiya/edge-perimeter-polyhex-growth/blob/main/notes/note_B.pdf}).
 \end{remark}
