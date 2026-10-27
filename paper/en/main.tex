@@ -717,41 +717,27 @@ edge semiperimeter at most \(\sigma(K)\).
 \end{lemma}
 
 \begin{proof}
-Say \(\Lambda\) is the line \(q=q_{\min}\); the other five cases are the same after
-permuting the roles of the keys and of the two senses.
-
-(i) For each occupied value \(k\) of \(q\) let \(K_{k}\) be the trace of \(K\) on
-\(q=k\); it is a run. If \(K\) is connected, then for consecutive values \(k,k+1\) a path
-inside \(K\) joining a cell of \(K_{k}\) to a cell of \(K_{k+1}\) must, by
-Fact~\ref{f:3}, contain a step from a cell with \(q=k\) to a cell with \(q=k+1\), so
-\(K_{k}\) and \(K_{k+1}\) are adjacent. Hence \(K'\), the union of the \(K_{k}\) with
-\(k\ge q_{\min}+1\), is connected. Its traces in the \(q\)-family are traces of \(K\),
-hence runs. Now fix a line of the \(r\)-family, \(r=k\); its cells are \((q,k)\), so the
-trace of \(K\) on it is a run if and only if its \(q\)-values form an interval, and by
-Fact~\ref{f:2} it meets \(\Lambda\) in at most the one cell \((q_{\min},k)\). The trace of
-\(K'\) on this line is the trace of \(K\) with that cell, if present, removed. Since
-\(q_{\min}\) is the least \(q\)-value occurring anywhere in \(K\), it is the least
-\(q\)-value of the interval, so removing it leaves an interval, possibly empty. A line of
-the \(s\)-family, \(s=k\), has cells \((q,k-q)\), again parametrized by \(q\), and the
-same sentence applies verbatim. So all traces of \(K'\) are runs and \(K'\) is
-directionally convex. Finally \(\Lambda\) is occupied by
-\(K\) and not by \(K'\), so \(\lambda(K')\le\lambda(K)-1\), and by Lemma~\ref{lem:runs}
+By symmetry take \(\Lambda=\{q=q_{\min}\}\).
+(i) The nonempty \(q\)-traces are consecutive runs, and two consecutive
+traces are adjacent: any path between them must cross between their
+\(q\)-levels (Fact~\ref{f:3}). Removing the first trace therefore leaves
+\(K'\) connected. The other \(q\)-traces remain runs. On a fixed
+\(r\)-line or \(s\)-line, the cells are parametrized by \(q\);
+the removed line meets it in at most one cell, necessarily the least
+\(q\)-value of its original interval. Thus the remaining trace is
+an interval, possibly empty. Therefore \(K'\) is directionally convex.
+Since \(\Lambda\) becomes unoccupied,
 \(\sigma(K')=\lambda(K')\le\lambda(K)-1=\sigma(K)-1\).
 
-(ii) Since \(K\) is connected there is a cell \(c_{1}\in K\cap\Lambda\) adjacent to
-\(K'\). Order the remaining cells of the run \(K\cap\Lambda\) so that every initial
-segment \(\{c_{1},\dots,c_{j}\}\) is a block of consecutive cells of that run containing
-\(c_{1}\). Write \(K_{j}:=K'\cup\{c_{1},\dots,c_{j}\}\). Then \(K_{j}\) is connected,
-because \(c_{1}\) is adjacent to \(K'\) and each later \(c_{j}\) is adjacent to a cell
-already inserted. Its trace on \(\Lambda\) is a block, hence a run; its trace on any other
-line of the \(q\)-family is a trace of \(K'\), hence a run. On a line of the \(r\)- or
-\(s\)-family, parametrized by \(q\) as in (i), the trace of \(K_{j}\) is the trace of
-\(K'\) there together with at most one inserted cell, which lies on \(\Lambda\) and so
-has \(q=q_{\min}\). The trace of \(K\) on that line is a run containing this cell and, by
-(i), the trace of \(K'\) is that run with its least element \(q_{\min}\) removed; putting
-the cell back restores the run of \(K\). Hence every trace of \(K_{j}\) is a run, so
-\(K_{j}\) is directionally convex, and every line it occupies is occupied by \(K\), whence
-\(\sigma(K_{j})=\lambda(K_{j})\le\lambda(K)=\sigma(K)\).
+(ii) Connectedness supplies \(c_1\in K\cap\Lambda\) adjacent to \(K'\).
+Order the remaining cells of the run \(K\cap\Lambda\) by extending
+a consecutive block from \(c_1\) at each step. Each intermediate
+\(K_j=K'\cup\{c_1,\dots,c_j\}\) is connected. Its \(q\)-traces
+are runs; on every \(r\)- or \(s\)-line, either the trace is
+unchanged from \(K'\), or the deleted least-\(q\) endpoint is restored,
+as in (i). Hence all its traces are runs. Every occupied line
+of \(K_j\) is also occupied by \(K\), giving
+\(\sigma(K_j)=\lambda(K_j)\le\lambda(K)=\sigma(K)\).
 \end{proof}
 
 \begin{corollary}\label{cor:subsets}
