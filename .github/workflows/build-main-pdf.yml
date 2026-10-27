@@ -1,0 +1,33 @@
+name: Build and update main PDF
+on:
+  push:
+    paths:
+      - 'paper/en/main.tex'
+      - 'paper/en/refs.bib'
+      - '.github/workflows/build-main-pdf.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build main.pdf
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: main.tex
+          working_directory: paper/en
+          latexmk_use_xelatex: false
+      - name: Commit refreshed preprint
+        run: |
+          test -s paper/en/main.pdf
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add paper/en/main.pdf
+          if ! git diff --cached --quiet; then
+            git commit -m "Rebuild main.pdf from updated LaTeX source"
+            git push
+          fi
