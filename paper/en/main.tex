@@ -96,7 +96,7 @@ The answer is that the growth has a \emph{skeleton} made of minimizers. For a po
 the six \emph{extreme lines} are the outermost occupied lines in the three lattice
 directions, and a \emph{shortest} extreme line is one carrying the fewest cells of \(S\).
 For a minimizer the cells of \(S\) on each extreme line form a contiguous run; that is a
-theorem (Theorem~\ref{thm:capacity}(d)), and Definition~\ref{def:traces} states the notion
+theorem (Corollary~\ref{cor:capacity-directional}), and Definition~\ref{def:traces} states the notion
 on the class of polyhexes for which it holds. Write \(g(N):=\lceil\sqrt{12N-3}\,\rceil\),
 so that \(p_{\min}(N)=2g(N)\) by a classical result recalled in
 Section~\ref{sec:capacity}. We call \(g(N)\) the \emph{threshold} of \(N\): it is the
@@ -203,7 +203,7 @@ needs the hull machinery, not merely the values.
 Davoli, Piovano and Stefanelli \cite{DavoliPiovanoStefanelli2017} study the same
 edge-isoperimetric problem and characterize all minimizers. They prove, in particular,
 that minimizers are directionally convex (see the remark after
-Theorem~\ref{thm:capacity}). Their results do not state that deleting a shortest
+Theorem~\ref{thm:knownperimeter}). Their results do not state that deleting a shortest
 extreme line preserves minimality, nor the bounded-excess one-cell growth statement
 proved here.
 
@@ -224,7 +224,7 @@ for one-cell growth to reach all minimizers.
 
 Of the results below, the minimum edge perimeter and the capacity function
 (Section~\ref{sec:capacity}), the tight-hull identities (Section~\ref{sec:hulls}) and the directional
-convexity of minimizers (Theorem~\ref{thm:capacity}(d)) are classical or close to known
+convexity of minimizers (Corollary~\ref{cor:capacity-directional}) are classical or close to known
 results, as explained in Section~\ref{sec:0.5}, and are proved here only to keep the
 argument self-contained in the variables it needs. The contribution of the
 paper is Theorem~\ref{thm:intro-skel}, Theorem~\ref{thm:intro-main}, and Proposition~\ref{thm:intro-sharp}.
@@ -694,7 +694,7 @@ An equivalent defect identity is obtained from F\"ulep and Sieben's polyiamond i
 In the same site-perimeter variables, \cite[Proposition~5.10]{FulepSieben2010} yields exactly the capacity
 function $M(t)$ of Section~\ref{sec:capacity} when their perimeter variable is set equal to $t+3$; the value $7$
 of that variable excluded there corresponds to the value $t=4$ excluded in
-Remark~\ref{rem:attain}.
+Proposition~\ref{pro:capacity-bound}.
 \end{remark}
 
 
@@ -740,108 +740,63 @@ of \(K_j\) is also occupied by \(K\), giving
 \(\sigma(K_j)=\lambda(K_j)\le\lambda(K)=\sigma(K)\).
 \end{proof}
 
-\begin{corollary}\label{cor:subsets}
-Let \(K\) be a directionally convex polyhex. For every \(j\) with \(1\le j\le|K|\) there is
-a directionally convex polyhex \(K_{j}\subseteq K\) with \(|K_{j}|=j\) and
-\(\sigma(K_{j})\le\sigma(K)\).
-\end{corollary}
-
-\begin{proof}
-Strong induction on \(|K|\). For \(|K|=1\) there is nothing to prove. Let \(|K|\ge2\). Some
-extreme line \(\Lambda\) does not contain all of \(K\): otherwise \(K\) would be contained
-in two extreme lines belonging to different families, which by Fact~\ref{f:2} meet in a
-single cell, contradicting \(|K|\ge2\). Apply Lemma~\ref{lem:peel} to that \(\Lambda\). The
-sets \(K_{j}\) of part (ii) supply all sizes between \(|K'|\) and \(|K|\); the sizes below
-\(|K'|\) are supplied by the inductive hypothesis applied to \(K'\), whose edge
-semiperimeter is at most \(\sigma(K)\).
-\end{proof}
-
 \begin{definition}\label{def:M}
-For an integer \(t\ge0\) put
-\[
-   M(t):=\left\lfloor\frac{t^{2}+3}{12}\right\rfloor .
-\]
-Thus \(M(0)=M(1)=M(2)=0\) and \(M(3)=1\). The function \(M\) is nondecreasing.
+For integers \(t\ge0\), put \(M(t):=\lfloor(t^2+3)/12\rfloor\).
+Thus \(M(0)=M(1)=M(2)=0\), \(M(3)=1\), and \(M\) is nondecreasing.
 \end{definition}
 
-\begin{theorem}\label{thm:capacity}
-Let \(N\ge1\).
-\begin{enumerate}
-\item[(a)] Every polyhex \(S\) satisfies \(|S|\le M(\sigma(S))\): a configuration of edge
-semiperimeter \(t\) cannot have more than \(M(t)\) cells.
-\item[(b)] For every \(t\ge3\) there is a directionally convex polyhex \(K\) with
-\(|K|=M(t)\) and \(\sigma(K)\le t\).
-\item[(c)] The minimum edge perimeter of an \(N\)-cell polyhex is
+\begin{theorem}[Harary--Harborth \cite{HararyHarborth1976}]\label{thm:knownperimeter}
+The minimum edge perimeter of an \(N\)-cell polyhex, \(N\ge1\), is
 \[
-   p_{\min}(N)=2g(N),\qquad g(N)=\left\lceil\sqrt{12N-3}\,\right\rceil .
+p_{\min}(N)=2g(N),\qquad g(N)=\left\lceil\sqrt{12N-3}\,\right\rceil .
 \]
-\item[(d)] Every \(N\)-cell minimizer \(S\) is directionally convex and satisfies
-\(\sigma(S)=\lambda(S)=g(N)\).
-\end{enumerate}
 \end{theorem}
 
-The directional convexity of minimizers in (d) is a known result. Davoli, Piovano and
-Stefanelli \cite[Definition~3.2 and Proposition~3.3]{DavoliPiovanoStefanelli2017}
-establish this property for every minimizer of the edge-isoperimetric problem on the
-triangular lattice. Their original preprint calls the property \emph{$3$-connected}:
-for any two points on a common lattice line, all lattice points between them belong
-to the set. Under the identification of Section~\ref{sec:0.5} this is exactly the
-directional convexity used here. Their proof uses rearrangement; the proof below
-obtains (d) from the hull identities of Section~\ref{sec:hulls} and the capacity
-bound (a), together with $\lambda(S)=g(N)$, to keep the argument self-contained.
-
+\begin{lemma}[threshold--capacity equivalence]\label{lem:cap-equiv}
+For integers \(N\ge1\) and \(t\ge0\), \(g(N)\le t\) if and only if \(N\le M(t)\).
+\end{lemma}
 \begin{proof}
-(a) Let \(H=H(S)\). By Lemma~\ref{lem:hull} and Lemma~\ref{lem:hex}(v),
-\[
-   12|S|\le12|H|=\lambda(H)^{2}+3-\bigl(3\delta(H)^{2}+2Q(H)\bigr)\le\lambda(S)^{2}+3
-   \le\sigma(S)^{2}+3 ,
-\]
-the last step by Lemma~\ref{lem:runs}. Since \(|S|\) is an integer, \(|S|\le M(\sigma(S))\).
-
-(b) For \(t\equiv3\pmod 6\), say \(t=6m+3\), take \(K=H(3m+1;m,m,m)\); for \(t=6m\) take
-\(H(3m-1;m-1,m-1,m-1)\); for \(t=6m+1\) take \(H(3m;m,m,m-1)\); for \(t=6m+2\) take
-\(H(3m+1;m,m,m+1)\); for \(t=6m+4\) take \(H(3m+1;m,m,m-1)\); for \(t=6m+5\) take
-\(H(3m+2;m,m,m+1)\). Here \(m\ge0\) for \(t\equiv3,5\pmod6\) and \(m\ge1\)
-for the other four residues, which covers every \(t\ge3\) except \(t=4\); in each case
-\eqref{eq:adm} holds, Lemma~\ref{lem:hex}(ii) gives \(\sigma(K)=t\), and
-Lemma~\ref{lem:hex}(iv),(v) give
-\(12|K|=t^{2}+3-D\) with \(D\in\{0,3,4,7\}\) according to the residue of \(t\), so
-\(|K|=M(t)\). The single case not covered by an admissible triple is \(t=4\); there
-\(M(4)=1\) and a single cell has edge semiperimeter \(3\le4\).
-
-(c) Put \(t_{N}:=\min\{t\ge3:\ M(t)\ge N\}\). By (a) every \(N\)-cell polyhex has
-\(M(\sigma(S))\ge N\), hence \(\sigma(S)\ge t_{N}\). Conversely (b) produces a
-directionally convex \(K\) with \(|K|=M(t_{N})\ge N\) and \(\sigma(K)\le t_{N}\), and
-Corollary~\ref{cor:subsets} extracts from it an \(N\)-cell polyhex of edge semiperimeter at
-most \(t_{N}\). Therefore \(p_{\min}(N)=2t_{N}\). Finally, for integers \(t\),
-\[
-   M(t)\ge N\iff \frac{t^{2}+3}{12}\ge N\iff t\ge\sqrt{12N-3},
-\]
-and \(\sqrt{12N-3}\ge3\) for \(N\ge1\), so \(t_{N}=g(N)\).
-
-(d) By (c), \(\sigma(S)=g(N)\). Let \(H=H(S)\). Applying (a) to \(H\), which is
-directionally convex with \(\sigma(H)=\lambda(H)\), gives \(M(\lambda(H))\ge|H|\ge N\) and
-therefore \(\lambda(H)\ge t_{N}=g(N)\). Combining with Lemmas~\ref{lem:runs}
-and~\ref{lem:hull},
-\[
-   g(N)=\sigma(S)=R(S)\ \ge\ \lambda(S)=\lambda(H)\ \ge\ g(N),
-\]
-so \(R(S)=\lambda(S)\) and \(S\) is directionally convex.
+Since \(t\ge0\), the first inequality is equivalent to \(12N-3\le t^2\),
+which for integral \(N\) is equivalent to
+\(N\le\lfloor(t^2+3)/12\rfloor=M(t)\).
 \end{proof}
 
-\begin{remark}\label{rem:attain}
-Parts (a) and (b) together say exactly that
+\begin{proposition}[capacity bound]\label{pro:capacity-bound}
+Every polyhex \(S\) satisfies \(|S|\le M(\sigma(S))\).
+\end{proposition}
+\begin{proof}
+Let \(H=H(S)\). By Lemmas~\ref{lem:hull}, \ref{lem:hex}(v),
+and \ref{lem:runs},
 \[
-   M(t)=\max\{\,|K|:\ K\text{ a polyhex with }\sigma(K)\le t\,\},
+12|S|\le12|H|
+=\lambda(H)^2+3-\bigl(3\delta(H)^2+2Q(H)\bigr)
+\le\lambda(S)^2+3\le\sigma(S)^2+3 .
 \]
-in words: \(M(t)\) is the largest number of cells that fit within an edge-semiperimeter
-budget of \(t\). The budget form is the one the rest of the paper uses, and the
-inequality in (b) is not a weakening: for every \(t\ge3\) other than \(t=4\) the
-hexagons listed in the proof do satisfy \(\sigma(K)=t\), and the value \(t=4\) is not the
-edge semiperimeter of any polyhex at all. Indeed a polyhex \(K\) with \(\sigma(K)=4\)
-would have \(|K|\le M(4)=1\) by (a), while the one-cell polyhex has edge semiperimeter
-\(3\).
-\end{remark}
+Taking integer parts gives the claim.
+\end{proof}
+
+\begin{corollary}[directional convexity of minimizers]\label{cor:capacity-directional}
+Every \(N\)-cell minimizer \(S\) is directionally convex and has
+\(\sigma(S)=\lambda(S)=g(N)\).
+\end{corollary}
+\begin{proof}
+Theorem~\ref{thm:knownperimeter} gives \(\sigma(S)=g(N)\).
+The tight hull \(H=H(S)\) is directionally convex, so by
+Proposition~\ref{pro:capacity-bound} and Lemma~\ref{lem:cap-equiv},
+\(N\le|H|\le M(\lambda(H))\) implies \(g(N)\le\lambda(H)\).
+Consequently
+\[
+g(N)=\sigma(S)=R(S)\ge\lambda(S)=\lambda(H)\ge g(N).
+\]
+Thus \(R(S)=\lambda(S)\), and Lemma~\ref{lem:runs}
+implies directional convexity.
+\end{proof}
+
+Directional convexity of minimizers was also established by
+Davoli, Piovano and Stefanelli
+\cite[Definition~3.2 and Proposition~3.3]{DavoliPiovanoStefanelli2017}.
+The preceding proof is retained to make this geometric input
+self-contained.
 
 \subsection{The plateau bridge}\label{sec:2.7}
 
@@ -862,8 +817,7 @@ cell after the capacity of edge semiperimeter \(\gamma-1\) has been exhausted.
 \end{lemma}
 
 \begin{proof}
-For integers \(N\ge1\) and \(t\ge3\) we have, as in the proof of
-Theorem~\ref{thm:capacity}(c), \(g(N)\le t\) if and only if \(N\le M(t)\). Hence
+For integers \(N\ge1\) and \(t\ge3\) we have, by Lemma~\ref{lem:cap-equiv}, \(g(N)\le t\) if and only if \(N\le M(t)\). Hence
 \(\{N:\ g(N)\le\gamma-1\}=\{1,\dots,M(\gamma-1)\}\), so the least \(N\) with
 \(g(N)\ge\gamma\) is \(M(\gamma-1)+1\); as \(\gamma\) lies in the range of \(g\), that
 least \(N\) satisfies \(g(N)=\gamma\).
@@ -876,7 +830,7 @@ minimizer sits at the start of its plateau.
 \section{The shortest side and rigidity at exceptional plateau starts}\label{sec:rigidity}
 
 Throughout this section \(S\) is an edge-perimeter minimizer with \(n=|S|\) and
-\(\sigma=\sigma(S)=g(n)\); by Theorem~\ref{thm:capacity}(d) it is directionally convex, so
+\(\sigma=\sigma(S)=g(n)\); by Corollary~\ref{cor:capacity-directional} it is directionally convex, so
 its support traces \(r_{i}\) and \(\rho(S)=\min_{i}r_{i}\) are defined, and by
 Lemma~\ref{lem:hull}(iii) \(\rho(S)\ge1\). Let \(H=H(S)\).
 
@@ -945,7 +899,7 @@ residues gives
 \end{equation}
 since \(\bigl((6h-4)^{2}+3\bigr)/12\) has integer part \(3h^{2}-4h+1\) and
 \(\bigl((6h-2)^{2}+3\bigr)/12\) has integer part \(3h^{2}-2h\). By
-Theorem~\ref{thm:capacity}(d), \(S\) is directionally convex with \(\lambda(S)=\gamma\),
+Corollary~\ref{cor:capacity-directional}, \(S\) is directionally convex with \(\lambda(S)=\gamma\),
 hence \(\lambda(H)=\gamma\) by Lemma~\ref{lem:hull}(ii).
 
 \medskip\noindent\textbf{Case \(\gamma\equiv3\pmod6\).} Write \(\gamma=6h-3\), so
@@ -1027,7 +981,7 @@ threshold step down, and putting the line back one cell at a time never costs mo
 units of edge perimeter.
 
 \begin{proof}
-By Theorem~\ref{thm:capacity}(d), \(S\) is directionally convex with \(\lambda(S)=\sigma\),
+By Corollary~\ref{cor:capacity-directional}, \(S\) is directionally convex with \(\lambda(S)=\sigma\),
 and \(\rho=\rho(S)\ge1\). Since \(n\ge3\), \(g(3)=\lceil\sqrt{33}\rceil=6\), and \(g\) is
 nondecreasing, we have \(\sigma\ge6\). Write \(\sigma=6m+s\) with \(0\le s\le5\); then
 \(m\ge1\).
@@ -1085,7 +1039,7 @@ contradicting \(\rho=m+1\). Hence \eqref{eq:strict} holds in every residue.
 From \eqref{eq:strict} and the definition of \(g\), \(g(n-\rho)\ge\sigma-1\). As
 \(n-\rho\ge M(\sigma-2)+1\ge1\), the set \(S'\) is nonempty, so Lemma~\ref{lem:peel}(i)
 applies: \(S'\) is a directionally convex polyhex with \(\sigma(S')\le\sigma-1\). By
-Lemma~\ref{lem:runs} and Theorem~\ref{thm:capacity}(c),
+Lemma~\ref{lem:runs} and Theorem~\ref{thm:knownperimeter},
 \[
    2(\sigma-1)\ \le\ 2g(|S'|)\ =\ p_{\min}(|S'|)\ \le\ p(S')\ =\ 2\sigma(S')\ \le\ 2(\sigma-1),
 \]
@@ -1255,7 +1209,7 @@ Suppose there were a chain of polyhexes \(S_{1}\subset\cdots\subset S_{13}=S^{*}
 
 It remains to see that no uniform bound strictly between \(0\) and \(2\) is available. By
 Lemma~\ref{lem:runs} the edge perimeter of any finite set of cells is even, and
-\(p_{\min}\) is even by Theorem~\ref{thm:capacity}(c); hence
+\(p_{\min}\) is even by Theorem~\ref{thm:knownperimeter}; hence
 \[
    \exc(K)=p(K)-p_{\min}(|K|)\in\{0,2,4,\dots\}
 \]
@@ -1378,7 +1332,7 @@ are independent of the proofs: the hull identities are re-derived symbolically a
 enumeration, the peeling lemma is re-checked cell by cell, and so on, without following
 the steps of the argument. The \emph{enumerations of minimizers}, on the other hand, are
 not logically independent of the analysis: they generate the candidates through
-Theorem~\ref{thm:capacity}(d) (a minimizer is directionally convex with
+Corollary~\ref{cor:capacity-directional} (a minimizer is directionally convex with
 \(\lambda=g(N)\)) and Section~\ref{sec:16.4} says exactly how. A row that checks a
 statement on ``all minimizers with \(N\le34\)'' is therefore a check conditional on that
 theorem, and two implementations of such a check are two implementations, not two
@@ -1443,7 +1397,7 @@ classes), \(102\) (\(9\) free classes) are reachable by an all-minimizer growth.
 
 Each row was carried out with an implementation written independently of the proof it
 re-checks. Row 7 and the census of Section~\ref{sec:16.1} generate their minimizers
-through Theorem~\ref{thm:capacity}(d) and are conditional on it in the sense explained at
+through Corollary~\ref{cor:capacity-directional} and are conditional on it in the sense explained at
 the start of this section; every other row enumerates all polyhexes, all directionally
 convex polyhexes or all admissible hexagons in its range, or examines a named
 configuration exhaustively, and carries no such condition. No violation was found in any
@@ -1474,7 +1428,7 @@ all \(145{,}374\) side peelings of directionally convex polyhexes with \(N\le10\
 minimizer with \(g\) down by one, and the restoration order keeps \(\exc\le2\) &
 all \(2{,}382\) shortest-line deletions from minimizers with \(3\le N\le34\), ties included;
 two independently written implementations, both enumerating minimizers via
-Theorem~\ref{thm:capacity}(d) & \textsc{analytic} \\
+Corollary~\ref{cor:capacity-directional} & \textsc{analytic} \\
 8 & the degree table of \(S^{*}\) and its thirteen one-cell deletions &
 exhaustive for \(S^{*}\) & \textsc{exact} \\
 9 & the configuration \(X_{15}\) of Remark~\ref{rem:x31} & direct line-count verification & \textsc{analytic} \\
@@ -1488,12 +1442,12 @@ Theorem~\ref{thm:skel} is not decorative.
 
 \subsection{Reproduction}\label{sec:16.4}
 
-The enumeration of \(\mathcal{M}_{N}\) uses Theorem~\ref{thm:capacity}(d): a minimizer is
+The enumeration of \(\mathcal{M}_{N}\) uses Corollary~\ref{cor:capacity-directional}: a minimizer is
 directionally convex with \(\lambda=g(N)\), so it suffices to enumerate the tight hulls with
 the corresponding edge semiperimeter and then the subsets that keep it. For \(N\le34\) one
 has \(|H|-N\le3\). Reachability is then decided by dynamic programming on the size. The
 census of Section~\ref{sec:16.1} is thus exact for the class of configurations that
-Theorem~\ref{thm:capacity}(d) describes; it does not re-establish that theorem.
+Corollary~\ref{cor:capacity-directional} describes; it does not re-establish that theorem.
 
 The scripts reproducing every number quoted above are provided as ancillary files; they use
 the Python standard library only and need no input files.
