@@ -198,14 +198,30 @@ maximum-size function of F\"ulep and Sieben for the site perimeter of polyhexes
 our hull defect identity corresponds to their polyiamond identity
 \cite[Lemma~3.3]{FulepSieben2010} under the duality of their Section~5. The two perimeters are
 different functionals (Remark~\ref{rem:site}); only the resulting formulas correspond.
-Yang \cite[Theorems~8, 11, 13 and 18]{Yang2002} independently gives the
-maximum-cell capacity at fixed edge perimeter, algorithms constructing extremal
-polyhexes, and the minimum edge-perimeter formula. His fixed-perimeter capacity
-agrees with \(M(t)\) upon writing \(p=2t\) for admissible exact perimeters;
-\(M(t)\) instead uses a semiperimeter budget \emph{at most} \(t\), so exceptional
-unattainable exact perimeters must be distinguished. These algorithms produce
-particular extremal configurations, and do not assert shortest-extreme-line
-deletion for every prescribed minimizer.
+Yang \cite[Theorems~4--5]{Yang2002} gives the perimeter--subslice
+identity and its slice-convex equality case, corresponding to
+Lemma~\ref{lem:runs} below. His fixed-direction-line-count capacity theorem
+\cite[Theorem~7]{Yang2002} is a predecessor to our hull-based capacity
+estimate, using a parallelogram rather than the tight six-sided hull.
+His balanced-dimensions characterization of capacity-maximizing
+polyhexes \cite[Theorem~9]{Yang2002} is related in spirit to, but has
+different hypotheses from, the plateau-start rigidity result
+Proposition~\ref{pro:rigidity}; neither is presented here as a consequence
+of the other. His exact-perimeter capacity and constructive algorithms
+are given in \cite[Theorems~8 and 11]{Yang2002}, and the minimum
+edge-perimeter formula in \cite[Theorem~18]{Yang2002}.
+More precisely, Yang's \emph{generalized} capacity for perimeter at most
+\(p\), in \cite[Section~10]{Yang2002}, is
+\(\operatorname{round}(\lfloor p/2\rfloor^2/12)\), equal to
+\(M(\lfloor p/2\rfloor)\) for every integer \(p\); thus \(M\) is
+not claimed as a new extremal quantity. Yang's minimal-polyhex spiral
+\cite[Theorems~13--14]{Yang2002} yields a particular nested sequence of
+minimizers rather than a predecessor for every prescribed minimizer.
+Indeed the \(13\)-cell minimizer \(S^\ast\) in Example~\ref{ex:13}
+has no \(12\)-cell minimizing predecessor (Proposition~\ref{pro:nopred}),
+so it cannot occur on any all-minimizer one-cell nested sequence,
+including Yang's spiral, even up to lattice symmetry.
+
 Section~\ref{sec:capacity} cites the minimum edge-perimeter formula while retaining a
 self-contained hull proof of the capacity bound and minimizer convexity.
 
@@ -233,6 +249,25 @@ The shortest-line restriction matters: deleting the non-shortest extreme line
 \(q=0\) from the \(13\)-cell minimizer \(S^{\ast}\) in Example~\ref{ex:13}
 leaves a \(9\)-cell configuration with \(\lambda=12>g(9)=11\), hence not a minimizer.
 This illustrates why a deletion statement requires control of the chosen line.
+
+In chemical graph theory, the same edge-perimeter extremal problem is
+studied through extremal benzenoids or hexanimals. For a simply
+connected \(h\)-cell hexanimal, the number \(n_i\) of internal vertices
+satisfies \(n_i=2h+1-p/2\), so maximizing \(n_i\) at fixed \(h\)
+is equivalent to minimizing the edge perimeter \(p\).
+Brunvoll, Cyvin and Cyvin \cite{BrunvollCyvinCyvin1993} review the
+Harary--Harborth spiral and its limitations, and study
+\emph{circumscribing}: adjoining a closed single ring of cells along
+the perimeter, with the reverse operation called \emph{excising}.
+Their Theorem~2 establishes eventual extremality under sufficiently
+many circumscribings, conditional on the operations being executable;
+their Theorem~1 asserts the existence of a repeatedly-circumscribable
+representative for each admissible pair of invariants.
+These whole-ring operations and eventual extremality differ from the
+present shortest-extreme-line deletion, which applies to every
+minimizer and preserves minimality at each skeleton step. Their
+Figure~3 already exhibits four extremal \(13\)-cell species, so no
+novelty is claimed here for a \(13\)-cell extremal shape as such.
 
 Barequet and Ben-Shachar \cite{BarequetBenShachar2022} investigate inflation and
 deflation of minimum-\emph{site}-perimeter lattice animals: inflation adds all
@@ -391,6 +426,9 @@ Every occupied line carries at least one run, so \(R(S)\ge\lambda(S)\), with equ
 exactly when every occupied line carries exactly one run, which is
 Definition~\ref{def:dconv}.
 \end{proof}
+\noindent This run-count identity and the directional-convexity equality
+case were also given by Yang \cite[Theorems~4--5]{Yang2002}.
+
 
 \begin{remark}[edge perimeter versus site perimeter]\label{rem:site}
 The \emph{site perimeter} of $S$ is the number of cells outside $S$ adjacent to at
@@ -811,6 +849,10 @@ and \ref{lem:runs},
 \]
 Taking integer parts gives the claim.
 \end{proof}
+\noindent A capacity bound at prescribed three-direction line counts was
+previously obtained by Yang \cite[Theorem~7]{Yang2002} through a different
+(parallelogram-hull) representation.
+
 
 \begin{remark}[attainment of the capacity bound]
 For \(t\ge3\), set \(N=M(t)\ge1\). By Lemma~\ref{lem:cap-equiv},
