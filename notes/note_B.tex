@@ -50,6 +50,13 @@ configurations show that neither auxiliary condition can be dropped. The common 
 of the main paper is reproduced for self-containment.
 \end{abstract}
 
+The related construction of Brunvoll, Cyvin and Cyvin
+\cite[Theorems~1--2]{BrunvollCyvinCyvin1993} uses
+\emph{circumscribing} (adding a closed peripheral ring of cells) and its
+inverse, \emph{excising}, to study eventual extremality when repeated
+circumscribing is possible. These whole-ring operations differ from
+the single-cell deletion with a bounded-excess invariant proved here.
+
 \section{The hexagonal lattice, runs, and directional convexity}\label{sec:prelim}
 
 This part reproduces, for self-containment, the common framework of the main paper
@@ -176,6 +183,9 @@ Every occupied line carries at least one run, so \(R(S)\ge\lambda(S)\), with equ
 exactly when every occupied line carries exactly one run, which is
 Definition~\ref{def:dconv}.
 \end{proof}
+\noindent The run-count identity and its slice-convex equality case were
+previously formulated by Yang \cite[Theorems~4--5]{Yang2002}.
+
 
 \begin{remark}[edge perimeter versus site perimeter]\label{rem:site}
 The \emph{site perimeter} of \(S\) is the number of cells outside \(S\) adjacent to at
@@ -506,6 +516,17 @@ perimeter is twice that number.
 \(\exc(S)\le2\) if and only if \(|S|>M(\sigma(S)-2)\).
 \end{enumerate}
 \end{theorem}
+
+Parts (a)--(d) record classical or previously established edge-isoperimetric
+quantities and properties, alongside self-contained proofs used in this note.
+In particular, part (c) is the Harary--Harborth minimum edge-perimeter
+formula \cite{HararyHarborth1976}. Yang's capacity results
+\cite[Theorems~7--9 and Section~10]{Yang2002} include a
+three-direction slice-count bound and the generalized capacity
+\(\operatorname{round}(\lfloor p/2\rfloor^{2}/12)
+=M(\lfloor p/2\rfloor)\) for a perimeter budget \(p\).
+Consequently the capacity function \(M\) is not new here; the new
+contribution is the controlled one-cell deletion proof below.
 
 The directional convexity in (d) is a known result: Davoli, Piovano and Stefanelli
 \cite[Proposition~3.3]{DavoliPiovanoStefanelli2017} prove that every minimizer of the
