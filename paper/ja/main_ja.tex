@@ -107,7 +107,7 @@ lattice, hexagonal tiling.
 答えは，成長が最小配置からなる\emph{骨格}を持つ，ということである．polyhex \(S\) について，
 六本の \emph{extreme line} とは三つの格子方向それぞれにおける最外の占有線であり，
 \emph{最短} extreme line とは \(S\) のセルを最も少なく持つものをいう．最小配置では各
-extreme line 上の \(S\) のセルは連続する run をなすが，これは定理~\ref{thm:capacity}(d)
+extreme line 上の \(S\) のセルは連続する run をなすが，これは定理~\ref{cor:capacity-directional}
 で証明される事実であり，定義~\ref{def:traces} はその性質を持つ polyhex のクラス上で
 support trace を定める．
 \(g(N):=\lceil\sqrt{12N-3}\,\rceil\) とおけば，第~\ref{sec:capacity}~節で再掲する古典的結果により
@@ -185,40 +185,99 @@ support trace を定める．
 
 \subsection{先行研究との関係}\label{sec:0.5}
 
-六角タイリングのセル隣接グラフは単位距離の辺を持つ三角格子であり，そのグラフにおける
-セル集合の辺境界はちょうど辺周長である．したがって，本稿で扱う問題は三角格子上の辺等周
-問題である．その最小値 $p_{\min}(N)=2\lceil\sqrt{12N-3}\,\rceil$ は Harary と Harborth
-\cite{HararyHarborth1976} による．隣接するセル対を $b$ 組持つ $N$ セル polyhex の辺周長は
-$6N-2b$ であるため，この値は，平面上の重なり合わない $N$ 個の単位円板の接触対数の最大値
-に関する Harborth の先行する公式 $\lfloor 3N-\sqrt{12N-3}\rfloor$ \cite{Harborth1974} に対応する．
-容量関数 $M(t)$ は，彼らの周長変数を $t+3$ に設定すると，Fülep と Sieben の polyhex の
-site 周長に関する最大サイズ関数 \cite[Proposition~5.10]{FulepSieben2010} と，$t=4$ を除く
-すべての $t\ge 3$ について一致する（注意~\ref{rem:fs}）．また，本稿の hull defect 恒等式は，
-同論文第 5 節の双対性の下で彼らの polyiamond の恒等式 \cite[Lemma~3.3]{FulepSieben2010}
-に対応する．二つの周長は異なる汎関数であり（注意~\ref{rem:site}），対応するのは結果として
-得られる公式だけである．第~\ref{sec:capacity}~節ではこれらの事実を辺周長変数で再導出する．
-証明が必要とするのは値だけでなく，hull の仕組みだからである．
+六角タイルのセル隣接グラフは三角格子であり，セル集合の辺境界は辺周長に等しい．
+最小値 \(p_{\min}(N)=2\lceil\sqrt{12N-3}\,\rceil\) は Harary と Harborth
+\cite{HararyHarborth1976} による．隣接セル対を \(b\) 組持つ \(N\) セル polyhex では
+\(p=6N-2b\) だから，これは平面上で重ならない \(N\) 個の合同円板の接触対数に関する
+Harborth の公式 \(\lfloor3N-\sqrt{12N-3}\rfloor\)
+\cite{Harborth1974} に対応する．容量関数 \(M(t)\) は，周長変数を \(t+3\)
+とすると，Fülep と Sieben の site 周長に関する最大サイズ公式
+\cite[Proposition~5.10]{FulepSieben2010} と \(t\ge3,\ t\ne4\) で一致する
+（注意~\ref{rem:fs}）．本稿の hull defect 恒等式は，同論文の polyiamond 恒等式
+\cite[Lemma~3.3]{FulepSieben2010} と同論文第5節の双対性を通じて対応する．
+ただし二つの周長は異なる汎関数である（注意~\ref{rem:site}）．
 
-Davoli，Piovano，Stefanelli \cite{DavoliPiovanoStefanelli2017} は同じ辺等周問題を扱い，
-すべての最小配置を特徴づけている．特に，最小配置が方向凸であることを証明する
-（定理~\ref{thm:capacity} の後の注を参照）．彼らの結果は，最短 extreme line の削除が最小性を
-保存することも，本稿で証明する超過を抑えた一セル成長の主張も述べていない．
+Yang \cite[Theorems~4--5]{Yang2002} は辺周長と三方向の subslice 数の恒等式および
+slice 凸の場合の等号条件を与えており，本稿の補題~\ref{lem:runs} に対応する．
+同論文の三方向の線数に対する容量定理
+\cite[Theorem~7]{Yang2002} は，六辺の tight hull ではなく平行四辺形を用いた
+容量上界の先行研究である．容量最大配置の方向別次元の均衡条件
+\cite[Theorem~9]{Yang2002} と，本稿の plateau 開始点に限る
+命題~\ref{pro:rigidity} は関連するが，仮定は異なり，相互に帰結するとは主張しない．
+Yang の厳密な周長に対する容量と構成法は
+\cite[Theorems~8 and 11]{Yang2002} に，最小辺周長の公式は
+\cite[Theorem~18]{Yang2002} にある．さらに
+\cite[Section~10]{Yang2002} で扱われる「周長 \(p\) 以下」の一般化容量は
+\(\operatorname{round}(\lfloor p/2\rfloor^2/12)\) であり，
+任意の整数 \(p\) について \(M(\lfloor p/2\rfloor)\) と等しい．
+したがって本稿は \(M\) 自体を新しい極値量とは主張しない．
+Yang の spiral 構成 \cite[Theorems~13--14]{Yang2002} は
+特定の入れ子の最小配置列を生成するが，指定された任意の最小配置の直前配置を保証しない．
+実際，例~\ref{ex:13} の13セル最小配置 \(S^\ast\) は12セルの最小直前配置を持たない
+（命題~\ref{pro:nopred}）ため，格子対称性を含めても最小配置のみからなる
+一セル入れ子列には現れない．第~\ref{sec:capacity}~節では既知の
+最小辺周長公式を明示して引用し，容量上界と方向凸性は hull から自足的に示す．
 
-三角格子の辺等周問題には入れ子解が存在する \cite[Theorem~7.2, p.~135]{Harper2004}．
-すなわち，任意の有限な前半部分が最適であるような格子の順序が存在する．Vainsencher と
-Bruckstein \cite{VainsencherBruckstein2008} は，スパイラル構成が各サイズで最適周長を達成
-する一方，最適形状を尽くさないことを指摘する．Malen，Roldán，Toalá-Enríquez
-\cite{MalenRoldanToala2023} はスパイラル構成をユークリッド的および双曲的な
-$\{p,q\}$-animal に拡張する．入れ子解が与えるのは各サイズに一つの最小配置であるが，
-本稿の結果は指定された任意の最小配置を対象とする．定理~\ref{thm:intro-skel} は，extreme line
-全体を削除するステップなら，各最小配置を通る最小配置の鎖が存在することを示す．一方，
-定理~\ref{thm:intro-main} と定理~\ref{thm:intro-sharp} は，一セル成長ですべての最小配置に
-到達するには超過 2 が十分かつ必要であることを示す．
+Davoli，Piovano，Stefanelli \cite[Theorem~1.1]{DavoliPiovanoStefanelli2017}
+は同じ三角格子上の辺等周問題を扱い，面積と幾何学的周長を用いた
+等周不等式の等号によって最小配置を特徴づける．特に最小配置の方向凸性を示す．
+しかし，個々の配置の等号条件から，指定した極端線を削除した後の
+配置にも等号が成り立つことは直接には従わない．
+
+本稿で扱うのは，指定された最小配置から最小性を保存する削除が可能かという問題である．
+\(N\) セル最小配置の最短 extreme line に \(k\) セルがある場合，
+削除後に方向凸であるだけでは足りず，
+\(g(N-k)=g(N)-1\) を示さなければならない．
+既知の周長公式と方向凸性だけではこの関係は直ちには保証されない．
+本稿では最短 support trace の定量的な上界と，例外的な plateau 開始点での
+剛性を使う．ゆえに新規性の主張は最小配置の新しい特徴づけではなく，
+任意の指定された最小配置に対する削除・成長構造である．
+「最短」の制限は本質的である．例~\ref{ex:13} の \(S^\ast\) から
+最短でない極端線 \(q=0\) を削除すると，残りは9セルで
+\(\lambda=12>g(9)=11\) となり，最小配置ではない．
+
+化学グラフ理論でも extremal benzenoid または hexanimal として
+同じ辺周長の極値問題が研究されてきた．穴のない \(h\) セル hexanimal の
+内部頂点数 \(n_i\) は \(n_i=2h+1-p/2\) を満たすため，
+固定した \(h\) で \(n_i\) の最大化は辺周長 \(p\) の最小化に等しい．
+Brunvoll，Cyvin，Cyvin \cite{BrunvollCyvinCyvin1993} は
+Harary--Harborth の spiral とその限界を論じ，
+外周に単一の閉環を追加する \emph{circumscribing} と
+その逆操作 \emph{excising} を研究した．同論文の Theorem~2 は，
+操作を継続して実行できるという条件下で，十分な反復後に
+極値配置へ到達することを示す．Theorem~1 は，許される不変量対ごとに
+無限回の操作が可能な代表配置が少なくとも一つ存在することを述べる．
+これらの環全体に対する操作と最終的な極値性は，
+任意の最小配置に適用でき各骨格段階で最小性を保つ本稿の
+最短 extreme line 削除とは異なる．また同論文の Figure~3 には
+13セルの極値配置4種類が既に示されており，
+本稿は13セルの極値形状自体の新規性を主張しない．
+
+Barequet と Ben-Shachar \cite{BarequetBenShachar2022} は
+最小 \emph{site} 周長 lattice animal の inflation と deflation を研究した．
+前者は隣接する空セル全体を追加し，後者は境界セル全体を除去する．
+同論文の六角格子での対応は，本稿とは周長汎関数も操作も異なる．
+最小周長配置の計数アルゴリズムは
+\cite{BarequetBenShachar2023} でさらに発展している．
+Kurz \cite{OEIS_A135711_Kurz} の OEIS における指摘は
+最小周長の数列に関するものであり，任意の最小配置の削除・復元操作ではない．
+
+三角格子の辺等周問題には入れ子解がある
+\cite[Theorem~7.2, p.~135]{Harper2004}．
+Vainsencher と Bruckstein \cite{VainsencherBruckstein2008} は spiral が
+すべてのサイズで最適な周長を達成しても最適形状を尽くさないことを指摘した．
+Malen，Roldán，Toalá-Enríquez \cite{MalenRoldanToala2023} は
+これをユークリッド的および双曲的な \(\{p,q\}\)-animal に拡張した．
+入れ子解は各サイズで一つの最小配置を与えるのに対し，本稿は任意の指定された
+最小配置を扱う．定理~\ref{thm:intro-skel} は
+極端線全体の削除による最小配置の鎖を与え，
+定理~\ref{thm:intro-main} と命題~\ref{thm:intro-sharp} は
+任意の最小配置へ到達する一セル成長で超過2が十分かつ必要なことを示す．
 
 \subsection{構成}\label{sec:0.6}
 
 以下の結果のうち，最小辺周長と容量関数（第~\ref{sec:capacity}~節），tight hull の恒等式
-（第~\ref{sec:hulls}~節），および最小配置の方向凸性（定理~\ref{thm:capacity}(d)）は，
+（第~\ref{sec:hulls}~節），および最小配置の方向凸性（定理~\ref{cor:capacity-directional}）は，
 第~\ref{sec:0.5}~節で説明したとおり，古典的な結果または既知結果に近いものである．本稿では，
 議論を必要な変数のまま自足的に保つためにのみ，これらを証明する．本稿の貢献は
 定理~\ref{thm:intro-skel}--\ref{thm:intro-sharp} である．
@@ -345,6 +404,9 @@ run であることをいう．言葉では，三方向のそれぞれに沿っ�
 成り立つのは占有された各線がちょうど一つの run を持つとき，すなわち定義~\ref{def:dconv} の
 ときに限る．
 \end{proof}
+この run 数の恒等式と方向凸性の等号条件は，Yang
+\cite[Theorems~4--5]{Yang2002} にも与えられている．
+
 
 \begin{remark}[辺周長と site 周長]\label{rem:site}
 $S$ の \emph{site 周長}とは，$S$ の外にあって $S$ の少なくとも一つのセルに隣接するセルの
@@ -618,7 +680,7 @@ run であって，連続するトレースが共通の線と交わることか�
 \linebreak\cite[Lemma~3.3]{FulepSieben2010} から，同論文第 5 節で展開された三角格子と六角格子の
 双対性を通じて得られる．同じ site 周長変数で， \cite[Proposition~5.10]{FulepSieben2010} は，
 彼らの周長変数を $t+3$ に設定すると，第~\ref{sec:capacity}~節の容量関数 $M(t)$ をちょうど
-与える．そこで除外されるその変数の値 $7$ は，注意~\ref{rem:attain} で除外される $t=4$ に
+与える．そこで除外されるその変数の値 $7$ は，注意~\ref{lem:cap-equiv} で除外される $t=4$ に
 対応する．
 \end{remark}
 
@@ -700,81 +762,72 @@ run である．\(K\) は連結だから，連続する値 \(k,k+1\) につい�
 \(M(0)=M(1)=M(2)=0\)，\(M(3)=1\)．関数 \(M\) は単調非減少である．
 \end{definition}
 
-\begin{theorem}\label{thm:capacity}
-\(N\ge1\) とする．
-\begin{enumerate}
-\item[(a)] 任意の polyhex \(S\) は \(|S|\le M(\sigma(S))\) を満たす．言葉では，辺半周長が
-\(t\) の配置は \(M(t)\) より多くのセルを持てない．
-\item[(b)] 各 \(t\ge3\) に対し，方向凸な polyhex \(K\) であって \(|K|=M(t)\) かつ
-\(\sigma(K)\le t\) なるものが存在する．
-\item[(c)] \(N\) セル polyhex の最小辺周長は
+\begin{theorem}[Harary--Harborth \cite{HararyHarborth1976}]\label{thm:knownperimeter}
+\(N\ge1\) セルの polyhex の最小辺周長は
 \[
-   p_{\min}(N)=2g(N),\qquad g(N)=\left\lceil\sqrt{12N-3}\,\right\rceil
+p_{\min}(N)=2g(N),\qquad
+g(N)=\left\lceil\sqrt{12N-3}\,\right\rceil
 \]
-である．言葉では，\(N\) セルを収容できる最小の辺半周長は，12 倍の \(N\) から 3 を引いたものの
-平方根以上の最小の整数であり，最小辺周長はその 2 倍である．
-\item[(d)] 任意の \(N\) セル最小配置 \(S\) は方向凸であって
-\(\sigma(S)=\lambda(S)=g(N)\) を満たす．
-\end{enumerate}
+である．
 \end{theorem}
 
-(d) の最小配置の方向凸性は既知結果である．Davoli，Piovano，Stefanelli
-\cite[Definition~3.2 and Proposition~3.3]{DavoliPiovanoStefanelli2017} は，三角格子上の辺等周問題
-のすべての最小配置についてこの性質を示している．著者の元のプレプリントでは，この性質を
-\emph{$3$-connected} と呼ぶ．すなわち，同じ格子線上の二点の間にある全格子点が集合に含まれる
-という性質であり，第~\ref{sec:0.5}~節の同一視の下で，本稿で用いる方向凸性そのものである．
-彼らの証明は rearrangement を用いる．以下の証明では，第~\ref{sec:hulls}~節の hull 恒等式と
-容量上界 (a) から (d) を導き，同時に $\lambda(S)=g(N)$ を得ることで議論を自足的に保つ．
-
+\begin{lemma}[閾値と容量の同値性]\label{lem:cap-equiv}
+整数 \(N\ge1\) と \(t\ge0\) について，
+\(g(N)\le t\) と \(N\le M(t)\) は同値である．
+\end{lemma}
 \begin{proof}
-(a) \(H=H(S)\) とする．補題~\ref{lem:hull} と補題~\ref{lem:hex}(v) より
-\[
-   12|S|\le12|H|=\lambda(H)^{2}+3-\bigl(3\delta(H)^{2}+2Q(H)\bigr)\le\lambda(S)^{2}+3
-   \le\sigma(S)^{2}+3 ,
-\]
-最後の段は補題~\ref{lem:runs} による．\(|S|\) は整数だから \(|S|\le M(\sigma(S))\)．
-
-(b) \(t\equiv3\pmod 6\)，たとえば \(t=6m+3\) のときは \(K=H(3m+1;m,m,m)\) を取る．\(t=6m\) の
-ときは \(H(3m-1;m-1,m-1,m-1)\)，\(t=6m+1\) のときは \(H(3m;m,m,m-1)\)，\(t=6m+2\) のときは
-\(H(3m+1;m,m,m+1)\)，\(t=6m+4\) のときは \(H(3m+1;m,m,m-1)\)，\(t=6m+5\) のときは
-\(H(3m+2;m,m,m+1)\) を取る．ここで \(t\equiv3,5\pmod6\) では \(m\ge0\)，
-残る四つの剰余では \(m\ge1\) であり，これで \(t=4\) を除くすべての \(t\ge3\) を覆う．
-いずれの場合も \eqref{eq:adm} が成り立ち，
-補題~\ref{lem:hex}(ii) より \(\sigma(K)=t\)，補題~\ref{lem:hex}(iv),(v) より
-\(12|K|=t^{2}+3-D\) であって \(t\) の剰余に応じて \(D\in\{0,3,4,7\}\) となるから
-\(|K|=M(t)\)．許容的な三つ組で覆われない唯一の場合は \(t=4\) であり，そこでは \(M(4)=1\) で
-あって単一セルの辺半周長は \(3\le4\) である．
-
-(c) \(t_{N}:=\min\{t\ge3:\ M(t)\ge N\}\) とおく．(a) より任意の \(N\) セル polyhex は
-\(M(\sigma(S))\ge N\) を満たすから \(\sigma(S)\ge t_{N}\)．逆に (b) は \(|K|=M(t_{N})\ge N\)
-かつ \(\sigma(K)\le t_{N}\) なる方向凸 \(K\) を与え，系~\ref{cor:subsets} がそこから辺半周長
-\(t_{N}\) 以下の \(N\) セル polyhex を取り出す．よって \(p_{\min}(N)=2t_{N}\)．最後に整数
-\(t\) に対し
-\[
-   M(t)\ge N\iff \frac{t^{2}+3}{12}\ge N\iff t\ge\sqrt{12N-3},
-\]
-であり \(N\ge1\) では \(\sqrt{12N-3}\ge3\) だから \(t_{N}=g(N)\)．
-
-(d) (c) より \(\sigma(S)=g(N)\)．\(H=H(S)\) とする．\(H\) は方向凸で
-\(\sigma(H)=\lambda(H)\) だから (a) を \(H\) に適用して \(M(\lambda(H))\ge|H|\ge N\)，したがって
-\(\lambda(H)\ge t_{N}=g(N)\)．補題~\ref{lem:runs} と補題~\ref{lem:hull} と合わせて
-\[
-   g(N)=\sigma(S)=R(S)\ \ge\ \lambda(S)=\lambda(H)\ \ge\ g(N)
-\]
-となるから \(R(S)=\lambda(S)\)，すなわち \(S\) は方向凸である．
+\(t\ge0\) なので \(g(N)\le t\) は \(12N-3\le t^2\)
+と同値であり，整数 \(N\) に対しては
+\(N\le\lfloor(t^2+3)/12\rfloor=M(t)\) と同値である．
 \end{proof}
 
-\begin{remark}\label{rem:attain}
-(a) と (b) を合わせると，ちょうど
+\begin{proposition}[容量上界]\label{pro:capacity-bound}
+任意の polyhex \(S\) について \(|S|\le M(\sigma(S))\) である．
+\end{proposition}
+\begin{proof}
+\(H=H(S)\) とする．補題~\ref{lem:hull}，\ref{lem:hex}(v)，
+\ref{lem:runs} により，
 \[
-   M(t)=\max\{\,|K|:\ K\text{ は }\sigma(K)\le t\text{ なる polyhex}\,\}
+12|S|\le12|H|
+=\lambda(H)^2+3-\bigl(3\delta(H)^2+2Q(H)\bigr)
+\le\lambda(S)^2+3\le\sigma(S)^2+3 .
 \]
-である．言葉では，\(M(t)\) とは辺半周長の予算 \(t\) の中に収まる最大のセル数である．本稿の
-以降が用いるのはこの予算形であり，(b) の不等号は弱めではない．\(t=4\) を除く各 \(t\ge3\) に
-ついて証明中の六角形は実際に \(\sigma(K)=t\) を満たし，\(t=4\) はそもそもどの polyhex の辺半
-周長でもない．実際 \(\sigma(K)=4\) なる polyhex \(K\) は (a) より \(|K|\le M(4)=1\) となるが，
-一セルの polyhex の辺半周長は 3 である．
+整数部分を取れば結論が従う．
+\end{proof}
+三方向の線数を指定した容量上界は，異なる平行四辺形 hull の表現を用いて
+Yang \cite[Theorem~7]{Yang2002} によっても先に得られている．
+
+\begin{remark}[容量上界の達成]
+\(t\ge3\) とし，\(N=M(t)\ge1\) と置く．
+補題~\ref{lem:cap-equiv} から \(g(N)\le t\) だから，
+定理~\ref{thm:knownperimeter} によって，辺半周長が \(t\) 以下の
+\(N\) セル最小配置が存在する．命題~\ref{pro:capacity-bound} と併せて
+\[
+M(t)=\max\{\,|K|:\ K\text{ は }\sigma(K)\le t
+\text{ なる polyhex}\,\}
+\]
+を得る．
 \end{remark}
+
+\begin{corollary}[最小配置の方向凸性]\label{cor:capacity-directional}
+任意の \(N\) セル最小配置 \(S\) は方向凸であり，
+\(\sigma(S)=\lambda(S)=g(N)\) を満たす．
+\end{corollary}
+\begin{proof}
+定理~\ref{thm:knownperimeter} により \(\sigma(S)=g(N)\)．
+補題~\ref{lem:hex}(ii) から tight hull \(H=H(S)\) は方向凸で
+\(\sigma(H)=\lambda(H)\)．したがって
+命題~\ref{pro:capacity-bound} と補題~\ref{lem:cap-equiv} から
+\(N\le|H|\le M(\lambda(H))\) は \(g(N)\le\lambda(H)\) を含意する．
+ゆえに
+\[
+g(N)=\sigma(S)=R(S)\ge\lambda(S)=\lambda(H)\ge g(N).
+\]
+\(R(S)=\lambda(S)\) なので補題~\ref{lem:runs} から方向凸性が従う．
+\end{proof}
+最小配置の方向凸性は Davoli，Piovano，Stefanelli
+\cite[Definition~3.2 and Proposition~3.3]{DavoliPiovanoStefanelli2017}
+にも示されている．ここでは幾何学的な証明を自足的に保つため再証明した．
 
 \subsection{plateau の橋渡し}\label{sec:2.7}
 
@@ -795,7 +848,7 @@ run である．\(K\) は連結だから，連続する値 \(k,k+1\) につい�
 \end{lemma}
 
 \begin{proof}
-整数 \(N\ge1\) と \(t\ge3\) について，定理~\ref{thm:capacity}(c) の証明と同様に，
+整数 \(N\ge1\) と \(t\ge3\) について，定理~\ref{thm:knownperimeter} の証明と同様に，
 \(g(N)\le t\) と \(N\le M(t)\) は同値である．したがって
 \(\{N:\ g(N)\le\gamma-1\}=\{1,\dots,M(\gamma-1)\}\) であり，\(g(N)\ge\gamma\) なる最小の \(N\)
 は \(M(\gamma-1)+1\) である．\(\gamma\) が \(g\) の値域に属するから，その最小の \(N\) は
@@ -809,7 +862,7 @@ run である．\(K\) は連結だから，連続する値 \(k,k+1\) につい�
 \section{最短辺と，例外的な plateau 開始点における剛性}\label{sec:rigidity}
 
 本節を通じて \(S\) を辺周長最小配置，\(n=|S|\)，\(\sigma=\sigma(S)=g(n)\) とする．
-定理~\ref{thm:capacity}(d) より \(S\) は方向凸なので support trace \(r_{i}\) と
+定理~\ref{cor:capacity-directional} より \(S\) は方向凸なので support trace \(r_{i}\) と
 \(\rho(S)=\min_{i}r_{i}\) が定義され，補題~\ref{lem:hull}(iii) より \(\rho(S)\ge1\)．
 \(H=H(S)\) とする．
 
@@ -874,7 +927,7 @@ support trace は補題~\ref{lem:rhobound} の上界（ここでは \(m+1\)）�
 \end{equation}
 を得る．\(\bigl((6h-4)^{2}+3\bigr)/12\) の整数部分は \(3h^{2}-4h+1\)，
 \(\bigl((6h-2)^{2}+3\bigr)/12\) の整数部分は \(3h^{2}-2h\) だからである．
-定理~\ref{thm:capacity}(d) より \(S\) は方向凸で \(\lambda(S)=\gamma\)，したがって
+定理~\ref{cor:capacity-directional} より \(S\) は方向凸で \(\lambda(S)=\gamma\)，したがって
 補題~\ref{lem:hull}(ii) より \(\lambda(H)=\gamma\)．
 
 \medskip\noindent\textbf{場合 \(\gamma\equiv3\pmod6\)．} \(\gamma=6h-3\) と書くと \(h=m+1\ge2\)．
@@ -946,7 +999,7 @@ tight hull を回転後の \(S\) の tight hull に写す（回転後に定義~\
 一セルずつ戻す途中の代価は辺周長 2 単位を超えない．
 
 \begin{proof}
-定理~\ref{thm:capacity}(d) より \(S\) は方向凸で \(\lambda(S)=\sigma\)，また
+定理~\ref{cor:capacity-directional} より \(S\) は方向凸で \(\lambda(S)=\sigma\)，また
 \(\rho=\rho(S)\ge1\)．\(n\ge3\)，\(g(3)=\lceil\sqrt{33}\rceil=6\)，\(g\) が単調非減少である
 ことから \(\sigma\ge6\)．\(\sigma=6m+s\)，\(0\le s\le5\) と書くと \(m\ge1\)．
 
@@ -1000,7 +1053,7 @@ tight hull を回転後の \(S\) の tight hull に写す（回転後に定義~\
 \eqref{eq:strict} と \(g\) の定義より \(g(n-\rho)\ge\sigma-1\)．
 \(n-\rho\ge M(\sigma-2)+1\ge1\) だから \(S'\) は空でなく，補題~\ref{lem:peel}(i) が適用でき
 る．すなわち \(S'\) は \(\sigma(S')\le\sigma-1\) なる方向凸 polyhex である．
-補題~\ref{lem:runs} と定理~\ref{thm:capacity}(c) より
+補題~\ref{lem:runs} と定理~\ref{thm:knownperimeter} より
 \[
    2(\sigma-1)\ \le\ 2g(|S'|)\ =\ p_{\min}(|S'|)\ \le\ p(S')\ =\ 2\sigma(S')\ \le\ 2(\sigma-1),
 \]
@@ -1163,7 +1216,7 @@ polyhex の鎖 \(S_{1}\subset\cdots\subset S_{13}=S^{*}\) であって \(|S_{k}|
 \(p(S_{12})=p_{\min}(12)=24\) を意味する．これは命題~\ref{pro:nopred} に矛盾する．
 
 残るのは 0 と 2 の間に一様な上界がないことである．補題~\ref{lem:runs} より任意の有限セル集合の
-辺周長は偶数であり，定理~\ref{thm:capacity}(c) より \(p_{\min}\) も偶数だから，任意の polyhex
+辺周長は偶数であり，定理~\ref{thm:knownperimeter} より \(p_{\min}\) も偶数だから，任意の polyhex
 \(K\) について
 \[
    \exc(K)=p(K)-p_{\min}(|K|)\in\{0,2,4,\dots\}
@@ -1234,7 +1287,7 @@ skeleton 定理は，一本の線の復元中を除いて最小配置から離�
 ここで「独立」には二つの意味があるので区別する．\emph{実装}は証明から独立に書かれており，
 hull 恒等式を記号計算と列挙で再導出し，peeling 補題をセル単位で再検査するなど，本文の証明手順
 をなぞっていない．一方，\emph{最小配置の列挙}は解析から論理的に独立ではない．候補生成には
-定理~\ref{thm:capacity}(d)（最小配置は方向凸で \(\lambda=g(N)\)）を用い，第~\ref{sec:16.4}~節
+定理~\ref{cor:capacity-directional}（最小配置は方向凸で \(\lambda=g(N)\)）を用い，第~\ref{sec:16.4}~節
 でその方法を明示する．したがって「\(N\le34\) のすべての最小配置」に関する行は，その定理を
 条件とする検査であり，二つの実装があっても二つの証明ではない．与えられたサイズ以下の全 polyhex
 を走査する検査にはこの条件はない．
@@ -1291,7 +1344,7 @@ hull 恒等式を記号計算と列挙で再導出し，peeling 補題をセル�
 \subsection{整合性の検査}\label{sec:16.2}
 
 各行は，再検査する主張の証明とは独立に書かれた実装で実行した．第 7 行と
-第~\ref{sec:16.1}~節の census は定理~\ref{thm:capacity}(d) によって最小配置を生成するため，
+第~\ref{sec:16.1}~節の census は定理~\ref{cor:capacity-directional} によって最小配置を生成するため，
 本節冒頭で説明した意味でそれを条件とする．他の各行は，範囲内の全 polyhex，全方向凸 polyhex，
 全許容六角形のいずれかを列挙するか，指定された配置を網羅的に調べるので，その条件を持たない．
 いずれにおいても違反は見つからなかった．
@@ -1318,7 +1371,7 @@ hull 恒等式を記号計算と列挙で再導出し，peeling 補題をセル�
 7 & 定理~\ref{thm:skel}：最小配置からの最短線削除がすべて \(g\) が 1 下がる最小配置に着地し，
 復元順序が \(\exc\le2\) を保つこと &
 \(3\le N\le34\) の最小配置からの全 \(2{,}382\) 通りの最短線削除（同点を含む）；
-独立に書かれた二実装で，いずれも定理~\ref{thm:capacity}(d) により最小配置を列挙 &
+独立に書かれた二実装で，いずれも定理~\ref{cor:capacity-directional} により最小配置を列挙 &
 \textsc{analytic} \\
 8 & \(S^{*}\) の次数表と 13 通りの一セル削除 & \(S^{*}\) について網羅的 & \textsc{exact} \\
 9 & 注意~\ref{rem:x31} の配置 \(X_{31}\) & 網羅的 & \textsc{exact} \\
@@ -1332,10 +1385,10 @@ hull 恒等式を記号計算と列挙で再導出し，peeling 補題をセル�
 
 \subsection{再現}\label{sec:16.4}
 
-\(\mathcal{M}_{N}\) の数え上げは定理~\ref{thm:capacity}(d) を用いる．最小配置は方向凸で
+\(\mathcal{M}_{N}\) の数え上げは定理~\ref{cor:capacity-directional} を用いる．最小配置は方向凸で
 \(\lambda=g(N)\) だから，対応する辺半周長を持つ tight hull を数え上げ，それを保つ部分集合を
 数え上げれば足りる．\(N\le34\) では \(|H|-N\le3\) である．到達可能性はその後サイズに関する
-動的計画で決まる．したがって第~\ref{sec:16.1}~節の census は，定理~\ref{thm:capacity}(d) が
+動的計画で決まる．したがって第~\ref{sec:16.1}~節の census は，定理~\ref{cor:capacity-directional} が
 記述する配置クラスについて exact であるが，その定理自体を再証明するものではない．
 
 上に挙げたすべての数値を再現するスクリプトを ancillary file として添付する．Python の標準
