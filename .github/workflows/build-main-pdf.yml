@@ -1,9 +1,11 @@
-name: Build and update main PDF
+name: Build and update bilingual PDFs
 on:
   push:
     paths:
       - 'paper/en/main.tex'
       - 'paper/en/refs.bib'
+      - 'paper/ja/main_ja.tex'
+      - 'paper/ja/refs.bib'
       - '.github/workflows/build-main-pdf.yml'
   workflow_dispatch:
 
@@ -15,19 +17,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build main.pdf
+      - name: Build English main.pdf
         uses: xu-cheng/latex-action@v4
         with:
           root_file: main.tex
           working_directory: paper/en
           latexmk_use_xelatex: false
-      - name: Commit refreshed preprint
+      - name: Build Japanese main_ja.pdf
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: main_ja.tex
+          working_directory: paper/ja
+          latexmk_use_xelatex: true
+          extra_system_packages: font-noto-cjk
+      - name: Commit refreshed preprints
         run: |
           test -s paper/en/main.pdf
+          test -s paper/ja/main_ja.pdf
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add paper/en/main.pdf
+          git add paper/en/main.pdf paper/ja/main_ja.pdf
           if ! git diff --cached --quiet; then
-            git commit -m "Rebuild main.pdf from updated LaTeX source"
+            git commit -m "Rebuild bilingual PDFs from updated LaTeX sources"
             git push
           fi
