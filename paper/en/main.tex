@@ -355,8 +355,7 @@ One adjacency step changes each of \(q\), \(r\) and \(s\) by at most \(1\).
 
 \begin{fact}\label{f:4}
 For a polyhex \(S\) and each key, the set of values taken by that key on \(S\) is an
-interval of consecutive integers. In words: no key value inside the range of \(S\) can be
-skipped.
+interval of consecutive integers. Thus every intermediate key value occurs in \(S\).
 \end{fact}
 
 \begin{proof}
@@ -372,14 +371,12 @@ Let \(a(S)\) denote the number of unordered pairs of adjacent cells of \(S\). Th
 \begin{equation}\label{eq:p}
    p(S)=6|S|-2a(S),
 \end{equation}
-in words: six times the number of cells, minus twice the number of adjacent pairs.
 Equivalently, \(p(S)\) counts the cell edges of \(S\) that are not shared with another
 cell of \(S\); we call these the \emph{boundary edges}. The \emph{edge semiperimeter} is
 \[
    \sigma(K):=\tfrac{1}{2}p(K)
 \]
-for any finite set of cells \(K\); in words, half the edge perimeter. That this is an
-integer is part of Lemma~\ref{lem:runs} below.
+for any finite set of cells \(K\); ; its integrality is part of Lemma~\ref{lem:runs} below.
 
 A line \(\Lambda\) is \emph{occupied} by \(S\) when \(S\cap\Lambda\neq\emptyset\); we call
 \(S\cap\Lambda\) the \emph{trace} of \(S\) on \(\Lambda\). Cells of a line are linearly
@@ -394,8 +391,7 @@ of consecutive cells of the trace. Let
 
 \begin{definition}\label{def:dconv}
 A polyhex \(S\) is \emph{directionally convex} when the trace of \(S\) on every occupied
-line is a single run. In words: along each of the three directions, \(S\) never leaves a
-line and comes back to it.
+line is a single run. Equivalently, each occupied line meets \(S\) in an interval of cells.
 \end{definition}
 
 This is a lattice notion and not Euclidean convexity; it is the notion called
@@ -406,8 +402,7 @@ For every finite set of cells \(S\),
 \begin{equation}\label{eq:pruns}
    p(S)=2R(S)\ \ge\ 2\lambda(S),
 \end{equation}
-in words: the edge perimeter equals twice the total number of runs, and the total number
-of runs is at least the number of occupied lines. In particular \(p(S)\) is even and
+In particular \(p(S)\) is even and
 \(\sigma(S)=R(S)\). For a polyhex, equality \(R(S)=\lambda(S)\) holds if and only if
 \(S\) is directionally convex.
 \end{lemma}
@@ -493,8 +488,8 @@ and put \(A:=L-u\), \(B:=L-v\), \(C:=L-w\), so that \(A,B,C\ge1\). The correspon
 \[
    H(L;u,v,w):=\{\,(q,r):\ 0\le q\le A-1,\ \ 0\le r\le B-1,\ \ w\le q+r\le L-1\,\}.
 \]
-In words: the triangle of side \(L\) with three corner triangles of sides \(u\), \(v\) and
-\(w\) cut off. Degenerate shapes, in which one or more of the cut corners is empty or one
+Geometrically, this is a triangle of side \(L\) with corner triangles of sides \(u\), \(v\), and
+\(w\) removed. Degenerate shapes, in which one or more of the cut corners is empty or one
 of the three widths equals \(1\), are allowed.
 \end{definition}
 
@@ -902,8 +897,7 @@ For every \(\gamma\) in the range of \(g\),
 \begin{equation}\label{eq:bridge}
    N_{b}(\gamma)=M(\gamma-1)+1 ,
 \end{equation}
-in words: the plateau on which the minimum edge semiperimeter equals \(\gamma\) begins one
-cell after the capacity of edge semiperimeter \(\gamma-1\) has been exhausted.
+This identifies the first size in the plateau of threshold \(\gamma\).
 \end{lemma}
 
 \begin{proof}
@@ -956,8 +950,7 @@ containing both ends of that run, so it contains the whole of it.
 \end{proof}
 
 \begin{lemma}\label{lem:rhobound}
-\(\displaystyle \rho(S)\le\Bigl\lfloor\frac{\sigma+3}{6}\Bigr\rfloor\). In words: the shortest
-support trace has at most one sixth of \(\sigma+3\) cells.
+\(\displaystyle \rho(S)\le\Bigl\lfloor\frac{\sigma+3}{6}\Bigr\rfloor\). Equivalently, the shortest support trace is bounded by one sixth of \(\sigma+3\).
 \end{lemma}
 
 \begin{proof}
@@ -1066,9 +1059,8 @@ and let \(\Lambda\) be \emph{any} extreme line of \(S\) with \(|S\cap\Lambda|=\r
 \end{enumerate}
 \end{theorem}
 
-In words: peeling a shortest extreme line from a minimizer lands on a minimizer one
-threshold step down, and putting the line back one cell at a time never costs more than two
-units of edge perimeter.
+Thus shortest-line deletion preserves minimality at the lower threshold, and
+cell-by-cell restoration incurs excess at most two.
 
 \begin{proof}
 By Corollary~\ref{cor:capacity-directional}, \(S\) is directionally convex with \(\lambda(S)=\sigma\),
@@ -1145,8 +1137,8 @@ By Lemma~\ref{lem:peel}(ii) there is an ordering \(c_{1},\dots,c_{\rho}\) of
    \exc(T_{j})=p(T_{j})-2g(|T_{j}|)=2\bigl(\sigma(T_{j})-g(|T_{j}|)\bigr)
    \le2\bigl(\sigma-(\sigma-1)\bigr)=2 .
 \]
-In words: during the restoration the perimeter never exceeds the starting value while the
-threshold is already one step lower, so the excess is at most two.
+The starting perimeter bounds every intermediate perimeter, while the minimum threshold
+has fallen by one; hence the excess is at most two.
 \end{proof}
 
 \begin{corollary}[skeleton chain]\label{cor:skel}
@@ -1223,8 +1215,7 @@ Let
 \[
    S^{\ast}:=\{(0,r):1\le r\le4\}\ \cup\ \{(1,r):0\le r\le4\}\ \cup\ \{(2,r):0\le r\le3\} .
 \]
-In words: three consecutive \(q\)-lines carrying \(4\), \(5\) and \(4\) cells respectively,
-each a run, arranged so that the whole set is a polyhex.
+The configuration comprises three consecutive \(q\)-line runs of lengths \(4\), \(5\), and \(4\).
 \end{example}
 
 \begin{lemma}\label{lem:13min}
@@ -1287,7 +1278,7 @@ Lemma~\ref{lem:13min} no cell of \(S^{\ast}\) has degree \(2\). Every degree is 
 Note that connectedness of \(S^{\ast}\sm\{c\}\) never had to be examined: if the deletion
 disconnects \(S^{\ast}\), the result is not a polyhex and cannot be a predecessor in a
 growth chain; if it does not, Proposition~\ref{pro:nopred} already rules it out as a
-minimizer. Thirteen separate case checks are not needed.
+minimizer. The preceding argument applies uniformly to all thirteen cases.
 
 \subsection{The constant \texorpdfstring{\(2\)}{2} is optimal}\label{sec:8.4}
 
@@ -1489,8 +1480,8 @@ exhaustive for \(S^{*}\) & \textsc{exact} \\
 \end{center}
 
 For orientation: among the \(6{,}498\) deletions of a \emph{non}-shortest extreme line
-from the same minimizers, only \(3{,}192\) land on a minimizer. The word ``shortest'' in
-Theorem~\ref{thm:skel} is not decorative.
+from the same minimizers, only \(3{,}192\) land on a minimizer. This computation illustrates the role of the shortest-line hypothesis in
+Theorem~\ref{thm:skel}.
 
 \subsection{Reproduction}\label{sec:16.4}
 
