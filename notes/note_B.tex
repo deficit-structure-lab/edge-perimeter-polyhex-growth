@@ -71,8 +71,7 @@ Cells of the hexagonal tiling are indexed by axial coordinates
 \[
    s:=q+r
 \]
-the three \emph{keys} of a cell; in words, the third key of a cell is the sum of its two
-axial coordinates. Two cells are \emph{adjacent} when they differ by one of the six
+the three \emph{keys} of a cell; Two cells are \emph{adjacent} when they differ by one of the six
 vectors
 \[
    d_{0}=(1,0),\quad d_{1}=(0,1),\quad d_{2}=(-1,1),\quad
@@ -112,8 +111,7 @@ One adjacency step changes each of \(q\), \(r\) and \(s\) by at most \(1\).
 
 \begin{fact}\label{f:4}
 For a polyhex \(S\) and each key, the set of values taken by that key on \(S\) is an
-interval of consecutive integers. In words: no key value inside the range of \(S\) can be
-skipped.
+interval of consecutive integers. Thus every intermediate key value occurs in \(S\).
 \end{fact}
 
 \begin{proof}
@@ -129,14 +127,12 @@ Let \(a(S)\) denote the number of unordered pairs of adjacent cells of \(S\). Th
 \begin{equation}\label{eq:p}
    p(S)=6|S|-2a(S),
 \end{equation}
-in words: six times the number of cells, minus twice the number of adjacent pairs.
 Equivalently, \(p(S)\) counts the cell edges of \(S\) that are not shared with another
 cell of \(S\); we call these the \emph{boundary edges}. The \emph{edge semiperimeter} is
 \[
    \sigma(K):=\tfrac{1}{2}p(K)
 \]
-for any finite set of cells \(K\); in words, half the edge perimeter. That this is an
-integer is part of Lemma~\ref{lem:runs} below.
+for any finite set of cells \(K\); ; its integrality is part of Lemma~\ref{lem:runs} below.
 
 A line \(\Lambda\) is \emph{occupied} by \(S\) when \(S\cap\Lambda\neq\emptyset\); we call
 \(S\cap\Lambda\) the \emph{trace} of \(S\) on \(\Lambda\). Cells of a line are linearly
@@ -151,8 +147,7 @@ of consecutive cells of the trace. Let
 
 \begin{definition}\label{def:dconv}
 A polyhex \(S\) is \emph{directionally convex} when the trace of \(S\) on every occupied
-line is a single run. In words: along each of the three directions, \(S\) never leaves a
-line and comes back to it.
+line is a single run. Equivalently, each occupied line meets \(S\) in an interval of cells.
 \end{definition}
 
 This is a lattice notion and not Euclidean convexity; it is the notion called
@@ -163,8 +158,7 @@ For every finite set of cells \(S\),
 \begin{equation}\label{eq:pruns}
    p(S)=2R(S)\ \ge\ 2\lambda(S),
 \end{equation}
-in words: the edge perimeter equals twice the total number of runs, and the total number
-of runs is at least the number of occupied lines. In particular \(p(S)\) is even and
+In particular \(p(S)\) is even and
 \(\sigma(S)=R(S)\). For a polyhex, equality \(R(S)=\lambda(S)\) holds if and only if
 \(S\) is directionally convex.
 \end{lemma}
@@ -221,8 +215,7 @@ traces \(S\cap\Lambda_{i}\), each a single run by Definition~\ref{def:dconv}, an
    \qquad\text{and}\qquad
    \rho(S):=\min_{i} r_{i} .
 \]
-In words: \(r_{i}\) is the number of cells of \(S\) on the \(i\)-th extreme line, and
-\(\rho(S)\) is the smallest of those six numbers.
+Thus \(\rho(S)\) is the minimum support-trace length.
 \end{definition}
 
 \begin{remark}\label{rem:rho}
@@ -245,8 +238,8 @@ and put \(A:=L-u\), \(B:=L-v\), \(C:=L-w\), so that \(A,B,C\ge1\). The correspon
 \[
    H(L;u,v,w):=\{\,(q,r):\ 0\le q\le A-1,\ \ 0\le r\le B-1,\ \ w\le q+r\le L-1\,\}.
 \]
-In words: the triangle of side \(L\) with three corner triangles of sides \(u\), \(v\) and
-\(w\) cut off. Degenerate shapes, in which one or more of the cut corners is empty or one
+Geometrically, this is a triangle of side \(L\) with corner triangles of sides \(u\), \(v\), and
+\(w\) removed. Degenerate shapes, in which one or more of the cut corners is empty or one
 of the three widths equals \(1\), are allowed.
 \end{definition}
 
@@ -492,24 +485,21 @@ For an integer \(t\ge0\) put
 \[
    M(t):=\left\lfloor\frac{t^{2}+3}{12}\right\rfloor ,
 \]
-in words: the integer part of one twelfth of the square of \(t\) plus three. Thus
+Thus
 \(M(0)=M(1)=M(2)=0\) and \(M(3)=1\). The function \(M\) is nondecreasing.
 \end{definition}
 
 \begin{theorem}\label{thm:capacity}
 Let \(N\ge1\).
 \begin{enumerate}
-\item[(a)] Every polyhex \(S\) satisfies \(|S|\le M(\sigma(S))\); in words, a configuration
-of edge semiperimeter \(t\) cannot have more than \(M(t)\) cells.
+\item[(a)] Every polyhex \(S\) satisfies \(|S|\le M(\sigma(S))\); ; thus \(M(t)\) is an upper bound at edge semiperimeter \(t\).
 \item[(b)] For every \(t\ge3\) there is a directionally convex polyhex \(K\) with
 \(|K|=M(t)\) and \(\sigma(K)\le t\).
 \item[(c)] The minimum edge perimeter of an \(N\)-cell polyhex is
 \[
    p_{\min}(N)=2g(N),\qquad g(N)=\left\lceil\sqrt{12N-3}\,\right\rceil ,
 \]
-in words: the smallest edge semiperimeter that can hold \(N\) cells is the least integer at
-least as large as the square root of twelve times \(N\) minus three, and the minimum edge
-perimeter is twice that number.
+
 \item[(d)] Every \(N\)-cell minimizer \(S\) is directionally convex and satisfies
 \(\sigma(S)=\lambda(S)=g(N)\).
 \item[(e)] Writing \(\exc(S):=p(S)-p_{\min}(|S|)\), a polyhex \(S\) satisfies
@@ -606,8 +596,7 @@ For every \(\gamma\) in the range of \(g\),
 \begin{equation}\label{eq:bridge}
    N_{b}(\gamma)=M(\gamma-1)+1 ,
 \end{equation}
-in words: the plateau on which the minimum edge semiperimeter equals \(\gamma\) begins one
-cell after the capacity of edge semiperimeter \(\gamma-1\) has been exhausted.
+This identifies the first size in the plateau of threshold \(\gamma\).
 \end{lemma}
 
 \begin{proof}
@@ -878,7 +867,7 @@ would be one of degree two, and Lemma~\ref{lem:bridge-exc} would give \(\exc(S)\
 \(S\sm\{c^{*}\}\) is connected, and \(c^{*}\) is a legal deletion.
 \end{proof}
 
-\begin{remark}[what the word ``shortest'' is for]\label{rem:shortest}
+\begin{remark}[Role of the shortest-line hypothesis]\label{rem:shortest}
 The argument just given used the shortest extreme line only to choose \(c^{*}\); the
 connectedness conclusion did not depend on that choice. Indeed a theorem
 (recorded in a separate note) shows, by the same local argument, that for \(|S|\ge4\)
