@@ -198,9 +198,10 @@ maximum-size function of F\"ulep and Sieben for the site perimeter of polyhexes
 our hull defect identity corresponds to their polyiamond identity
 \cite[Lemma~3.3]{FulepSieben2010} under the duality of their Section~5. The two perimeters are
 different functionals (Remark~\ref{rem:site}); only the resulting formulas correspond.
-Yang \cite[Theorems~4--5]{Yang2002} gives the perimeter--subslice
-identity and its slice-convex equality case, corresponding to
-Lemma~\ref{lem:runs} below. His fixed-direction-line-count capacity theorem
+Yang \cite[Theorem~4]{Yang2002} gives the perimeter--subslice identity,
+and \cite[Theorem~5]{Yang2002} proves that slice convexity suffices for equality.
+The converse equality condition in Lemma~\ref{lem:runs} below follows from
+our run-count proof. His fixed-direction-line-count capacity theorem
 \cite[Theorem~7]{Yang2002} is a predecessor to our hull-based capacity
 estimate, using a parallelogram rather than the tight six-sided hull.
 His balanced-dimensions characterization of capacity-maximizing
@@ -252,9 +253,9 @@ This illustrates why a deletion statement requires control of the chosen line.
 
 In chemical graph theory, the same edge-perimeter extremal problem is
 studied through extremal benzenoids or hexanimals. For a simply
-connected \(h\)-cell hexanimal, the number \(n_i\) of internal vertices
-satisfies \(n_i=2h+1-p/2\), so maximizing \(n_i\) at fixed \(h\)
-is equivalent to minimizing the edge perimeter \(p\).
+connected \(h\)-cell hexanimal, Euler's formula and edge counting give
+\(n_i=2h+1-p/2\) for the number \(n_i\) of internal vertices, so maximizing
+\(n_i\) at fixed \(h\) is equivalent to minimizing the edge perimeter \(p\).
 Brunvoll, Cyvin and Cyvin \cite{BrunvollCyvinCyvin1993} review the
 Harary--Harborth spiral and its limitations, and study
 \emph{circumscribing}: adjoining a closed single ring of cells along
@@ -276,15 +277,18 @@ Their hexagonal-lattice bijections concern this different perimeter functional
 and these whole-boundary operations, rather than the edge-perimeter-preserving
 deletion of a shortest extreme line. Their counting algorithms for minimum-perimeter
 animals are developed further in \cite{BarequetBenShachar2023}.
-The classical minimum-perimeter sequence was also noted by Kurz
-\cite{OEIS_A135711_Kurz}; this concerns perimeter values rather than a
-delete-and-restore operation on arbitrary minimizers.
+Kurz \cite{OEIS_A135711_Kurz} recorded in OEIS A135711 that the classical
+minimum-perimeter formula follows from Harborth's contact-number formula in
+A135708; this concerns perimeter values rather than a delete-and-restore
+operation on arbitrary minimizers.
 
 The triangular-lattice edge-isoperimetric problem admits a nested solution
 \cite[Theorem~7.2, p.~135]{Harper2004}: an ordering of the lattice whose every finite
 prefix is optimal. Vainsencher and Bruckstein \cite{VainsencherBruckstein2008}
-observe that a spiral construction attains the optimal perimeter at every size
-without exhausting the optimal shapes. Malen, Rold\'an and Toal\'a-Enr\'iquez
+study spiral constructions for Pareto-optimal polyforms under boundary measures
+including site perimeter, rather than the edge perimeter used here. Their
+non-exhaustiveness example concerns the square lattice; their results do not
+assert non-exhaustiveness of edge-perimeter minimizers on the hexagonal tiling. Malen, Rold\'an and Toal\'a-Enr\'iquez
 \cite{MalenRoldanToala2023} extend the spiral construction to Euclidean and
 hyperbolic $\{p,q\}$-animals. A nested solution supplies one minimizer at each
 size; the present results concern every prescribed minimizer.
@@ -421,8 +425,9 @@ Every occupied line carries at least one run, so \(R(S)\ge\lambda(S)\), with equ
 exactly when every occupied line carries exactly one run, which is
 Definition~\ref{def:dconv}.
 \end{proof}
-\noindent This run-count identity and the directional-convexity equality
-case were also given by Yang \cite[Theorems~4--5]{Yang2002}.
+\noindent The run-count identity was also given by Yang \cite[Theorem~4]{Yang2002},
+who proved the slice-convex sufficient condition for equality
+\cite[Theorem~5]{Yang2002}. The converse follows from the proof above.
 
 
 \begin{remark}[edge perimeter versus site perimeter]\label{rem:site}
