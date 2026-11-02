@@ -50,7 +50,7 @@ skeletons of edge-perimeter-minimizing polyhexes} is reproduced for self-contain
 \section{The hexagonal lattice, runs, and directional convexity}\label{sec:prelim}
 
 This part reproduces, for self-containment, the common framework of the main paper
-[Utsunomiya, \emph{Shortest-side skeletons of edge-perimeter-minimizing polyhexes}]:
+\cite{UtsunomiyaCSGMain}:
 the lattice, the perimeter functional, directional convexity, the tight hull and its
 identities, and the extremal capacity function. Numbering follows this note.
 
@@ -173,6 +173,11 @@ Every occupied line carries at least one run, so \(R(S)\ge\lambda(S)\), with equ
 exactly when every occupied line carries exactly one run, which is
 Definition~\ref{def:dconv}.
 \end{proof}
+
+\noindent The perimeter--run identity was established by Yang
+\cite[Theorem~4]{Yang2002}; Yang's \cite[Theorem~5]{Yang2002} proves the
+slice-convex sufficient condition for equality. The converse here follows
+from the preceding run-count proof.
 
 \begin{remark}[edge perimeter versus site perimeter]\label{rem:site}
 The \emph{site perimeter} of \(S\) is the number of cells outside \(S\) adjacent to at
@@ -504,6 +509,10 @@ perimeter is twice that number.
 \end{enumerate}
 \end{theorem}
 
+The minimum edge-perimeter formula in part (c) is the classical result
+of Harary and Harborth \cite{HararyHarborth1976}, also proved here from
+the capacity bound.
+
 The directional convexity in (d) is a known result: Davoli, Piovano and Stefanelli
 \cite[Proposition~3.3]{DavoliPiovanoStefanelli2017} prove that every minimizer of the
 edge-isoperimetric problem on the triangular lattice is \(3\)-convex, which is
@@ -643,7 +652,7 @@ Lemma~\ref{lem:arith} needs \((n_{1},n_{2})\neq(1,1)\), which would mean \(N=3\)
 
 \section{Extreme endpoints are never articulation cells}\label{sec:15.4}
 
-In the one-cell deletion proof of the growth theorem (recorded in a companion note) one
+In the one-cell deletion proof of the growth theorem (recorded in the companion Note~B, \url{https://github.com/deficit-structure-lab/edge-perimeter-polyhex-growth/blob/main/notes/note_B.pdf}) one
 needs that \emph{some} endpoint of a shortest extreme line of a minimizer can be deleted
 without disconnecting the configuration. The local argument used there does not in fact
 depend on the line being shortest, nor on directional convexity, nor on which end is taken;
