@@ -6,6 +6,7 @@ on:
       - 'paper/en/refs.bib'
       - 'paper/ja/main_ja.tex'
       - 'paper/ja/refs.bib'
+      - 'notes/note_A.tex'
       - 'notes/note_B.tex'
       - 'notes/refs.bib'
       - '.github/workflows/build-main-pdf.yml'
@@ -32,6 +33,12 @@ jobs:
           working_directory: paper/ja
           latexmk_use_xelatex: true
           extra_system_packages: font-noto-cjk
+      - name: Build Note A PDF
+        uses: xu-cheng/latex-action@v4
+        with:
+          root_file: note_A.tex
+          working_directory: notes
+          latexmk_use_xelatex: false
       - name: Build Note B PDF
         uses: xu-cheng/latex-action@v4
         with:
@@ -42,10 +49,11 @@ jobs:
         run: |
           test -s paper/en/main.pdf
           test -s paper/ja/main_ja.pdf
+          test -s notes/note_A.pdf
           test -s notes/note_B.pdf
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add paper/en/main.pdf paper/ja/main_ja.pdf notes/note_B.pdf
+          git add paper/en/main.pdf paper/ja/main_ja.pdf notes/note_A.pdf notes/note_B.pdf
           if ! git diff --cached --quiet; then
             git commit -m "Rebuild bilingual PDFs from updated LaTeX sources"
             git push
