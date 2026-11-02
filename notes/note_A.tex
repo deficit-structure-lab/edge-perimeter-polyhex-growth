@@ -52,7 +52,7 @@ self-containment.
 \section{The hexagonal lattice, runs, and directional convexity}\label{sec:prelim}
 
 This part reproduces, for self-containment, the common framework of the main paper
-[Utsunomiya, \emph{Shortest-side skeletons of edge-perimeter-minimizing polyhexes}]:
+\cite{UtsunomiyaCSGMain}:
 the lattice, the perimeter functional, directional convexity, the tight hull and its
 identities, and the extremal capacity function. Numbering follows this note.
 
@@ -175,6 +175,11 @@ Every occupied line carries at least one run, so \(R(S)\ge\lambda(S)\), with equ
 exactly when every occupied line carries exactly one run, which is
 Definition~\ref{def:dconv}.
 \end{proof}
+
+\noindent The perimeter--run identity was established by Yang
+\cite[Theorem~4]{Yang2002}; Yang's \cite[Theorem~5]{Yang2002} proves the
+slice-convex sufficient condition for equality. The converse here follows
+from the preceding run-count proof.
 
 \begin{remark}[edge perimeter versus site perimeter]\label{rem:site}
 The \emph{site perimeter} of \(S\) is the number of cells outside \(S\) adjacent to at
@@ -505,6 +510,10 @@ perimeter is twice that number.
 \(\exc(S)\le2\) if and only if \(|S|>M(\sigma(S)-2)\).
 \end{enumerate}
 \end{theorem}
+
+The minimum edge-perimeter formula in part (c) is the classical result
+of Harary and Harborth \cite{HararyHarborth1976}, also proved here from
+the capacity bound.
 
 The directional convexity in (d) is a known result: Davoli, Piovano and Stefanelli
 \cite[Proposition~3.3]{DavoliPiovanoStefanelli2017} prove that every minimizer of the
