@@ -197,8 +197,9 @@ Harborth の公式 \(\lfloor3N-\sqrt{12N-3}\rfloor\)
 \cite[Lemma~3.3]{FulepSieben2010} と同論文第5節の双対性を通じて対応する．
 ただし二つの周長は異なる汎関数である（注意~\ref{rem:site}）．
 
-Yang \cite[Theorems~4--5]{Yang2002} は辺周長と三方向の subslice 数の恒等式および
-slice 凸の場合の等号条件を与えており，本稿の補題~\ref{lem:runs} に対応する．
+Yang \cite[Theorem~4]{Yang2002} は辺周長と三方向の subslice 数の恒等式を与え，
+\cite[Theorem~5]{Yang2002} は slice 凸なら等号が成立するという十分条件を示した．
+本稿の補題~\ref{lem:runs} における逆向きは，run 数による本稿の証明から従う．
 同論文の三方向の線数に対する容量定理
 \cite[Theorem~7]{Yang2002} は，六辺の tight hull ではなく平行四辺形を用いた
 容量上界の先行研究である．容量最大配置の方向別次元の均衡条件
@@ -238,7 +239,7 @@ Davoli，Piovano，Stefanelli \cite[Theorem~1.1]{DavoliPiovanoStefanelli2017}
 
 化学グラフ理論でも extremal benzenoid または hexanimal として
 同じ辺周長の極値問題が研究されてきた．穴のない \(h\) セル hexanimal の
-内部頂点数 \(n_i\) は \(n_i=2h+1-p/2\) を満たすため，
+Euler の公式と辺の計数から，内部頂点数 \(n_i\) は \(n_i=2h+1-p/2\) を満たすため，
 固定した \(h\) で \(n_i\) の最大化は辺周長 \(p\) の最小化に等しい．
 Brunvoll，Cyvin，Cyvin \cite{BrunvollCyvinCyvin1993} は
 Harary--Harborth の spiral とその限界を論じ，
@@ -259,13 +260,17 @@ Barequet と Ben-Shachar \cite{BarequetBenShachar2022} は
 同論文の六角格子での対応は，本稿とは周長汎関数も操作も異なる．
 最小周長配置の計数アルゴリズムは
 \cite{BarequetBenShachar2023} でさらに発展している．
-Kurz \cite{OEIS_A135711_Kurz} の OEIS における指摘は
-最小周長の数列に関するものであり，任意の最小配置の削除・復元操作ではない．
+Kurz \cite{OEIS_A135711_Kurz} は OEIS A135711 において，
+Harborth の接触数公式（A135708）から古典的な最小周長公式が導かれると記載した．
+これは周長の値に関する注記であり，任意の最小配置の削除・復元操作ではない．
 
 三角格子の辺等周問題には入れ子解がある
 \cite[Theorem~7.2, p.~135]{Harper2004}．
-Vainsencher と Bruckstein \cite{VainsencherBruckstein2008} は spiral が
-すべてのサイズで最適な周長を達成しても最適形状を尽くさないことを指摘した．
+Vainsencher と Bruckstein \cite{VainsencherBruckstein2008} は，
+本稿の辺周長とは異なる site perimeter などの境界量に関して，
+Pareto 最適な polyform と spiral 構成を研究した．
+spiral が最適形状を尽くさない例は正方格子に関するものであり，
+六角形敷き詰めにおける辺周長最小配置の非網羅性を述べたものではない．
 Malen，Roldán，Toalá-Enríquez \cite{MalenRoldanToala2023} は
 これをユークリッド的および双曲的な \(\{p,q\}\)-animal に拡張した．
 入れ子解は各サイズで一つの最小配置を与えるのに対し，本稿は任意の指定された
